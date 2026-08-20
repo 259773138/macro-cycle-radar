@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T09:14:31.974Z",
+  "updatedAt": "2026-08-20T09:24:30.102Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -3867,7 +3867,8 @@
         }
       ],
       "signal": "down",
-      "updatedAt": "2026-04"
+      "updatedAt": "2026-04",
+      "stale": true
     },
     {
       "id": "cn-urban-ue",
