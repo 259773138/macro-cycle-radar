@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { marked } from 'marked';
 import {
   Bar, BarChart, CartesianGrid, Cell, ReferenceLine, ResponsiveContainer,
   Tooltip, XAxis, YAxis,
@@ -6,17 +7,54 @@ import {
 import { useStore, aggregateSignals, suggestTier, diffusion } from '../lib/store';
 import { CN_QUADRANTS, QUADRANTS, TIER_META } from '../lib/utils';
 import { fmtMonth, lastNMonths } from '../lib/types';
-import { LAYERS, IndicatorType, Quadrant } from '../lib/types';
+import { LAYERS, IndicatorRecord, IndicatorType, Quadrant, Signal } from '../lib/types';
 import { SignalBadge } from '../components/Badges';
 
 const TYPE_LABEL: Record<IndicatorType, string> = { leading: '领先', coincident: '同步', lagging: '滞后' };
 
-function layerColor(sig: 'up' | 'flat' | 'down'): string {
+function layerColor(sig: Signal): string {
   return sig === 'up' ? '#059669' : sig === 'down' ? '#dc2626' : '#f59e0b';
 }
 
+// 原始方向（不看 better 偏好，用于时钟推导）
+function rawDir(rec: IndicatorRecord | undefined): 'up' | 'down' | 'flat' {
+  if (!rec) return 'flat';
+  const pts = rec.monthly.filter((p) => p.value !== null && p.value !== undefined);
+  if (pts.length < 2) return 'flat';
+  const d = pts[pts.length - 1].value - pts[pts.length - 2].value;
+  if (d > 1e-9) return 'up';
+  if (d < -1e-9) return 'down';
+  return 'flat';
+}
+
+function byId(indicators: IndicatorRecord[], id: string): IndicatorRecord | undefined {
+  return indicators.find((i) => i.enabled && i.id === id);
+}
+
+function dirText(d: 'up' | 'down' | 'flat', upLabel: string, downLabel: string): string {
+  return d === 'up' ? upLabel : d === 'down' ? downLabel : '持平';
+}
+
+function dirColor(d: 'up' | 'down' | 'flat'): string {
+  return d === 'up' ? 'var(--green)' : d === 'down' ? 'var(--red)' : 'var(--muted)';
+}
+
+function sahmCheck(indicators: IndicatorRecord[]): { triggered: boolean; diff: number } | null {
+  const ue = byId(indicators, 'us-ue');
+  if (!ue) return null;
+  const pts = ue.monthly.filter((p) => p.value !== null).map((p) => p.value);
+  if (pts.length < 16) return null;
+  const avg3 = (pts.slice(-3).reduce((a, b) => a + b, 0)) / 3;
+  const min12 = Math.min(...pts.slice(-15, -3));
+  const diff = Math.round((avg3 - min12) * 100) / 100;
+  return { triggered: diff >= 0.5, diff };
+}
+
 export default function Dashboard() {
-  const { indicators, tier, tierNote, setTier, quadrant, setQuadrant, cnQuadrant, setCnQuadrant } = useStore();
+  const {
+    indicators, tier, tierNote, setTier, quadrant, setQuadrant, cnQuadrant, setCnQuadrant,
+    aiReport, dataMeta, demoMode,
+  } = useStore();
 
   const enabled = useMemo(() => indicators.filter((i) => i.enabled), [indicators]);
   const total = enabled.length;
@@ -31,7 +69,32 @@ export default function Dashboard() {
 
   const suggestion = useMemo(() => suggestTier(indicators), [indicators]);
 
-  // 扩散趋势：重建近 12 个月信号
+  // 关键指标
+  const usWei = byId(enabled, 'us-wei');
+  const usCoreCpi = byId(enabled, 'us-core-cpi');
+  const cnPmi = byId(enabled, 'cn-pmi');
+  const cnCpi = byId(enabled, 'cn-cpi');
+  const cnM1 = byId(enabled, 'cn-m1');
+  const cnM2 = byId(enabled, 'cn-m2');
+  const cnM1m2 = byId(enabled, 'cn-m1m2');
+  const usVix = byId(enabled, 'us-vix');
+  const usSp500 = byId(enabled, 'us-sp500');
+  const us2s10s = byId(enabled, 'us-2s10s');
+  const usHy = byId(enabled, 'us-hy-oas');
+  const sahm = sahmCheck(enabled);
+
+  // 时钟自动推导（启发式）
+  const usGrowth = rawDir(usWei);
+  const usInfl = rawDir(usCoreCpi);
+  const cnGrowth = rawDir(cnPmi);
+  const cnInfl = rawDir(cnCpi);
+  const cnCredit = rawDir(cnM1) === 'flat' ? rawDir(cnM1m2) : rawDir(cnM1);
+  const cnMoney = rawDir(cnM2);
+
+  const usQuadrantSug: Quadrant = usGrowth === 'up' ? (usInfl === 'up' ? 'overheat' : 'recovery') : usGrowth === 'down' ? (usInfl === 'up' ? 'stagflation' : 'recession') : quadrant;
+  const cnQuadrantSug: Quadrant = cnMoney === 'up' ? (cnCredit === 'up' ? 'recovery' : 'recession') : cnMoney === 'down' ? (cnCredit === 'up' ? 'overheat' : 'stagflation') : cnQuadrant;
+
+  // 扩散趋势
   const months = lastNMonths(12);
   const diffTrend = useMemo(() => {
     return months.map((m) => {
@@ -54,21 +117,30 @@ export default function Dashboard() {
   const t = TIER_META[tier];
   const q = QUADRANTS[quadrant];
   const cq = CN_QUADRANTS[cnQuadrant];
+  const creditAgg = aggregateSignals(enabled.filter((i) => i.layer === 'credit').map((i) => i.signal));
+  const sentiAgg = aggregateSignals(enabled.filter((i) => i.layer === 'sentiment').map((i) => i.signal));
+  const fragAgg = aggregateSignals(enabled.filter((i) => i.layer === 'fragility').map((i) => i.signal));
+
+  const vixVal = usVix?.monthly?.slice(-1)[0]?.value;
+  const vixText = vixVal === undefined ? '未知' : vixVal < 15 ? `低位（${vixVal}，市场平静/自满）` : vixVal < 25 ? `中性（${vixVal}）` : `高位（${vixVal}，恐慌）`;
+  const inversion = us2s10s?.monthly?.slice(-1)[0]?.value ?? 0;
+  const hyVal = usHy?.monthly?.slice(-1)[0]?.value;
 
   return (
     <div>
       <div className="hero">
-        <h1>宏观周期雷达</h1>
+        <h1>宏观周期雷达 · 全自动版</h1>
         <p>
-          不预测拐点，只提前感知风向：用六层仪表盘定位周期、用三档协议分级反应、用预测日志检验自己。
-          现在的位置比明天的涨跌更重要 —— 马克斯：<i>“我们永远不知道下一步会去哪，但必须知道自己现在在哪。”</i>
+          数据每日自动采集（FRED + 东方财富），信号、扩散、档位、时钟与简报自动生成——
+          你只需要看结论。不预测拐点，只提前感知风向。
         </p>
+        {demoMode && <div className="quote">⚠️ 当前为演示数据模式（未加载到自动数据文件，本地开发时正常；线上由每日流水线提供真实数据）。</div>}
       </div>
 
       {/* KPI */}
       <div className="grid grid-4 mb16">
         <div className="kpi">
-          <div className="k">启用指标</div>
+          <div className="k">启用指标（自动+手动）</div>
           <div className="v">{total}</div>
           <div className="s">改善 {up} · 中性 {flat} · 恶化 {down}</div>
         </div>
@@ -82,17 +154,74 @@ export default function Dashboard() {
         <div className="kpi">
           <div className="k">当前协议档位</div>
           <div className="v" style={{ color: t.color }}>{t.name}</div>
-          <div className="s">建议档位：{TIER_META[suggestion.tier].name}</div>
+          <div className="s">系统建议：{TIER_META[suggestion.tier].name}档</div>
         </div>
         <div className="kpi">
-          <div className="k">周期定位（美林 × 货币信用）</div>
+          <div className="k">周期定位</div>
           <div className="v" style={{ color: q.color, fontSize: 20 }}>{q.name} / {cq.name}</div>
-          <div className="s">{q.cn} · {cq.cn}</div>
+          <div className="s">美林 {q.cn} · 货币信用 {cq.cn}</div>
         </div>
       </div>
 
-      {/* 三档协议 */}
+      {/* 自动分析摘要 */}
       <div className="card">
+        <h3>🤖 自动分析摘要（规则引擎 · 每日随数据更新）</h3>
+        <p className="hint">按报告「月度四问」自动生成；时钟定位为启发式推导，仅供定位参考。</p>
+
+        <div className="grid grid-2">
+          <div>
+            <div className="bold">① 流动性 / 信用：{dirText(creditAgg, '偏松（改善）', '偏紧（恶化）')}</div>
+            <ul className="small muted" style={{ paddingLeft: 18, margin: '6px 0 12px' }}>
+              <li>美债曲线 2s10s：{inversion < 0 ? `倒挂 ${inversion}bp（未来 6–18 个月衰退概率上升的信号）` : `未倒挂 ${inversion}bp`}；HY 利差 {hyVal !== undefined ? `${hyVal}bp${hyVal > 600 ? '（危机级！）' : ''}` : '—'}</li>
+              <li>中国 M1 同比 {dirText(rawDir(cnM1), '↑ 回升（资金活化）', '↓ 回落')}；M1–M2 剪刀差 {dirText(rawDir(cnM1m2), '走扩', '收窄')}；M2 {dirText(cnMoney, '↑ 货币偏宽', '↓ 货币偏紧')}</li>
+            </ul>
+          </div>
+          <div>
+            <div className="bold">② 增长与通胀方向</div>
+            <ul className="small muted" style={{ paddingLeft: 18, margin: '6px 0 12px' }}>
+              <li>美国：WEI 增长动能 <b style={{ color: dirColor(usGrowth) }}>{dirText(usGrowth, '回升', '回落')}</b>；核心 CPI <b style={{ color: dirColor(usInfl) }}>{dirText(usInfl, '抬升', '回落')}</b></li>
+              <li>中国：PMI <b style={{ color: dirColor(cnGrowth) }}>{dirText(cnGrowth, '回升', '回落')}</b>；CPI <b style={{ color: dirColor(cnInfl) }}>{dirText(cnInfl, '抬升', '回落')}</b></li>
+              <li>Sahm 规则（美国失业率）：{sahm === null ? '数据不足' : sahm.triggered ? <b style={{ color: 'var(--red)' }}>已触发（+{sahm.diff}pp，衰退确认信号）</b> : <span style={{ color: 'var(--green)' }}>未触发（+{sahm.diff}pp）</span>}</li>
+            </ul>
+          </div>
+          <div>
+            <div className="bold">③ 市场定价的情景：{dirText(sentiAgg, '偏乐观', '偏谨慎')}</div>
+            <ul className="small muted" style={{ paddingLeft: 18, margin: '6px 0 12px' }}>
+              <li>VIX {vixText}；标普500 {dirText(rawDir(usSp500), '上行中', '回调中')}</li>
+              <li>提示：贵不贵、疯不疯还要看估值与广度——估值/广度/融资余额等情绪指标为手动维护项，建议每月人工复核。</li>
+            </ul>
+          </div>
+          <div>
+            <div className="bold">④ 长周期脆弱性：{dirText(fragAgg, '在释放（改善）', '在累积（恶化）')}</div>
+            <ul className="small muted" style={{ paddingLeft: 18, margin: '6px 0 12px' }}>
+              <li>该层决定「普通衰退还是资产负债表衰退」；多数脆弱性指标（杠杆率、信贷/GDP 缺口、房价缺口）无免费自动源，建议每月人工核对一次。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="spread mt8" style={{ borderTop: '1px dashed var(--border)', paddingTop: 12 }}>
+          <div className="small">
+            <b>时钟启发式定位：</b>
+            美林建议 <b style={{ color: QUADRANTS[usQuadrantSug].color }}>{QUADRANTS[usQuadrantSug].name}</b>（增长{dirText(usGrowth, '↑', '↓')} 通胀{dirText(usInfl, '↑', '↓')}）
+            ｜ 货币×信用建议 <b style={{ color: CN_QUADRANTS[cnQuadrantSug].color }}>{CN_QUADRANTS[cnQuadrantSug].name}</b>（货币{dirText(cnMoney, '宽', '紧')} 信用{dirText(cnCredit, '宽', '紧')}）
+          </div>
+          <div className="row">
+            <button className="btn sm" onClick={() => { setQuadrant(usQuadrantSug); setCnQuadrant(cnQuadrantSug); }}>采纳建议定位</button>
+          </div>
+        </div>
+      </div>
+
+      {/* AI 每日简报 */}
+      {aiReport && (
+        <div className="card mt16">
+          <h3>🧠 AI 每日简报（魔搭 Qwen 自动生成）</h3>
+          <div className="md small" style={{ maxHeight: 560, overflowY: 'auto' }}
+            dangerouslySetInnerHTML={{ __html: marked.parse(aiReport.text) as string }} />
+        </div>
+      )}
+
+      {/* 三档协议 */}
+      <div className="card mt16">
         <h3>🎚️ 拐点识别协议（观察 → 预警 → 确认）</h3>
         <p className="hint">禁止从“一个数据”直接跳到“改世界观”。当前档位由你决定，系统只给建议。</p>
         <div className="tier-cards">

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useStore } from '../lib/store';
 import {
-  BUILTIN_INDICATORS, IndicatorRecord, LAYERS, REGIONS, Signal, TYPE_NAMES, todayISO, uid,
+  BUILTIN_INDICATORS, IndicatorRecord, LAYERS, REGIONS, Signal, todayISO, uid,
 } from '../lib/types';
 import { fmtMonth } from '../lib/types';
 import { metaToRecord } from '../lib/seed';
@@ -20,11 +20,15 @@ function miniSeries(rec: IndicatorRecord) {
 }
 
 export default function Indicators() {
-  const { indicators, upsertIndicator, removeIndicator } = useStore();
+  const {
+    indicators, dataMeta, demoMode, upsertCustom, removeCustom, removeIndicator,
+    toggleEnabled, setSignalOverride, addBuiltinManual,
+  } = useStore();
   const [region, setRegion] = useState<string>('all');
   const [layer, setLayer] = useState<string>('all');
   const [type, setType] = useState<string>('all');
   const [sig, setSig] = useState<string>('all');
+  const [autoFilter, setAutoFilter] = useState<string>('all');
   const [q, setQ] = useState('');
   const [editing, setEditing] = useState<IndicatorRecord | null>(null);
   const [creating, setCreating] = useState(false);
@@ -37,22 +41,21 @@ export default function Indicators() {
       if (layer !== 'all' && i.layer !== layer) return false;
       if (type !== 'all' && i.type !== type) return false;
       if (sig !== 'all' && i.signal !== sig) return false;
+      if (autoFilter === 'auto' && !i.auto) return false;
+      if (autoFilter === 'manual' && i.auto) return false;
       if (q && !i.name.includes(q) && !i.watch.includes(q)) return false;
       return true;
     });
-  }, [indicators, region, layer, type, sig, q]);
+  }, [indicators, region, layer, type, sig, autoFilter, q]);
 
-  const addedIds = useMemo(() => new Set(indicators.map((i) => i.id)), [indicators]);
-  const libPool = BUILTIN_INDICATORS.filter((m) => !addedIds.has(m.id));
+  const autoIds = useMemo(() => new Set(indicators.filter((i) => i.auto).map((i) => i.id)), [indicators]);
+  const manualPool = BUILTIN_INDICATORS.filter((m) => !m.auto && !indicators.some((i) => i.id === m.id));
 
   const cycleSignal = (rec: IndicatorRecord) => {
     const order: Signal[] = ['up', 'flat', 'down'];
     const next = order[(order.indexOf(rec.signal) + 1) % 3];
-    upsertIndicator({ ...rec, signal: next });
-  };
-
-  const toggleEnabled = (rec: IndicatorRecord) => {
-    upsertIndicator({ ...rec, enabled: !rec.enabled });
+    if (rec.auto) setSignalOverride(rec.id, next);
+    else upsertCustom({ ...rec, signal: next });
   };
 
   const changeVal = (rec: IndicatorRecord, field: 'latest' | 'prev', v: string) => {
@@ -70,7 +73,7 @@ export default function Indicators() {
       if (months.length >= 2) months[months.length - 2] = { ...months[months.length - 2], value: n };
       else months.unshift({ month: prevMonthStr(), value: n });
     }
-    upsertIndicator({ ...rec, monthly: months, updatedAt: todayISO() });
+    upsertCustom({ ...rec, monthly: months, updatedAt: todayISO() });
   };
 
   function lastMonthStr(): string {
@@ -87,13 +90,19 @@ export default function Indicators() {
     <div>
       <h2 className="page-title">📊 指标库</h2>
       <p className="page-sub">
-        六层仪表盘的信号来源。维护你关心的指标读数，系统自动推导信号、扩散指数与档位建议。
-        <b> 点信号列可循环切换 改善/中性/恶化。</b>
+        {dataMeta && !demoMode
+          ? <>真实数据由流水线自动采集（{dataMeta.fetchedAt.slice(0, 16).replace('T', ' ')} UTC 更新）。<b>自动指标不可篡改数值</b>，信号可手动覆盖；手动指标自由维护。</>
+          : <>演示数据模式：线上部署后由 GitHub Actions 每日自动采集真实数据。<b>自动指标不可篡改数值</b>，手动指标自由维护。</>}
       </p>
 
       <div className="card">
         <div className="spread mb8">
           <div className="row">
+            <select style={{ width: 110 }} value={autoFilter} onChange={(e) => setAutoFilter(e.target.value)}>
+              <option value="all">全部来源</option>
+              <option value="auto">🛰️ 自动采集</option>
+              <option value="manual">✍️ 手动维护</option>
+            </select>
             <select style={{ width: 110 }} value={region} onChange={(e) => setRegion(e.target.value)}>
               <option value="all">全部地区</option>
               {REGIONS.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
@@ -117,7 +126,7 @@ export default function Indicators() {
             <input style={{ width: 170 }} type="text" placeholder="搜索名称 / 关键词…" value={q} onChange={(e) => setQ(e.target.value)} />
           </div>
           <div className="row">
-            <button className="btn" onClick={() => setLibOpen(true)}>＋ 从内置指标库添加{libPool.length ? `（${libPool.length}）` : ''}</button>
+            <button className="btn" onClick={() => setLibOpen(true)}>＋ 添加内置手动指标{manualPool.length ? `（${manualPool.length}）` : ''}</button>
             <button className="btn primary" onClick={() => { setCreating(true); setEditing({ ...EMPTY, id: uid(), monthly: [] }); }}>＋ 自定义指标</button>
           </div>
         </div>
@@ -132,7 +141,7 @@ export default function Indicators() {
               <th>变化</th>
               <th>信号</th>
               <th>连续同向</th>
-              <th style={{ width: 110 }}>操作</th>
+              <th style={{ width: 120 }}>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -141,6 +150,7 @@ export default function Indicators() {
               const prev = rec.monthly[rec.monthly.length - 2] || last;
               const delta = last ? last.value - prev.value : 0;
               const streak = rec.signal === 'down' ? consecutiveBad(rec) : rec.signal === 'up' ? consecutiveGood(rec) : 0;
+              const isAuto = !!rec.auto;
               return (
                 <tr key={rec.id} style={{ opacity: rec.enabled ? 1 : .5 }}>
                   <td>
@@ -148,44 +158,61 @@ export default function Indicators() {
                       className={`pill-dot ${rec.enabled ? 'up' : ''}`}
                       style={{ background: rec.enabled ? 'var(--green)' : '#cbd5e1', cursor: 'pointer' }}
                       title={rec.enabled ? '参与统计，点击停用' : '已停用，点击启用'}
-                      onClick={() => toggleEnabled(rec)}
+                      onClick={() => toggleEnabled(rec.id)}
                     />
                   </td>
                   <td style={{ cursor: 'pointer' }} onClick={() => setDetail(rec)}>
-                    <div className="bold">{rec.name}</div>
+                    <div className="bold">
+                      {rec.name}
+                      {isAuto
+                        ? <span className="badge blue" style={{ marginLeft: 6 }}>🛰️ 自动 · {rec.source}</span>
+                        : <span className="badge gray" style={{ marginLeft: 6 }}>✍️ 手动</span>}
+                      {rec.stale && <span className="badge flat" style={{ marginLeft: 4 }}>沿用旧值</span>}
+                    </div>
                     <div className="row small faint" style={{ marginTop: 2 }}>
                       <RegionBadge region={rec.region} />
                       <LayerBadge layer={rec.layer} />
                       <TypeBadge type={rec.type} />
+                      <span className="num">截止 {rec.updatedAt}</span>
                     </div>
                   </td>
                   <td className="num">
                     {last ? (
-                      <input
-                        type="number" step="any" style={{ width: 92, padding: '3px 6px' }}
-                        value={last.value}
-                        onChange={(e) => changeVal(rec, 'latest', e.target.value)}
-                        title="编辑最新值（自动推入月度序列）"
-                      />
+                      isAuto ? (
+                        <b>{last.value}</b>
+                      ) : (
+                        <input
+                          type="number" step="any" style={{ width: 92, padding: '3px 6px' }}
+                          value={last.value}
+                          onChange={(e) => changeVal(rec, 'latest', e.target.value)}
+                          title="编辑最新值（自动推入月度序列）"
+                        />
+                      )
                     ) : <span className="faint">—</span>}
                     {last && <span className="faint small"> {rec.unit}</span>}
                   </td>
                   <td className="num faint">{prev ? `${prev.value}${rec.unit}` : '—'}</td>
-                  <td className={`num ${delta > 0 ? '' : delta < 0 ? '' : 'faint'}`} style={{ color: delta > 0 ? 'var(--green)' : delta < 0 ? 'var(--red)' : 'var(--faint)' }}>
+                  <td className="num" style={{ color: delta > 0 ? 'var(--green)' : delta < 0 ? 'var(--red)' : 'var(--faint)' }}>
                     {delta > 0 ? '+' : ''}{delta.toFixed(2)}
                   </td>
                   <td>
-                    <span className="sig-btn" onClick={() => cycleSignal(rec)} title="点击切换信号">
+                    <span className="sig-btn" onClick={() => cycleSignal(rec)} title={isAuto ? '点击覆盖自动信号（数据本身不变）' : '点击切换信号'}>
                       <SignalBadge signal={rec.signal} />
                     </span>
                   </td>
-                  <td className="num small muted">
-                    {rec.signal === 'flat' ? '—' : `${streak} 个月`}
-                  </td>
+                  <td className="num small muted">{rec.signal === 'flat' ? '—' : `${streak} 个月`}</td>
                   <td>
                     <div className="row">
-                      <button className="btn sm ghost" onClick={() => { setCreating(false); setEditing(rec); }}>编辑</button>
-                      <button className="btn sm ghost danger" onClick={() => { if (confirm(`删除指标「${rec.name}」？`)) removeIndicator(rec.id); }}>删除</button>
+                      {!isAuto && (
+                        <button className="btn sm ghost" onClick={() => { setCreating(false); setEditing(rec); }}>编辑</button>
+                      )}
+                      <button
+                        className="btn sm ghost danger"
+                        onClick={() => {
+                          if (isAuto) { if (confirm(`停用自动指标「${rec.name}」？（数据仍在更新，仅从仪表盘隐藏）`)) removeIndicator(rec.id); }
+                          else { if (confirm(`删除指标「${rec.name}」？`)) removeIndicator(rec.id); }
+                        }}
+                      >{isAuto ? '停用' : '删除'}</button>
                     </div>
                   </td>
                 </tr>
@@ -193,21 +220,21 @@ export default function Indicators() {
             })}
             {!filtered.length && (
               <tr><td colSpan={8} className="muted" style={{ textAlign: 'center', padding: 26 }}>
-                没有符合条件的指标。可从内置指标库添加，或创建自定义指标。
+                没有符合条件的指标。
               </td></tr>
             )}
           </tbody>
         </table>
       </div>
 
-      {/* 内置指标库弹窗 */}
+      {/* 内置手动指标库弹窗 */}
       {libOpen && (
         <div className="modal-mask" onClick={() => setLibOpen(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h3>从内置指标库添加</h3>
-            <p className="muted small mb16">指标含义与用法均来自研究报告（第 3.1–3.6 节），添加后可在表格中维护读数。</p>
+            <h3>添加内置手动指标</h3>
+            <p className="muted small mb16">这些指标暂无免费自动数据源（如 CAPE、融资余额、社融、LPR），加入后由你每月手动维护读数。</p>
             <div style={{ maxHeight: 420, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {libPool.map((m) => (
+              {manualPool.map((m) => (
                 <div key={m.id} className="spread" style={{ border: '1px solid var(--border)', borderRadius: 10, padding: '10px 12px' }}>
                   <div style={{ minWidth: 0 }}>
                     <div className="bold small">{m.name}</div>
@@ -216,10 +243,10 @@ export default function Indicators() {
                       <RegionBadge region={m.region} /><LayerBadge layer={m.layer} /><TypeBadge type={m.type} />
                     </div>
                   </div>
-                  <button className="btn sm primary" onClick={() => { upsertIndicator(metaToRecord(m)); }}>添加</button>
+                  <button className="btn sm primary" onClick={() => addBuiltinManual(m.id)}>添加</button>
                 </div>
               ))}
-              {!libPool.length && <div className="muted" style={{ padding: 16, textAlign: 'center' }}>全部内置指标已添加。</div>}
+              {!manualPool.length && <div className="muted" style={{ padding: 16, textAlign: 'center' }}>全部手动指标已添加。</div>}
             </div>
             <div className="row mt16" style={{ justifyContent: 'flex-end' }}>
               <button className="btn" onClick={() => setLibOpen(false)}>关闭</button>
@@ -228,12 +255,12 @@ export default function Indicators() {
         </div>
       )}
 
-      {/* 编辑弹窗 */}
-      {(editing && (creating || editing.id !== EMPTY.id)) && (
+      {/* 编辑弹窗（仅手动指标） */}
+      {(editing && (creating || (!editing.auto && editing.id !== EMPTY.id))) && (
         <EditModal
           rec={editing}
           isNew={creating}
-          onSave={(r) => { upsertIndicator(r); setEditing(null); setCreating(false); }}
+          onSave={(r) => { upsertCustom(r); setEditing(null); setCreating(false); }}
           onClose={() => { setEditing(null); setCreating(false); }}
         />
       )}
@@ -248,6 +275,7 @@ export default function Indicators() {
             </div>
             <div className="row mt8">
               <RegionBadge region={detail.region} /><LayerBadge layer={detail.layer} /><TypeBadge type={detail.type} /><SignalBadge signal={detail.signal} />
+              {detail.auto && <span className="badge blue">🛰️ 自动采集 · {detail.source} · 截止 {detail.updatedAt}</span>}
             </div>
             <div className="mt16 small">
               <div><b>看什么：</b>{detail.watch || '—'}</div>
@@ -255,7 +283,7 @@ export default function Indicators() {
               <div className="mt8"><b>局限：</b>{detail.limit || '—'}</div>
             </div>
             <div className="mt16">
-              <b className="small">近 12 个月走势（演示/维护数据）</b>
+              <b className="small">近 {Math.min(detail.monthly.length, 24)} 个月走势</b>
               <ResponsiveContainer width="100%" height={200}>
                 <LineChart data={miniSeries(detail)}>
                   <XAxis dataKey="label" tick={{ fontSize: 10 }} />

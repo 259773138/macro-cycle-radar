@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dashboard from './pages/Dashboard';
 import Indicators from './pages/Indicators';
 import Predictions from './pages/Predictions';
 import Assistant from './pages/Assistant';
 import Knowledge from './pages/Knowledge';
 import Settings from './pages/Settings';
+import { useStore } from './lib/store';
+import { DataMeta, IndicatorRecord } from './lib/types';
 
 const NAV = [
   { id: 'dashboard', label: '总览仪表盘', icon: '📡' },
@@ -19,6 +21,41 @@ type PageId = (typeof NAV)[number]['id'];
 
 export default function App() {
   const [page, setPage] = useState<PageId>('dashboard');
+  const setAutoIndicators = useStore((s) => s.setAutoIndicators);
+  const setAiReport = useStore((s) => s.setAiReport);
+  const dataMeta = useStore((s) => s.dataMeta);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const res = await fetch('./data/indicators.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('no data file');
+        const data = await res.json();
+        if (!alive) return;
+        let meta: DataMeta | null = null;
+        try {
+          const mres = await fetch('./data/meta.json', { cache: 'no-store' });
+          if (mres.ok) meta = await mres.json();
+        } catch { /* 忽略 */ }
+        setAutoIndicators(data.indicators as IndicatorRecord[], meta);
+      } catch {
+        // 本地开发或文件缺失：保持内置演示数据（demoMode）
+      }
+      try {
+        const rres = await fetch('./data/ai-report.md', { cache: 'no-store' });
+        if (rres.ok) {
+          const text = await rres.text();
+          if (alive && text.trim()) setAiReport({ text, updatedAt: new Date().toISOString().slice(0, 10) });
+        }
+      } catch { /* 忽略 */ }
+    })();
+    return () => { alive = false; };
+  }, [setAutoIndicators, setAiReport]);
+
+  const updateLabel = dataMeta?.fetchedAt
+    ? `数据更新于 ${dataMeta.fetchedAt.slice(0, 16).replace('T', ' ')} UTC`
+    : '当前为演示数据（未加载到自动数据文件）';
 
   return (
     <div className="app-shell">
@@ -50,6 +87,12 @@ export default function App() {
         </div>
       </aside>
       <main className="main">
+        <div className="row" style={{ justifyContent: 'space-between', marginBottom: 14 }}>
+          <div className="row">
+            <span className="badge blue">🛰️ {updateLabel}</span>
+          </div>
+          <span className="badge gray">数据来源：FRED · 东方财富</span>
+        </div>
         {page === 'dashboard' && <Dashboard />}
         {page === 'indicators' && <Indicators />}
         {page === 'predictions' && <Predictions />}
@@ -57,8 +100,8 @@ export default function App() {
         {page === 'knowledge' && <Knowledge />}
         {page === 'settings' && <Settings />}
         <div className="footer-note">
-          本工具基于《宏观周期感知-研究报告》构建，内置数据为教学演示用途，不构成任何投资建议。
-          市场有风险，决策需独立判断。· 数据仅保存在你的浏览器本地（localStorage）。
+          本工具基于《宏观周期感知-研究报告》构建；宏观数据由 GitHub Actions 每日自动采集（FRED / 东方财富），
+          分析结论为规则引擎与 AI 生成，仅供研究参考，不构成任何投资建议。市场有风险，决策需独立判断。
         </div>
       </main>
     </div>

@@ -1,10 +1,9 @@
-// 演示数据：内置指标 + 一组示例读数（数据为教学演示用途，非实时行情）
+// 演示数据（离线兜底 / 本地开发用）：真实数据由 data/indicators.json 提供并覆盖
 import { BUILTIN_INDICATORS, IndicatorRecord, lastNMonths, todayISO } from './types';
 
-// 为每个内置指标生成近 12 个月的演示月度序列
+// 为每个内置指标生成近 12 个月的确定性演示序列
 function genMonthly(id: string): { month: string; value: number }[] {
   const months = lastNMonths(12);
-  // 用 id 做确定性伪随机种子
   let seed = 0;
   for (let i = 0; i < id.length; i++) seed = (seed * 31 + id.charCodeAt(i)) % 997;
   const rnd = () => {
@@ -17,37 +16,7 @@ function genMonthly(id: string): { month: string; value: number }[] {
   return months.map((m, i) => ({ month: m, value: Math.round((base + drift * i + (rnd() - 0.5) * vol) * 10) / 10 }));
 }
 
-export function buildDemoIndicators(): IndicatorRecord[] {
-  return BUILTIN_INDICATORS.map((meta, idx) => {
-    const monthly = genMonthly(meta.id);
-    const last = monthly[monthly.length - 1];
-    const prev = monthly[monthly.length - 2] || last;
-    let signal: 'up' | 'flat' | 'down' = 'flat';
-    const delta = last.value - prev.value;
-    if (delta > 0.05) signal = meta.better === 'high' ? 'up' : 'down';
-    else if (delta < -0.05) signal = meta.better === 'high' ? 'down' : 'up';
-    return {
-      id: meta.id,
-      name: meta.name,
-      region: meta.region,
-      layer: meta.layer,
-      type: meta.type,
-      unit: meta.unit,
-      better: meta.better,
-      watch: meta.watch,
-      meaning: meta.meaning,
-      limit: meta.limit,
-      enabled: true,
-      monthly,
-      signal,
-      updatedAt: todayISO(),
-      tags: [meta.region === 'CN' ? '中国' : meta.region === 'US' ? '美国' : '全球'],
-    };
-  });
-}
-
-// 用于“加入全部内置指标”时新增的条目
-export function metaToRecord(meta: (typeof BUILTIN_INDICATORS)[number]): IndicatorRecord {
+export function metaToRecord(meta: (typeof BUILTIN_INDICATORS)[number], demo = false): IndicatorRecord {
   const monthly = genMonthly(meta.id);
   const last = monthly[monthly.length - 1];
   const prev = monthly[monthly.length - 2] || last;
@@ -58,6 +27,12 @@ export function metaToRecord(meta: (typeof BUILTIN_INDICATORS)[number]): Indicat
   return {
     id: meta.id, name: meta.name, region: meta.region, layer: meta.layer, type: meta.type,
     unit: meta.unit, better: meta.better, watch: meta.watch, meaning: meta.meaning, limit: meta.limit,
-    enabled: true, monthly, signal, updatedAt: todayISO(), tags: [],
+    enabled: true, monthly, signal, updatedAt: todayISO(),
+    tags: [meta.region === 'CN' ? '中国' : meta.region === 'US' ? '美国' : '全球'],
+    auto: !!meta.auto, source: demo ? '演示数据' : undefined,
   };
+}
+
+export function buildDemoIndicators(): IndicatorRecord[] {
+  return BUILTIN_INDICATORS.map((meta) => metaToRecord(meta, true));
 }

@@ -1,0 +1,58 @@
+name: 每日数据更新与部署
+
+on:
+  schedule:
+    # 每天 UTC 23:00 = 北京时间 07:00
+    - cron: '0 23 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 采集宏观数据（FRED + 东方财富）
+        run: node scripts/fetch-data.mjs
+
+      - name: 生成 AI 每日简报
+        env:
+          AI_BASE_URL: ${{ secrets.AI_BASE_URL }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL: ${{ secrets.AI_MODEL }}
+        run: node scripts/ai-report.mjs
+
+      - name: 提交数据
+        run: |
+          git config user.name "macro-radar-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/data
+          if git diff --cached --quiet; then
+            echo "数据无变化，跳过提交"
+          else
+            git commit -m "data: 自动更新 $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push origin main
+          fi
+
+      - name: 构建
+        run: npm run build
+
+      - name: 部署 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true

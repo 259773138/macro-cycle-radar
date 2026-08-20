@@ -1,0 +1,21 @@
+{
+  "fetchedAt": "2026-08-20T08:05:35.293Z",
+  "sources": [
+    {
+      "name": "FRED（圣路易斯联储）",
+      "status": "ok",
+      "count": 23,
+      "message": ""
+    },
+    {
+      "name": "东方财富数据中心",
+      "status": "ok",
+      "count": 9,
+      "message": ""
+    }
+  ],
+  "autoCount": 32,
+  "staleCount": 0,
+  "failed": [],
+  "note": "全部指标采集成功。"
+}

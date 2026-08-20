@@ -1,14 +1,19 @@
 import { create } from 'zustand';
 import {
-  AIConfig, ChatMessage, IndicatorRecord, LayerId, PredictionCard, Quadrant, Region,
-  IndicatorType, Signal,
+  AIConfig, ChatMessage, DataMeta, IndicatorRecord, PredictionCard, Quadrant, Region,
+  IndicatorType, Signal, BUILTIN_INDICATORS,
 } from '../lib/types';
-import { buildDemoIndicators } from '../lib/seed';
+import { buildDemoIndicators, metaToRecord } from '../lib/seed';
 
-const LS_KEY = 'macro-radar-state-v1';
+const LS_KEY = 'macro-radar-state-v2';
+const LEGACY_KEY = 'macro-radar-state-v1';
+
+const BUILTIN_IDS = new Set(BUILTIN_INDICATORS.map((m) => m.id));
 
 interface Persisted {
-  indicators: IndicatorRecord[];
+  customIndicators: IndicatorRecord[];
+  disabledIds: string[];
+  signalOverrides: Record<string, Signal>;
   predictions: PredictionCard[];
   quadrant: Quadrant;
   cnQuadrant: Quadrant;
@@ -19,40 +24,66 @@ interface Persisted {
 }
 
 interface AppState extends Persisted {
-  // 指标
-  upsertIndicator: (rec: IndicatorRecord) => void;
-  removeIndicator: (id: string) => void;
+  // 自动采集数据（运行时从 data/indicators.json 加载，不持久化）
+  autoIndicators: IndicatorRecord[];
+  dataMeta: DataMeta | null;
+  aiReport: { text: string; updatedAt: string } | null;
+  demoMode: boolean;
+  // 合并后的完整指标列表（自动 + 自定义 + 用户设置）
+  indicators: IndicatorRecord[];
+
+  setAutoIndicators: (list: IndicatorRecord[], meta: DataMeta | null) => void;
+  setAiReport: (r: { text: string; updatedAt: string } | null) => void;
+
+  upsertCustom: (rec: IndicatorRecord) => void;
+  removeCustom: (id: string) => void;
+  addBuiltinManual: (id: string) => void;  // 把内置手动指标加入工作台
+  removeIndicator: (id: string) => void;   // 自动指标=禁用；自定义=删除
+  toggleEnabled: (id: string) => void;
+  setSignalOverride: (id: string, sig: Signal) => void;
+  clearOverrides: () => void;
+
   resetDemo: () => void;
   clearAll: () => void;
-  // 预测日志
+
   addPrediction: (p: PredictionCard) => void;
   updatePrediction: (p: PredictionCard) => void;
   removePrediction: (id: string) => void;
-  // 周期与档位
+
   setQuadrant: (q: Quadrant) => void;
   setCnQuadrant: (q: Quadrant) => void;
   setTier: (t: 'watch' | 'warn' | 'confirm', note?: string) => void;
-  // AI
+
   setAiConfig: (c: AIConfig) => void;
   setChat: (m: ChatMessage[]) => void;
   appendChat: (m: ChatMessage) => void;
   clearChat: () => void;
-  // 导入导出
+
   exportState: () => string;
   importState: (json: string) => boolean;
 }
 
 function defaultAiConfig(): AIConfig {
-  return { provider: 'modelscope', baseUrl: 'https://api-inference.modelscope.cn/v1', apiKey: '', model: '', temperature: 0.7 };
+  return { provider: 'modelscope', baseUrl: 'https://api-inference.modelscope.cn/v1', apiKey: '', model: 'Qwen/Qwen3-235B-A22B-Instruct-2507', temperature: 0.7 };
 }
 
-function load(): Persisted {
+function emptyPersisted(): Persisted {
+  return {
+    customIndicators: [], disabledIds: [], signalOverrides: {},
+    predictions: [], quadrant: 'recovery', cnQuadrant: 'recovery',
+    tier: 'watch', tierNote: '', aiConfig: defaultAiConfig(), chat: [],
+  };
+}
+
+function loadPersisted(): Persisted {
   try {
     const raw = localStorage.getItem(LS_KEY);
     if (raw) {
       const p = JSON.parse(raw) as Partial<Persisted>;
       return {
-        indicators: p.indicators?.length ? p.indicators : buildDemoIndicators(),
+        customIndicators: p.customIndicators ?? [],
+        disabledIds: p.disabledIds ?? [],
+        signalOverrides: p.signalOverrides ?? {},
         predictions: p.predictions ?? [],
         quadrant: p.quadrant ?? 'recovery',
         cnQuadrant: p.cnQuadrant ?? 'recovery',
@@ -62,41 +93,103 @@ function load(): Persisted {
         chat: p.chat ?? [],
       };
     }
+    // 迁移旧版本（v1 把所有指标存 localStorage，新版本只保留自定义）
+    const legacy = localStorage.getItem(LEGACY_KEY);
+    if (legacy) {
+      const p = JSON.parse(legacy) as Partial<Persisted & { indicators?: IndicatorRecord[] }>;
+      const migrated: Persisted = {
+        customIndicators: (p.indicators ?? []).filter((i) => !BUILTIN_IDS.has(i.id)),
+        disabledIds: [],
+        signalOverrides: {},
+        predictions: p.predictions ?? [],
+        quadrant: p.quadrant ?? 'recovery',
+        cnQuadrant: p.cnQuadrant ?? 'recovery',
+        tier: p.tier ?? 'watch',
+        tierNote: p.tierNote ?? '',
+        aiConfig: { ...defaultAiConfig(), ...(p.aiConfig ?? {}) },
+        chat: p.chat ?? [],
+      };
+      localStorage.setItem(LS_KEY, JSON.stringify(migrated));
+      localStorage.removeItem(LEGACY_KEY);
+      return migrated;
+    }
   } catch (e) {
-    console.warn('读取本地数据失败，使用演示数据', e);
+    console.warn('读取本地数据失败', e);
   }
-  return {
-    indicators: buildDemoIndicators(),
-    predictions: [],
-    quadrant: 'recovery',
-    cnQuadrant: 'recovery',
-    tier: 'watch',
-    tierNote: '',
-    aiConfig: defaultAiConfig(),
-    chat: [],
-  };
+  return emptyPersisted();
 }
 
-const initial = load();
+function mergeIndicators(
+  auto: IndicatorRecord[],
+  custom: IndicatorRecord[],
+  disabledIds: string[],
+  overrides: Record<string, Signal>,
+): IndicatorRecord[] {
+  const mergedAuto = auto.map((a) => ({
+    ...a,
+    enabled: !disabledIds.includes(a.id),
+    signal: overrides[a.id] ?? a.signal,
+  }));
+  return [...mergedAuto, ...custom];
+}
+
+const persisted = loadPersisted();
 
 export const useStore = create<AppState>((set, get) => {
-  const save = () => {
-    const { indicators, predictions, quadrant, cnQuadrant, tier, tierNote, aiConfig, chat } = get();
-    localStorage.setItem(LS_KEY, JSON.stringify({
-      indicators, predictions, quadrant, cnQuadrant, tier, tierNote, aiConfig, chat,
-    }));
+  const recompute = (partial: Partial<AppState>): Partial<AppState> => {
+    const s = { ...get(), ...partial } as AppState;
+    return { ...partial, indicators: mergeIndicators(s.autoIndicators, s.customIndicators, s.disabledIds, s.signalOverrides) };
   };
 
   return {
-    ...initial,
+    ...persisted,
+    autoIndicators: buildDemoIndicators(),
+    dataMeta: null,
+    aiReport: null,
+    demoMode: true,
+    indicators: mergeIndicators(buildDemoIndicators(), persisted.customIndicators, persisted.disabledIds, persisted.signalOverrides),
 
-    upsertIndicator: (rec) => set((s) => {
-      const exists = s.indicators.some((i) => i.id === rec.id);
-      return { indicators: exists ? s.indicators.map((i) => (i.id === rec.id ? rec : i)) : [...s.indicators, rec] };
+    setAutoIndicators: (list, meta) => set((s) => recompute({ autoIndicators: list, dataMeta: meta, demoMode: false })),
+
+    setAiReport: (r) => set({ aiReport: r }),
+
+    upsertCustom: (rec) => set((s) => recompute({
+      customIndicators: s.customIndicators.some((i) => i.id === rec.id)
+        ? s.customIndicators.map((i) => (i.id === rec.id ? rec : i))
+        : [...s.customIndicators, rec],
+    })),
+
+    removeCustom: (id) => set((s) => recompute({ customIndicators: s.customIndicators.filter((i) => i.id !== id) })),
+
+    addBuiltinManual: (id) => set((s) => {
+      const meta = BUILTIN_INDICATORS.find((m) => m.id === id);
+      if (!meta) return {};
+      return recompute({ customIndicators: [...s.customIndicators, metaToRecord(meta)] });
     }),
-    removeIndicator: (id) => set((s) => ({ indicators: s.indicators.filter((i) => i.id !== id) })),
-    resetDemo: () => set({ indicators: buildDemoIndicators() }),
-    clearAll: () => set({ indicators: [], predictions: [], chat: [], tier: 'watch', tierNote: '' }),
+
+    removeIndicator: (id) => set((s) => {
+      if (BUILTIN_IDS.has(id)) {
+        return recompute({ disabledIds: [...new Set([...s.disabledIds, id])] });
+      }
+      return recompute({ customIndicators: s.customIndicators.filter((i) => i.id !== id) });
+    }),
+
+    toggleEnabled: (id) => set((s) => {
+      const disabled = new Set(s.disabledIds);
+      if (disabled.has(id)) disabled.delete(id); else disabled.add(id);
+      return recompute({ disabledIds: [...disabled] });
+    }),
+
+    setSignalOverride: (id, sig) => set((s) => {
+      const overrides = { ...s.signalOverrides, [id]: sig };
+      return recompute({ signalOverrides: overrides });
+    }),
+
+    clearOverrides: () => set((s) => recompute({ signalOverrides: {} })),
+
+    resetDemo: () => set((s) => recompute({ customIndicators: [], disabledIds: [], signalOverrides: {}, predictions: [], chat: [] })),
+
+    clearAll: () => set((s) => recompute({ customIndicators: [], disabledIds: [], signalOverrides: {}, predictions: [], chat: [], tier: 'watch', tierNote: '' })),
 
     addPrediction: (p) => set((s) => ({ predictions: [p, ...s.predictions] })),
     updatePrediction: (p) => set((s) => ({ predictions: s.predictions.map((x) => (x.id === p.id ? p : x)) })),
@@ -113,7 +206,9 @@ export const useStore = create<AppState>((set, get) => {
 
     exportState: () => JSON.stringify({
       exportedAt: new Date().toISOString(),
-      indicators: get().indicators,
+      customIndicators: get().customIndicators,
+      disabledIds: get().disabledIds,
+      signalOverrides: get().signalOverrides,
       predictions: get().predictions,
       quadrant: get().quadrant,
       cnQuadrant: get().cnQuadrant,
@@ -125,14 +220,16 @@ export const useStore = create<AppState>((set, get) => {
     importState: (json) => {
       try {
         const p = JSON.parse(json);
-        set({
-          indicators: Array.isArray(p.indicators) ? p.indicators : get().indicators,
+        set(recompute({
+          customIndicators: Array.isArray(p.customIndicators) ? p.customIndicators : get().customIndicators,
+          disabledIds: Array.isArray(p.disabledIds) ? p.disabledIds : get().disabledIds,
+          signalOverrides: p.signalOverrides ?? get().signalOverrides,
           predictions: Array.isArray(p.predictions) ? p.predictions : get().predictions,
           quadrant: p.quadrant ?? get().quadrant,
           cnQuadrant: p.cnQuadrant ?? get().cnQuadrant,
           tier: p.tier ?? get().tier,
           tierNote: p.tierNote ?? get().tierNote,
-        });
+        }));
         return true;
       } catch {
         return false;
@@ -141,23 +238,20 @@ export const useStore = create<AppState>((set, get) => {
   };
 });
 
-// 每次变更后持久化（轻量订阅）
+// 持久化订阅
 useStore.subscribe((s) => {
   try {
     localStorage.setItem(LS_KEY, JSON.stringify({
-      indicators: s.indicators, predictions: s.predictions, quadrant: s.quadrant,
-      cnQuadrant: s.cnQuadrant, tier: s.tier, tierNote: s.tierNote, aiConfig: s.aiConfig, chat: s.chat,
+      customIndicators: s.customIndicators, disabledIds: s.disabledIds, signalOverrides: s.signalOverrides,
+      predictions: s.predictions, quadrant: s.quadrant, cnQuadrant: s.cnQuadrant,
+      tier: s.tier, tierNote: s.tierNote, aiConfig: s.aiConfig, chat: s.chat,
     }));
   } catch (e) { /* 存储满时忽略 */ }
 });
 
-// ---------- 派生工具（纯函数，供各页面使用） ----------
+// ---------- 派生工具（供各页面使用） ----------
 
-export function signalOf(rec: IndicatorRecord): Signal {
-  return rec.signal;
-}
-
-export function layerSignals(indicators: IndicatorRecord[], layer: LayerId): Signal[] {
+export function layerSignals(indicators: IndicatorRecord[], layer: string): Signal[] {
   return indicators.filter((i) => i.enabled && i.layer === layer).map((i) => i.signal);
 }
 
@@ -167,7 +261,6 @@ export function aggregateSignals(signals: Signal[]): Signal {
   const down = signals.filter((s) => s === 'down').length;
   if (up > down && up >= signals.length * 0.5) return 'up';
   if (down > up && down >= signals.length * 0.5) return 'down';
-  if (up === down && up === 0) return 'flat';
   if (up > down) return 'up';
   if (down > up) return 'down';
   return 'flat';
@@ -214,10 +307,10 @@ export function suggestTier(indicators: IndicatorRecord[]): { tier: 'watch' | 'w
       reasons.push(`同步指标也开始恶化（${badCoincident.map((i) => i.name).join('、')}）——拐点大概率正在发生`);
       return { tier: 'confirm', reasons };
     }
-    if (reasons.length) return { tier: 'warn', reasons };
+    return { tier: 'warn', reasons };
   }
-  if (badLeads.length >= 1 || lead.some((i) => i.signal === 'down')) {
-    reasons.push(`${badLeads.length || 1} 个领先指标出现恶化迹象——加密监测，不必急着改仓位`);
+  if (badLeads.length >= 1) {
+    reasons.push(`${badLeads.length} 个领先指标出现恶化迹象——加密监测，不必急着改仓位`);
     return { tier: 'watch', reasons };
   }
   reasons.push('领先指标未见明显恶化，维持观察即可');
