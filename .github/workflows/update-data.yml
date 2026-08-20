@@ -24,10 +24,16 @@ jobs:
       - name: 安装依赖
         run: npm ci
 
-      - name: 采集宏观数据（FRED + 东方财富）
+      - name: 采集宏观数据（FRED + 东方财富 + 统计局 + 商务部）
         run: node scripts/fetch-data.mjs
 
-      - name: 生成 AI 每日简报
+      - name: 生成策略回测数据（三档协议 vs 买入持有）
+        run: node scripts/backtest.mjs
+
+      - name: 生成长波档案数据（60 年长历史）
+        run: node scripts/longwave.mjs
+
+      - name: 生成 AI 每日简报（多 Agent 辩论）
         env:
           AI_BASE_URL: ${{ secrets.AI_BASE_URL }}
           AI_API_KEY: ${{ secrets.AI_API_KEY }}

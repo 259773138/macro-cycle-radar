@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useStore, brier, brierInterpret } from '../lib/store';
-import { PredictionCard, todayISO, uid } from '../lib/types';
+import { HistoryEntry, PredictionCard, todayISO, uid } from '../lib/types';
 import { TIER_META } from '../lib/utils';
 
 const STANCE = {
@@ -20,6 +20,8 @@ export default function Predictions() {
 
   const resolved = useMemo(() => predictions.filter((p) => p.status === 'resolved' && p.review), [predictions]);
   const open = useMemo(() => predictions.filter((p) => p.status === 'open'), [predictions]);
+  const today = todayISO();
+  const due = open.filter((p) => p.reviewDue && p.reviewDue <= today);
   const avgBrier = resolved.length ? resolved.reduce((s, p) => s + (p.review?.brier ?? 0), 0) / resolved.length : null;
   const avgDir = resolved.length ? resolved.reduce((s, p) => s + (p.review?.direction ?? 0), 0) / resolved.length : null;
   const calibCount = (lo: number, hi: number) => resolved.filter((p) => p.review && p.review.brier >= lo && p.review.brier < hi).length;
@@ -28,9 +30,16 @@ export default function Predictions() {
     <div>
       <h2 className="page-title">🧭 预测日志</h2>
       <p className="page-sub">
-        分析必须可证伪：每次判断都写清楚 <b>主情景 + 概率 + 时间窗 + 证伪条件 + 最强反方论点</b>。
-        到期复盘，用 Brier 分数检验概率校准——记忆会把含糊的话改写成神预测，只有日志不会。
+        分析必须可证伪：每次判断都写清楚 <b>主情景 + 概率 + 时间窗 + 证伪条件 + 最强反方论点</b>，并设<b>到期复盘日</b>。
+        到期后用 Brier 分数检验概率校准——记忆会把含糊的话改写成神预测，只有日志不会。
       </p>
+
+      {due.length > 0 && (
+        <div className="alert-box warn mb16">
+          <b>⏰ {due.length} 条预测已到复盘日：</b>
+          {due.map((p) => <div key={p.id}>· 「{p.mainScenario.label}」（{p.date} 记录，{p.reviewDue} 到期）——点击卡片右上角「到期复盘」打分。</div>)}
+        </div>
+      )}
 
       <div className="spread mb16">
         <div className="row">
@@ -71,7 +80,11 @@ export default function Predictions() {
                 {STANCE[p.positionMeaning.stance].label} · {p.positionMeaning.note || '未注明'}
               </span>
               {p.status === 'open'
-                ? <span className="badge flat">进行中</span>
+                ? p.reviewDue && p.reviewDue <= today
+                  ? <span className="badge down">⏰ 已到复盘日 {p.reviewDue}</span>
+                  : p.reviewDue
+                    ? <span className="badge flat">复盘日 {p.reviewDue}</span>
+                    : <span className="badge flat">进行中（未设复盘日）</span>
                 : <span className="badge up">已复盘 {p.review?.date}</span>}
             </div>
             <div className="row">
@@ -176,6 +189,7 @@ export default function Predictions() {
 
 function FormModal({ onClose, onSave }: { onClose: () => void; onSave: (p: PredictionCard) => void }) {
   const [date, setDate] = useState(todayISO());
+  const [reviewDue, setReviewDue] = useState('');
   const [posS, setPosS] = useState(''); const [posM, setPosM] = useState(''); const [posL, setPosL] = useState('');
   const [label, setLabel] = useState(''); const [prob, setProb] = useState(60); const [windowT, setWindowT] = useState('6–12 个月');
   const [assets, setAssets] = useState('');
@@ -194,6 +208,7 @@ function FormModal({ onClose, onSave }: { onClose: () => void; onSave: (p: Predi
         <h3>记录新判断（预测卡片）</h3>
         <div className="grid grid-2">
           <label className="field"><span>日期</span><input type="date" value={date} onChange={(e) => setDate(e.target.value)} /></label>
+          <label className="field"><span>到期复盘日（提醒自己到期打分）</span><input type="date" value={reviewDue} onChange={(e) => setReviewDue(e.target.value)} /></label>
           <label className="field"><span>时间窗</span><input type="text" value={windowT} onChange={(e) => setWindowT(e.target.value)} /></label>
           <label className="field"><span>周期定位 · 短周期（库存/流动）</span><input type="text" value={posS} onChange={(e) => setPosS(e.target.value)} placeholder="如：被动去库存末期" /></label>
           <label className="field"><span>周期定位 · 中周期（信用/资本开支）</span><input type="text" value={posM} onChange={(e) => setPosM(e.target.value)} placeholder="如：宽货币紧信用" /></label>
@@ -232,7 +247,7 @@ function FormModal({ onClose, onSave }: { onClose: () => void; onSave: (p: Predi
             className="btn primary"
             disabled={!valid}
             onClick={() => onSave({
-              id: uid(), date, createdBy: 'user',
+              id: uid(), date, createdBy: 'user', reviewDue: reviewDue || undefined,
               cyclePosition: { short: posS, mid: posM, long: posL },
               mainScenario: { label: label.trim(), prob, window: windowT, assets },
               keyEvidence: lines(evidence), notDoing, falsify: lines(falsify),
@@ -252,14 +267,37 @@ function ReviewModal({ p, onClose, onSave }: { p: PredictionCard; onClose: () =>
   const [calibration, setCalibration] = useState(3);
   const [value, setValue] = useState(3);
   const [note, setNote] = useState('');
+  const [snap, setSnap] = useState<{ record?: HistoryEntry; due?: HistoryEntry }>({});
+
+  // P1-5：复盘时拉取「记录日 vs 到期日」的数据快照对比
+  useEffect(() => {
+    fetch('./data/history.json', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : []))
+      .then((d: HistoryEntry[]) => {
+        const find = (iso: string) => d.find((h) => h.date === iso);
+        setSnap({ record: find(p.date), due: p.reviewDue ? find(p.reviewDue) : undefined });
+      })
+      .catch(() => setSnap({}));
+  }, [p.date, p.reviewDue]);
 
   const b = occurred === null ? null : brier(p.mainScenario.prob / 100, occurred ? 1 : 0);
+  const diffBlock = (h?: HistoryEntry) => h ? (
+    <div className="small num">
+      扩散 {h.diffusion.total > 0 ? '+' : ''}{h.diffusion.total}（领先 {h.diffusion.leading > 0 ? '+' : ''}{h.diffusion.leading} / 同步 {h.diffusion.coincident > 0 ? '+' : ''}{h.diffusion.coincident}）· 成功 {h.autoCount} 项
+    </div>
+  ) : <span className="small faint">无当日快照</span>;
 
   return (
     <div className="modal-mask" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h3>复盘打分：{p.mainScenario.label}</h3>
         <p className="muted small">按报告第 5 节四维评分：方向 / 时机 / 校准 / 决策价值。分析正确 ≠ 投资正确。</p>
+        <div className="alert-box gray small mb16" style={{ fontSize: 12 }}>
+          <b>📸 数据快照对比</b>（记录日 vs 到期日，来自每日采集存档）：
+          <div className="mt8">记录日（{p.date}）：{diffBlock(snap.record)}</div>
+          <div className="mt8">到期日（{p.reviewDue ?? '—'}）：{diffBlock(snap.due)}</div>
+          <div className="mt8 faint">快照覆盖最近 40 天；更早的对比请参考指标库历史。</div>
+        </div>
         <div className="mb16">
           <span className="small bold">主情景（{p.mainScenario.prob}%）是否发生？</span>
           <div className="row mt8">

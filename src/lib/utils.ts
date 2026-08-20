@@ -133,3 +133,119 @@ export function loadJSONFile(file: File): Promise<string> {
     r.readAsText(file);
   });
 }
+
+// ---------- P0-2 数据新鲜度 ----------
+export const FREQ_LABEL: Record<string, string> = { d: '日更', w: '周更', m: '月更', q: '季更' };
+
+export function lagMonths(updatedAt: string): number {
+  // updatedAt 形如 'YYYY-MM'；返回与当前月份的差距
+  const m = /^(\d{4})-(\d{2})/.exec(updatedAt);
+  if (!m) return 0;
+  const now = new Date();
+  return now.getFullYear() * 12 + now.getMonth() - (parseInt(m[1]) * 12 + (parseInt(m[2]) - 1));
+}
+
+// ---------- P1-1 衰退红绿灯（借鉴 recession-indicator-dashboard） ----------
+export interface LightSignal { id: string; label: string; on: boolean; note: string }
+
+export function recessionLights(indicators: IndicatorRecord[]): { lights: LightSignal[]; count: number; level: 'green' | 'yellow' | 'red' } {
+  const byId = (id: string) => indicators.find((i) => i.enabled && i.id === id);
+  const trendBad = (rec: IndicatorRecord | undefined, months = 3): boolean => {
+    if (!rec) return false;
+    const pts = rec.monthly.filter((p) => p.value !== null);
+    if (pts.length < months + 1) return false;
+    const last = pts[pts.length - 1];
+    const base = pts[pts.length - 1 - months];
+    return rec.better === 'high' ? last.value < base.value : last.value > base.value;
+  };
+  const curve = byId('us-2s10s');
+  const curveVal = curve?.monthly?.filter((p) => p.value !== null).slice(-1)[0]?.value ?? 0;
+  const sahm = (() => {
+    const ue = byId('us-ue');
+    if (!ue) return null;
+    const pts = ue.monthly.filter((p) => p.value !== null).map((p) => p.value);
+    if (pts.length < 16) return null;
+    const avg3 = pts.slice(-3).reduce((a, b) => a + b, 0) / 3;
+    const min12 = Math.min(...pts.slice(-15, -3));
+    return { triggered: avg3 - min12 >= 0.5, diff: Math.round((avg3 - min12) * 100) / 100 };
+  })();
+  const lights: LightSignal[] = [
+    { id: 'curve', label: '曲线倒挂', on: curveVal < 0, note: curveVal < 0 ? `2s10s 倒挂 ${curveVal}bp` : `2s10s ${curveVal}bp 未倒挂` },
+    { id: 'sahm', label: 'Sahm 规则', on: sahm?.triggered ?? false, note: sahm === null ? '数据不足' : sahm.triggered ? `已触发 +${sahm.diff}pp` : `未触发 +${sahm.diff}pp` },
+    { id: 'claims', label: '初请失业金', on: trendBad(byId('us-claims'), 3), note: '近 3 个月趋势' },
+    { id: 'housing', label: '新屋开工', on: trendBad(byId('us-housing'), 3), note: '近 3 个月趋势' },
+    { id: 'invsales', label: '库存/销售比', on: trendBad(byId('us-inv-sales'), 3), note: '近 3 个月趋势' },
+  ];
+  const count = lights.filter((l) => l.on).length;
+  const level: 'green' | 'yellow' | 'red' = count <= 1 ? 'green' : count <= 3 ? 'yellow' : 'red';
+  return { lights, count, level };
+}
+
+export const LIGHT_LEVEL_META: Record<'green' | 'yellow' | 'red', { label: string; color: string; bg: string }> = {
+  green: { label: '扩张（绿灯）', color: '#059669', bg: '#ecfdf5' },
+  yellow: { label: '警惕（黄灯）', color: '#b45309', bg: '#fffbeb' },
+  red: { label: '衰退风险高（红灯）', color: '#dc2626', bg: '#fef2f2' },
+};
+
+// ---------- P2-1 宏观数据日历（发布规则，自维护） ----------
+export interface CalendarRule {
+  id: string; name: string; region: string; freq: 'monthly' | 'weekly' | 'quarterly';
+  rule: string;                 // 规则描述
+  compute: (now: Date) => Date; // 计算下一次发布日（估算）
+  indicatorId?: string;         // 关联指标（用于回填已发布数据）
+  unit?: string;
+}
+
+const dayOfMonth = (y: number, m: number, d: number) => new Date(y, m, d);
+
+function nextMonthlyRule(now: Date, day: number, offsetDays: number): Date {
+  // 该月的目标日；若已过则下月
+  let target = dayOfMonth(now.getFullYear(), now.getMonth(), day + offsetDays);
+  if (target <= now) target = dayOfMonth(now.getFullYear(), now.getMonth() + 1, day + offsetDays);
+  return target;
+}
+
+function nextNthWeekday(now: Date, weekday: number, nth: number): Date {
+  // weekday: 0=周日…5=周五；nth: 第几个
+  let d = dayOfMonth(now.getFullYear(), now.getMonth(), 1);
+  let count = 0;
+  while (true) {
+    if (d.getDay() === weekday) count++;
+    if (count === nth) break;
+    d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+  }
+  if (d <= now) {
+    d = dayOfMonth(now.getFullYear(), now.getMonth() + 1, 1);
+    count = 0;
+    while (true) {
+      if (d.getDay() === weekday) count++;
+      if (count === nth) break;
+      d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+    }
+  }
+  return d;
+}
+
+function nextWeekly(now: Date, weekday: number): Date {
+  const d = new Date(now);
+  while (d.getDay() !== weekday) d.setDate(d.getDate() + 1);
+  if (d <= now) d.setDate(d.getDate() + 7);
+  return d;
+}
+
+export const CALENDAR_RULES: CalendarRule[] = [
+  { id: 'us-nfp', name: '非农就业 + 失业率', region: '美国', freq: 'monthly', rule: '每月第 1 个周五 20:30（北京）', compute: (n) => nextNthWeekday(n, 5, 1), indicatorId: 'us-payrolls', unit: '万人' },
+  { id: 'us-claims', name: '初请失业金', region: '美国', freq: 'weekly', rule: '每周四 20:30（北京）', compute: (n) => nextWeekly(n, 4), indicatorId: 'us-claims', unit: '万人' },
+  { id: 'us-cpi', name: '美国 CPI', region: '美国', freq: 'monthly', rule: '次月 10–14 日 20:30（北京）', compute: (n) => nextMonthlyRule(n, 12, 0), indicatorId: 'us-core-cpi', unit: '%' },
+  { id: 'us-ppi', name: '美国 PPI', region: '美国', freq: 'monthly', rule: '次月 11–15 日 20:30（北京）', compute: (n) => nextMonthlyRule(n, 13, 0), indicatorId: 'us-ppi', unit: '%' },
+  { id: 'us-retail', name: '美国零售销售', region: '美国', freq: 'monthly', rule: '次月 14–17 日 20:30（北京）', compute: (n) => nextMonthlyRule(n, 15, 0), indicatorId: 'us-retail', unit: '亿美元' },
+  { id: 'us-housing', name: '新屋开工 / 营建许可', region: '美国', freq: 'monthly', rule: '次月 16–19 日 20:30（北京）', compute: (n) => nextMonthlyRule(n, 17, 0), indicatorId: 'us-housing', unit: '千套' },
+  { id: 'us-fomc', name: '美联储 FOMC 利率决议', region: '美国', freq: 'monthly', rule: '每年 8 次会议（1/3/4/6/7/9/10/12 月，以官方日程为准）', compute: (n) => { const d = new Date(n); while (![0, 2, 3, 5, 6, 8, 9, 11].includes(d.getMonth())) d.setMonth(d.getMonth() + 1); if (d <= n) { d.setMonth(d.getMonth() + 1); while (![0, 2, 3, 5, 6, 8, 9, 11].includes(d.getMonth())) d.setMonth(d.getMonth() + 1); } return d; }, indicatorId: 'us-fedfunds', unit: '%' },
+  { id: 'cn-pmi', name: '中国官方制造业 PMI', region: '中国', freq: 'monthly', rule: '每月最后一天 09:30（北京）', compute: (n) => dayOfMonth(n.getFullYear(), n.getMonth() + 1, 0), indicatorId: 'cn-pmi', unit: '指数' },
+  { id: 'cn-cpi', name: '中国 CPI / PPI', region: '中国', freq: 'monthly', rule: '次月 9 日左右 09:30（北京）', compute: (n) => nextMonthlyRule(n, 9, 0), indicatorId: 'cn-cpi', unit: '%' },
+  { id: 'cn-credit', name: '社融 / 新增贷款 / M1 / M2', region: '中国', freq: 'monthly', rule: '次月 10–15 日 16:00（北京）', compute: (n) => nextMonthlyRule(n, 12, 0), indicatorId: 'cn-new-loan', unit: '亿元' },
+  { id: 'cn-ip', name: '工业增加值 / 社零 / 失业率', region: '中国', freq: 'monthly', rule: '次月 15–18 日 10:00（北京）', compute: (n) => nextMonthlyRule(n, 16, 0), indicatorId: 'cn-ip', unit: '%' },
+  { id: 'cn-lpr', name: 'LPR 报价', region: '中国', freq: 'monthly', rule: '每月 20 日 09:15（北京，遇节假日顺延）', compute: (n) => nextMonthlyRule(n, 20, 0), indicatorId: 'cn-lpr', unit: '%' },
+  { id: 'cn-house', name: '70 城房价 / 国房景气', region: '中国', freq: 'monthly', rule: '次月 15–19 日 09:30（北京）', compute: (n) => nextMonthlyRule(n, 17, 0), indicatorId: 'cn-house-bj', unit: '指数' },
+  { id: 'cn-gdp', name: '中国 GDP', region: '中国', freq: 'quarterly', rule: '1/4/7/10 月 15–19 日 10:00（北京）', compute: (n) => { let d = new Date(n); while (![0, 3, 6, 9].includes(d.getMonth())) d.setMonth(d.getMonth() + 1); if (d <= n) { d.setMonth(d.getMonth() + 1); while (![0, 3, 6, 9].includes(d.getMonth())) d.setMonth(d.getMonth() + 1); } return d; }, indicatorId: 'cn-gdp', unit: '%' },
+];

@@ -10,7 +10,12 @@
     "watch": "是否倒挂、倒挂深度与持续时间、何时重新陡峭化",
     "meaning": "1955 年以来美国衰退前几乎都出现倒挂；领先约 6–18 个月，中位数约 12 个月",
     "limit": "2022–2024 出现超长倒挂而未立刻衰退；浅而短的倒挂假信号更多",
-    "auto": { "kind": "fred", "series": "T10Y2Y", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "T10Y2Y",
+      "transform": "none"
+    },
+    "freq": "d"
   },
   {
     "id": "us-3m10s",
@@ -23,7 +28,12 @@
     "watch": "是否倒挂、深度与持续时间",
     "meaning": "更贴政策、假信号相对少；2s10s 更早更吵，两者一起看",
     "limit": "同样存在“超长倒挂未衰退”的失效期",
-    "auto": { "kind": "fred", "series": "T10Y3M", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "T10Y3M",
+      "transform": "none"
+    },
+    "freq": "d"
   },
   {
     "id": "us-hy-oas",
@@ -36,7 +46,12 @@
     "watch": "水平 + 走阔速度（100bp 快速走阔尤其重要）",
     "meaning": "利差快速走阔往往早于股价见顶；危机级常见 >600bp",
     "limit": "利差可以在过热期长期过窄，容易让人麻木",
-    "auto": { "kind": "fred", "series": "BAMLH0A0HYM2", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "BAMLH0A0HYM2",
+      "transform": "none"
+    },
+    "freq": "d"
   },
   {
     "id": "us-ig-baa",
@@ -49,7 +64,13 @@
     "watch": "质量下沉是否被惩罚",
     "meaning": "金融条件收紧的确认信号",
     "limit": "相对 HY 更钝、更晚",
-    "auto": { "kind": "fred", "seriesA": "BAA10Y", "seriesB": "AAA10Y", "transform": "spread" }
+    "auto": {
+      "kind": "fred",
+      "seriesA": "BAA10Y",
+      "seriesB": "AAA10Y",
+      "transform": "spread"
+    },
+    "freq": "d"
   },
   {
     "id": "us-real-rate",
@@ -62,7 +83,12 @@
     "watch": "政策是限制性还是转向",
     "meaning": "短债周期的舵；剔除通胀后的真实资金成本",
     "limit": "拐点期期货隐含误差会显著变大",
-    "auto": { "kind": "fred", "series": "DFII10", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "DFII10",
+      "transform": "none"
+    },
+    "freq": "d"
   },
   {
     "id": "us-m2",
@@ -75,7 +101,12 @@
     "watch": "水平不如加速度（二阶导）",
     "meaning": "流动性加速常领先风险资产表现",
     "limit": "口径、时滞、财政干扰较大；非全球口径",
-    "auto": { "kind": "fred", "series": "M2SL", "transform": "yoy" }
+    "auto": {
+      "kind": "fred",
+      "series": "M2SL",
+      "transform": "yoy"
+    },
+    "freq": "m"
   },
   {
     "id": "us-fci",
@@ -88,7 +119,12 @@
     "watch": "零轴上下、方向",
     "meaning": "综合金融条件的市场代理（替代银行贷款标准 SLOOS 的高频版）；银行“拒绝放贷”往往比股市阴线更早更诚实",
     "limit": "综合指数，掩盖结构性差异",
-    "auto": { "kind": "fred", "series": "NFCI", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "NFCI",
+      "transform": "none"
+    },
+    "freq": "m"
   },
   {
     "id": "us-wei",
@@ -101,7 +137,12 @@
     "watch": "连续 3 个月同向变化",
     "meaning": "Conference Board LEI 的免费替代（LEI 官方口径不开放）；综合领先指数，常先于衰退",
     "limit": "周度噪声大，看趋势不看单周",
-    "auto": { "kind": "fred", "series": "WEI", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "WEI",
+      "transform": "none"
+    },
+    "freq": "w"
   },
   {
     "id": "us-claims",
@@ -114,7 +155,12 @@
     "watch": "趋势而非单周数字",
     "meaning": "劳动市场最早的裂口；拐点信息量大于水平",
     "limit": "节假日、飓风等会扭曲单周读数",
-    "auto": { "kind": "fred", "series": "ICSA", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "ICSA",
+      "transform": "none"
+    },
+    "freq": "w"
   },
   {
     "id": "us-housing",
@@ -127,7 +173,12 @@
     "watch": "趋势",
     "meaning": "长周期里的短领先；地产是利率最敏感的实体部门",
     "limit": "地区差异大，受利率以外供给约束影响",
-    "auto": { "kind": "fred", "series": "HOUST", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "HOUST",
+      "transform": "none"
+    },
+    "freq": "m"
   },
   {
     "id": "us-permit",
@@ -140,7 +191,12 @@
     "watch": "许可趋势",
     "meaning": "比开工更领先一步的地产先行指标",
     "limit": "月度波动大",
-    "auto": { "kind": "fred", "series": "PERMIT", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "PERMIT",
+      "transform": "none"
+    },
+    "freq": "m"
   },
   {
     "id": "us-capex",
@@ -153,7 +209,12 @@
     "watch": "企业投资意图",
     "meaning": "朱格拉周期的月度代理",
     "limit": "波动大、修订多",
-    "auto": { "kind": "fred", "series": "ANDENO", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "ANDENO",
+      "transform": "none"
+    },
+    "freq": "m"
   },
   {
     "id": "gl-copper",
@@ -166,7 +227,12 @@
     "watch": "同比方向",
     "meaning": "铜偏周期：同比上行常与全球增长回暖同向",
     "limit": "受供给、库存、金融属性干扰",
-    "auto": { "kind": "fred", "series": "PCOPPUSDM", "transform": "yoy" }
+    "auto": {
+      "kind": "fred",
+      "series": "PCOPPUSDM",
+      "transform": "yoy"
+    },
+    "freq": "m"
   },
   {
     "id": "us-ip",
@@ -179,7 +245,12 @@
     "watch": "同比方向",
     "meaning": "回答“现在在哪”的核心同步指标",
     "limit": "制造业占比下降，代表性减弱",
-    "auto": { "kind": "fred", "series": "INDPRO", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "INDPRO",
+      "transform": "none"
+    },
+    "freq": "m"
   },
   {
     "id": "us-retail",
@@ -192,7 +263,12 @@
     "watch": "同比 / 环比方向",
     "meaning": "消费是 GDP 的大头，同步确认增长动能",
     "limit": "不覆盖服务消费",
-    "auto": { "kind": "fred", "series": "RSXFSN", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "RSXFSN",
+      "transform": "none"
+    },
+    "freq": "m"
   },
   {
     "id": "us-payrolls",
@@ -205,7 +281,12 @@
     "watch": "趋势与下修",
     "meaning": "就业是最重要的同步指标之一；Sahm 规则的原料",
     "limit": "初始值修订大",
-    "auto": { "kind": "fred", "series": "PAYEMS", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "PAYEMS",
+      "transform": "none"
+    },
+    "freq": "m"
   },
   {
     "id": "us-ue",
@@ -218,7 +299,12 @@
     "watch": "3 个月均值较过去 12 个月低点回升 0.5pp",
     "meaning": "美国战后衰退识别相当稳，但偏确认而非领先（平均滞后约 2–3 个月）",
     "limit": "OECD 国家需重标定阈值；结构变化会干扰",
-    "auto": { "kind": "fred", "series": "UNRATE", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "UNRATE",
+      "transform": "none"
+    },
+    "freq": "m"
   },
   {
     "id": "us-core-cpi",
@@ -231,7 +317,12 @@
     "watch": "趋势；但拐点预警请看 PPI/CRB/运价/工资",
     "meaning": "通胀是典型滞后变量：适合定阶段，不适合做拐点预警",
     "limit": "用 CPI 做拐点预警通常太晚",
-    "auto": { "kind": "fred", "series": "CPILFESL", "transform": "yoy" }
+    "auto": {
+      "kind": "fred",
+      "series": "CPILFESL",
+      "transform": "yoy"
+    },
+    "freq": "m"
   },
   {
     "id": "us-ppi",
@@ -244,7 +335,12 @@
     "watch": "拐点苗头",
     "meaning": "比 CPI 更早看到通胀拐点",
     "limit": "商品属性强，受供给冲击影响大",
-    "auto": { "kind": "fred", "series": "PPIACO", "transform": "yoy" }
+    "auto": {
+      "kind": "fred",
+      "series": "PPIACO",
+      "transform": "yoy"
+    },
+    "freq": "m"
   },
   {
     "id": "us-inv-sales",
@@ -257,7 +353,12 @@
     "watch": "被动补库还是主动去库",
     "meaning": "库存是滞后变量：被动去库结束+新订单回升是扩张信号",
     "limit": "行业差异巨大",
-    "auto": { "kind": "fred", "series": "ISRATIO", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "ISRATIO",
+      "transform": "none"
+    },
+    "freq": "m"
   },
   {
     "id": "us-vix",
@@ -270,7 +371,12 @@
     "watch": "方向与期限结构",
     "meaning": "VIX 的水平不如方向和期限结构有信息",
     "limit": "容易被事件脉冲扭曲",
-    "auto": { "kind": "fred", "series": "VIXCLS", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "VIXCLS",
+      "transform": "none"
+    },
+    "freq": "d"
   },
   {
     "id": "us-sp500",
@@ -283,7 +389,12 @@
     "watch": "趋势与背离（新高而广度变差）",
     "meaning": "风险偏好的直接表达；与广度/利差配合看背离",
     "limit": "指数受少数权重股影响",
-    "auto": { "kind": "fred", "series": "SP500", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "SP500",
+      "transform": "none"
+    },
+    "freq": "d"
   },
   {
     "id": "us-fedfunds",
@@ -296,7 +407,12 @@
     "watch": "政策是限制性还是转向",
     "meaning": "短债周期的舵；美联储政策立场的最直接度量",
     "limit": "滞后于市场定价",
-    "auto": { "kind": "fred", "series": "DFF", "transform": "none" }
+    "auto": {
+      "kind": "fred",
+      "series": "DFF",
+      "transform": "none"
+    },
+    "freq": "d"
   },
   {
     "id": "cn-pmi",
@@ -309,7 +425,12 @@
     "watch": "荣枯线 50 上下、连续方向",
     "meaning": "中国需求的最快月度读数；扩张初期新订单回升是关键",
     "limit": "季节性明显（春节），需看同比或扩散",
-    "auto": { "kind": "em", "reportName": "RPT_ECONOMY_PMI", "field": "MAKE_INDEX" }
+    "auto": {
+      "kind": "em",
+      "reportName": "RPT_ECONOMY_PMI",
+      "field": "MAKE_INDEX"
+    },
+    "freq": "m"
   },
   {
     "id": "cn-pmi-orders",
@@ -322,7 +443,12 @@
     "watch": "新订单–库存差，比 PMI 水平更领先",
     "meaning": "需求的月度体温；连续低于 48 更有意义",
     "limit": "单月噪声大",
-    "auto": { "kind": "em", "reportName": "RPT_ECONOMY_PMI", "field": "NMAKE_INDEX" }
+    "auto": {
+      "kind": "em",
+      "reportName": "RPT_ECONOMY_PMI",
+      "field": "NMAKE_INDEX"
+    },
+    "freq": "m"
   },
   {
     "id": "cn-m1",
@@ -335,7 +461,12 @@
     "watch": "同比方向与拐点",
     "meaning": "企业活钱、周期敏感；历史上领先股价约 1–2 个月量级（经验规律）",
     "limit": "非定律；受节日、口径调整干扰",
-    "auto": { "kind": "em", "reportName": "RPT_ECONOMY_CURRENCY_SUPPLY", "field": "CURRENCY_SAME" }
+    "auto": {
+      "kind": "em",
+      "reportName": "RPT_ECONOMY_CURRENCY_SUPPLY",
+      "field": "CURRENCY_SAME"
+    },
+    "freq": "m"
   },
   {
     "id": "cn-m2",
@@ -348,7 +479,12 @@
     "watch": "方向 + 与社融的背离",
     "meaning": "广义货币：方向代表货币政策松紧的近似",
     "limit": "存量变大后增速对边际变化变钝",
-    "auto": { "kind": "em", "reportName": "RPT_ECONOMY_CURRENCY_SUPPLY", "field": "BASIC_CURRENCY_SAME" }
+    "auto": {
+      "kind": "em",
+      "reportName": "RPT_ECONOMY_CURRENCY_SUPPLY",
+      "field": "BASIC_CURRENCY_SAME"
+    },
+    "freq": "m"
   },
   {
     "id": "cn-m1m2",
@@ -361,7 +497,14 @@
     "watch": "M1 快于 M2 → 资金活化；反之预防性储蓄",
     "meaning": "反映资金活化程度，是信用环境敏感的温度计",
     "limit": "M2/社融存量变大后增速钝化，需结合结构",
-    "auto": { "kind": "emDerive", "reportName": "RPT_ECONOMY_CURRENCY_SUPPLY", "fieldA": "CURRENCY_SAME", "fieldB": "BASIC_CURRENCY_SAME", "op": "sub" }
+    "auto": {
+      "kind": "emDerive",
+      "reportName": "RPT_ECONOMY_CURRENCY_SUPPLY",
+      "fieldA": "CURRENCY_SAME",
+      "fieldB": "BASIC_CURRENCY_SAME",
+      "op": "sub"
+    },
+    "freq": "m"
   },
   {
     "id": "cn-cpi",
@@ -374,7 +517,12 @@
     "watch": "趋势",
     "meaning": "通胀的滞后读数：定阶段用，做拐点预警太晚",
     "limit": "受猪肉等单一分项扰动大",
-    "auto": { "kind": "em", "reportName": "RPT_ECONOMY_CPI", "field": "NATIONAL_SAME" }
+    "auto": {
+      "kind": "em",
+      "reportName": "RPT_ECONOMY_CPI",
+      "field": "NATIONAL_SAME"
+    },
+    "freq": "m"
   },
   {
     "id": "cn-ppi",
@@ -387,7 +535,12 @@
     "watch": "拐点苗头",
     "meaning": "比 CPI 更早看到工业品价格与盈利拐点",
     "limit": "受大宗商品与基数效应影响大",
-    "auto": { "kind": "em", "reportName": "RPT_ECONOMY_PPI", "field": "BASE_SAME" }
+    "auto": {
+      "kind": "em",
+      "reportName": "RPT_ECONOMY_PPI",
+      "field": "BASE_SAME"
+    },
+    "freq": "m"
   },
   {
     "id": "cn-ip",
@@ -400,7 +553,12 @@
     "watch": "同比方向",
     "meaning": "中国实体经济的最核心同步读数",
     "limit": "受基数效应干扰大",
-    "auto": { "kind": "em", "reportName": "RPT_ECONOMY_INDUS_GROW", "field": "BASE_SAME" }
+    "auto": {
+      "kind": "em",
+      "reportName": "RPT_ECONOMY_INDUS_GROW",
+      "field": "BASE_SAME"
+    },
+    "freq": "m"
   },
   {
     "id": "cn-gdp",
@@ -413,46 +571,12 @@
     "watch": "方向而非水平（8→6→5 是加速度变差）",
     "meaning": "最权威的增长读数；看方向，不只盯水平",
     "limit": "季度发布、修订多",
-    "auto": { "kind": "em", "reportName": "RPT_ECONOMY_GDP", "field": "SUM_SAME" }
-  },
-  {
-    "id": "cn-shf",
-    "name": "中国社融存量增速",
-    "region": "CN",
-    "layer": "credit",
-    "type": "leading",
-    "unit": "%",
-    "better": "high",
-    "watch": "增速、结构（政府债 vs 企业债 vs 贷款）",
-    "meaning": "货币×信用时钟的信用端核心；宽信用领先风险资产",
-    "limit": "存量变大后增速对边际变化变钝，需配合脉冲",
-    "auto": null
-  },
-  {
-    "id": "cn-lpr",
-    "name": "中国 1 年期 LPR",
-    "region": "CN",
-    "layer": "credit",
-    "type": "leading",
-    "unit": "%",
-    "better": "low",
-    "watch": "降息周期是否开启",
-    "meaning": "货币×信用时钟的货币端核心定价",
-    "limit": "月度调整、幅度小",
-    "auto": null
-  },
-  {
-    "id": "cn-urban-ue",
-    "name": "城镇调查失业率",
-    "region": "CN",
-    "layer": "coincident",
-    "type": "coincident",
-    "unit": "%",
-    "better": "low",
-    "watch": "趋势",
-    "meaning": "中国就业的同步读数",
-    "limit": "对隐性失业覆盖不足",
-    "auto": null
+    "auto": {
+      "kind": "em",
+      "reportName": "RPT_ECONOMY_GDP",
+      "field": "SUM_SAME"
+    },
+    "freq": "q"
   },
   {
     "id": "us-cape",
@@ -465,7 +589,8 @@
     "watch": "水平与分位数",
     "meaning": "东西贵不贵；估值高=赔率差",
     "limit": "长期均值回归可能迟到很久",
-    "auto": null
+    "auto": null,
+    "freq": "m"
   },
   {
     "id": "us-erp",
@@ -478,7 +603,8 @@
     "watch": "分位数",
     "meaning": "股债性价比；ERP 极低时常对应过热尾部",
     "limit": "无风险利率口径影响大",
-    "auto": null
+    "auto": null,
+    "freq": "m"
   },
   {
     "id": "us-breadth",
@@ -491,7 +617,8 @@
     "watch": "等权 vs 市值加权背离",
     "meaning": "指数新高而广度变差 = 背离，提高监测频率",
     "limit": "背离不是立刻反向开仓的理由",
-    "auto": null
+    "auto": null,
+    "freq": "m"
   },
   {
     "id": "cn-margin",
@@ -504,7 +631,8 @@
     "watch": "增速与占比",
     "meaning": "杠杆是情绪的放大器",
     "limit": "规模随市值自然增长",
-    "auto": null
+    "auto": null,
+    "freq": "m"
   },
   {
     "id": "us-ipo",
@@ -517,7 +645,8 @@
     "watch": "是否“什么都能发出去”",
     "meaning": "一级市场融资狂热是过热尾部的经典特征；融资突然关闭常早于崩盘",
     "limit": "监管周期会干扰",
-    "auto": null
+    "auto": null,
+    "freq": "m"
   },
   {
     "id": "gl-bis-gap",
@@ -530,7 +659,8 @@
     "watch": "缺口是否长期处于高位",
     "meaning": "金融周期的中期脆弱性度量",
     "limit": "不是最及时的危机指标（IMF：股价、房价、产出缺口更及时）",
-    "auto": null
+    "auto": null,
+    "freq": "m"
   },
   {
     "id": "cn-debt-ratio",
@@ -543,7 +673,8 @@
     "watch": "政府/居民/企业谁在加杠杆",
     "meaning": "判断“普通衰退还是资产负债表衰退”",
     "limit": "口径变化多",
-    "auto": null
+    "auto": null,
+    "freq": "m"
   },
   {
     "id": "gl-productivity",
@@ -556,19 +687,159 @@
     "watch": "真实增长 vs 加杠杆增长",
     "meaning": "达利欧长周期锚：生产率决定长期收入",
     "limit": "难以高频观测",
-    "auto": null
+    "auto": null,
+    "freq": "m"
   },
   {
-    "id": "cn-house-price",
-    "name": "房价相对趋势缺口",
+    "id": "cn-lpr",
+    "name": "中国 1 年期 LPR",
+    "region": "CN",
+    "layer": "credit",
+    "type": "leading",
+    "unit": "%",
+    "better": "low",
+    "freq": "m",
+    "watch": "每月 20 日调整方向；降息周期是否开启",
+    "meaning": "货币×信用时钟的货币端核心定价；政策利率的方向盘",
+    "limit": "月度调整、幅度小；个别月份保持不变",
+    "auto": {
+      "kind": "emRate",
+      "field": "LPR1Y"
+    }
+  },
+  {
+    "id": "cn-new-loan",
+    "name": "中国新增人民币贷款（当月）",
+    "region": "CN",
+    "layer": "credit",
+    "type": "leading",
+    "unit": "亿元",
+    "better": "high",
+    "freq": "m",
+    "watch": "当月增量与同比；企业与居民结构",
+    "meaning": "信用扩张的最新读数：社融的最及时平替（社融增量官方源滞后）",
+    "limit": "单月波动大（季末冲量），看同比与趋势",
+    "auto": {
+      "kind": "em",
+      "reportName": "RPT_ECONOMY_RMB_LOAN",
+      "field": "RMB_LOAN"
+    }
+  },
+  {
+    "id": "cn-shf",
+    "name": "中国社融规模增量（当月）",
+    "region": "CN",
+    "layer": "credit",
+    "type": "leading",
+    "unit": "亿元",
+    "better": "high",
+    "freq": "m",
+    "lag": 4,
+    "watch": "当月增量；与 M1/M2 交叉验证",
+    "meaning": "信用脉冲的官方读数（商务部源）；增量转正+扩大=宽信用",
+    "limit": "官方源更新滞后约 4 个月；用新增贷款做及时补充",
+    "auto": {
+      "kind": "mofcom"
+    }
+  },
+  {
+    "id": "cn-urban-ue",
+    "name": "城镇调查失业率",
+    "region": "CN",
+    "layer": "coincident",
+    "type": "coincident",
+    "unit": "%",
+    "better": "low",
+    "freq": "m",
+    "watch": "趋势与季节调整",
+    "meaning": "中国就业的官方同步读数",
+    "limit": "对隐性失业覆盖不足",
+    "auto": {
+      "kind": "stats"
+    }
+  },
+  {
+    "id": "cn-house-climate",
+    "name": "国房景气指数",
     "region": "CN",
     "layer": "fragility",
     "type": "lagging",
-    "unit": "%",
-    "better": "low",
-    "watch": "相对长期趋势的偏离",
-    "meaning": "IMF：新兴市场“股价+房价+信贷缺口”组合预警能力最好",
-    "limit": "数据口径多、区域分化大",
+    "unit": "指数",
+    "better": "high",
+    "freq": "m",
+    "lag": 2,
+    "watch": "100 分水岭；趋势",
+    "meaning": "房地产行业综合景气度；100 以下=行业偏冷",
+    "limit": "指数本身发布滞后约 2 个月",
+    "auto": {
+      "kind": "emInd"
+    }
+  },
+  {
+    "id": "cn-house-bj",
+    "name": "北京新建住宅价格指数（同比）",
+    "region": "CN",
+    "layer": "fragility",
+    "type": "lagging",
+    "unit": "指数",
+    "better": "high",
+    "freq": "m",
+    "watch": "100=同比持平；趋势与拐点",
+    "meaning": "一线城市房价的温度计（70 城数据的代表）；房价缺口的重要参考",
+    "limit": "一线城市不代表全国",
+    "auto": {
+      "kind": "emCity",
+      "reportName": "RPT_ECONOMY_HOUSE_PRICE",
+      "field": "FIRST_COMHOUSE_SAME",
+      "city": "北京"
+    }
+  },
+  {
+    "id": "cn-sh-idx",
+    "name": "上证指数",
+    "region": "CN",
+    "layer": "sentiment",
+    "type": "leading",
+    "unit": "点",
+    "better": "high",
+    "freq": "d",
+    "watch": "趋势与背离；与广度配合",
+    "meaning": "A 股风险偏好的直接表达",
+    "limit": "指数受权重股影响",
+    "auto": {
+      "kind": "sinaKline",
+      "symbol": "sh000001"
+    }
+  },
+  {
+    "id": "cn-hs300",
+    "name": "沪深 300 指数",
+    "region": "CN",
+    "layer": "sentiment",
+    "type": "leading",
+    "unit": "点",
+    "better": "high",
+    "freq": "d",
+    "watch": "趋势；等权 vs 市值加权背离",
+    "meaning": "A 股核心资产与机构风险偏好",
+    "limit": "与上证高度相关",
+    "auto": {
+      "kind": "sinaKline",
+      "symbol": "sh000300"
+    }
+  },
+  {
+    "id": "hk-hsi",
+    "name": "恒生指数（手动维护）",
+    "region": "CN",
+    "layer": "sentiment",
+    "type": "leading",
+    "unit": "点",
+    "better": "high",
+    "freq": "d",
+    "watch": "趋势；中美周期错位时的分裂定价",
+    "meaning": "离岸中国资产的风险偏好；外资态度的风向标",
+    "limit": "受美元流动性影响大",
     "auto": null
   }
 ]

@@ -8,6 +8,7 @@ import { fmtMonth } from '../lib/types';
 import { metaToRecord } from '../lib/seed';
 import { LayerBadge, RegionBadge, SignalBadge, TypeBadge } from '../components/Badges';
 import { consecutiveBad, consecutiveGood } from '../lib/store';
+import { FREQ_LABEL, lagMonths } from '../lib/utils';
 
 const EMPTY: IndicatorRecord = {
   id: '', name: '', region: 'US', layer: 'credit', type: 'leading', unit: '',
@@ -168,6 +169,10 @@ export default function Indicators() {
                         ? <span className="badge blue" style={{ marginLeft: 6 }}>🛰️ 自动 · {rec.source}</span>
                         : <span className="badge gray" style={{ marginLeft: 6 }}>✍️ 手动</span>}
                       {rec.stale && <span className="badge flat" style={{ marginLeft: 4 }}>沿用旧值</span>}
+                      {rec.freq && <span className="badge gray" style={{ marginLeft: 4 }}>{FREQ_LABEL[rec.freq] ?? rec.freq}</span>}
+                      {isAuto && lagMonths(rec.updatedAt) >= 3 && (
+                        <span className="badge down" style={{ marginLeft: 4 }}>滞后 {lagMonths(rec.updatedAt)} 月</span>
+                      )}
                     </div>
                     <div className="row small faint" style={{ marginTop: 2 }}>
                       <RegionBadge region={rec.region} />

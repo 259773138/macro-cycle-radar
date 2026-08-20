@@ -1,20 +1,33 @@
 {
-  "fetchedAt": "2026-08-20T08:05:35.293Z",
+  "fetchedAt": "2026-08-20T09:14:31.974Z",
   "sources": [
     {
       "name": "FRED（圣路易斯联储）",
       "status": "ok",
-      "count": 23,
-      "message": ""
+      "count": 23
     },
     {
       "name": "东方财富数据中心",
       "status": "ok",
-      "count": 9,
-      "message": ""
+      "count": 13
+    },
+    {
+      "name": "商务部",
+      "status": "ok",
+      "count": 1
+    },
+    {
+      "name": "国家统计局",
+      "status": "ok",
+      "count": 1
+    },
+    {
+      "name": "新浪财经行情",
+      "status": "ok",
+      "count": 2
     }
   ],
-  "autoCount": 32,
+  "autoCount": 40,
   "staleCount": 0,
   "failed": [],
   "note": "全部指标采集成功。"

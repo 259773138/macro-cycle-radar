@@ -5,7 +5,7 @@ import {
   Tooltip, XAxis, YAxis,
 } from 'recharts';
 import { useStore, aggregateSignals, suggestTier, diffusion } from '../lib/store';
-import { CN_QUADRANTS, QUADRANTS, TIER_META } from '../lib/utils';
+import { CN_QUADRANTS, QUADRANTS, TIER_META, LIGHT_LEVEL_META, recessionLights } from '../lib/utils';
 import { fmtMonth, lastNMonths } from '../lib/types';
 import { LAYERS, IndicatorRecord, IndicatorType, Quadrant, Signal } from '../lib/types';
 import { SignalBadge } from '../components/Badges';
@@ -53,7 +53,7 @@ function sahmCheck(indicators: IndicatorRecord[]): { triggered: boolean; diff: n
 export default function Dashboard() {
   const {
     indicators, tier, tierNote, setTier, quadrant, setQuadrant, cnQuadrant, setCnQuadrant,
-    aiReport, dataMeta, demoMode,
+    aiReport, dataMeta, demoMode, predictions,
   } = useStore();
 
   const enabled = useMemo(() => indicators.filter((i) => i.enabled), [indicators]);
@@ -121,6 +121,19 @@ export default function Dashboard() {
   const sentiAgg = aggregateSignals(enabled.filter((i) => i.layer === 'sentiment').map((i) => i.signal));
   const fragAgg = aggregateSignals(enabled.filter((i) => i.layer === 'fragility').map((i) => i.signal));
 
+  // P1-1 衰退红绿灯
+  const lights = useMemo(() => recessionLights(enabled), [enabled]);
+  const lightMeta = LIGHT_LEVEL_META[lights.level];
+
+  // P1-5 到期预测提醒
+  const today = new Date().toISOString().slice(0, 10);
+  const duePredictions = predictions.filter((p) => p.status === 'open' && p.reviewDue && p.reviewDue <= today);
+  const soonPredictions = predictions.filter((p) => {
+    if (p.status !== 'open' || !p.reviewDue) return false;
+    const days = (new Date(p.reviewDue).getTime() - Date.now()) / 86400000;
+    return days >= 0 && days <= 7;
+  });
+
   const vixVal = usVix?.monthly?.slice(-1)[0]?.value;
   const vixText = vixVal === undefined ? '未知' : vixVal < 15 ? `低位（${vixVal}，市场平静/自满）` : vixVal < 25 ? `中性（${vixVal}）` : `高位（${vixVal}，恐慌）`;
   const inversion = us2s10s?.monthly?.slice(-1)[0]?.value ?? 0;
@@ -162,6 +175,43 @@ export default function Dashboard() {
           <div className="s">美林 {q.cn} · 货币信用 {cq.cn}</div>
         </div>
       </div>
+
+      {/* P1-1 衰退红绿灯总分条 */}
+      <div className="card" style={{ borderColor: lightMeta.color }}>
+        <div className="spread">
+          <div>
+            <h3>🚦 美国衰退风险灯（5 信号合成）</h3>
+            <p className="hint" style={{ marginBottom: 0 }}>0-1 绿灯扩张 · 2-3 黄灯警惕 · 4-5 红灯衰退风险高（借鉴 recession-indicator-dashboard）。</p>
+          </div>
+          <div className="badge" style={{ background: lightMeta.bg, color: lightMeta.color, fontSize: 14, padding: '8px 14px' }}>
+            {lights.count} 盏亮 · {lightMeta.label}
+          </div>
+        </div>
+        <div className="grid grid-4 mt16" style={{ gap: 10 }}>
+          {lights.lights.map((l) => (
+            <div key={l.id} style={{
+              border: `1px solid ${l.on ? lightMeta.color : 'var(--border)'}`,
+              background: l.on ? lightMeta.bg : '#fff',
+              borderRadius: 10, padding: '10px 12px',
+            }}>
+              <div className="row" style={{ justifyContent: 'space-between' }}>
+                <span className="bold small">{l.label}</span>
+                <span className="pill-dot" style={{ background: l.on ? lightMeta.color : '#cbd5e1' }} />
+              </div>
+              <div className="small muted" style={{ marginTop: 4 }}>{l.note}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* P1-5 预测到期提醒 */}
+      {(duePredictions.length > 0 || soonPredictions.length > 0) && (
+        <div className={`alert-box ${duePredictions.length ? 'warn' : 'info'} mt16`}>
+          <b>🧭 预测复盘提醒：</b>
+          {duePredictions.map((p) => <div key={p.id}>· 「{p.mainScenario.label.slice(0, 30)}…」已到复盘日（{p.reviewDue}）——去「预测日志」打分，别让记忆改写历史。</div>)}
+          {soonPredictions.map((p) => <div key={p.id}>· 「{p.mainScenario.label.slice(0, 30)}…」将在 {p.reviewDue}（{Math.ceil((new Date(p.reviewDue!).getTime() - Date.now()) / 86400000)} 天后）到期复盘。</div>)}
+        </div>
+      )}
 
       {/* 自动分析摘要 */}
       <div className="card">

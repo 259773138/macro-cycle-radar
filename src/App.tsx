@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import Dashboard from './pages/Dashboard';
 import Indicators from './pages/Indicators';
+import Backtest from './pages/Backtest';
+import Calendar from './pages/Calendar';
 import Predictions from './pages/Predictions';
 import Assistant from './pages/Assistant';
+import Sources from './pages/Sources';
+import Longwave from './pages/Longwave';
 import Knowledge from './pages/Knowledge';
 import Settings from './pages/Settings';
 import { useStore } from './lib/store';
@@ -11,8 +15,12 @@ import { DataMeta, IndicatorRecord } from './lib/types';
 const NAV = [
   { id: 'dashboard', label: '总览仪表盘', icon: '📡' },
   { id: 'indicators', label: '指标库', icon: '📊' },
+  { id: 'backtest', label: '策略回测', icon: '📈' },
+  { id: 'calendar', label: '宏观日历', icon: '📅' },
   { id: 'predictions', label: '预测日志', icon: '🧭' },
   { id: 'assistant', label: 'AI 分析师', icon: '🤖' },
+  { id: 'sources', label: '数据源', icon: '🗂' },
+  { id: 'longwave', label: '长波档案', icon: '🌊' },
   { id: 'knowledge', label: '知识库', icon: '📚' },
   { id: 'settings', label: '设置', icon: '⚙️' },
 ] as const;
@@ -95,8 +103,12 @@ export default function App() {
         </div>
         {page === 'dashboard' && <Dashboard />}
         {page === 'indicators' && <Indicators />}
+        {page === 'backtest' && <Backtest />}
+        {page === 'calendar' && <Calendar />}
         {page === 'predictions' && <Predictions />}
         {page === 'assistant' && <Assistant />}
+        {page === 'sources' && <Sources />}
+        {page === 'longwave' && <Longwave />}
         {page === 'knowledge' && <Knowledge />}
         {page === 'settings' && <Settings />}
         <div className="footer-note">

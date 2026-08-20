@@ -59,6 +59,8 @@ export interface IndicatorRecord {
   auto?: boolean;            // 是否自动采集
   source?: string;           // 数据源名称（FRED / 东方财富）
   stale?: boolean;           // 本次采集失败沿用旧值
+  freq?: 'd' | 'w' | 'm' | 'q';  // 更新频率：日/周/月/季
+  lag?: number | null;       // 发布滞后（月）
 }
 
 export type Quadrant = 'recovery' | 'overheat' | 'stagflation' | 'recession';
@@ -75,6 +77,7 @@ export interface PredictionCard {
   positionMeaning: { stance: 'attack' | 'neutral' | 'defense'; note: string };
   redTeam: string;
   status: 'open' | 'resolved';
+  reviewDue?: string;        // 到期复盘日（ISO 日期）
   review?: {
     date: string;
     occurred: boolean;
@@ -116,6 +119,52 @@ export interface DataMeta {
   staleCount: number;
   failed: { id: string; name: string; error: string; reused: boolean }[];
   note: string;
+}
+
+// 历史快照（history.json，供复盘对比 / 数据源登记页）
+export interface HistoryEntry {
+  date: string;
+  fetchedAt: string;
+  autoCount: number;
+  staleCount: number;
+  failedIds: string[];
+  diffusion: { leading: number; coincident: number; lagging: number; total: number };
+  signals: Record<string, Signal>;
+}
+
+// 回测数据（backtest.json）
+export interface BacktestRow {
+  month: string;
+  weight: number;
+  tier: 'watch' | 'warn' | 'confirm';
+  strategy: number;
+  buyhold: number;
+  ret: number;
+}
+export interface BacktestData {
+  generatedAt: string;
+  period: string;
+  note: string;
+  stats: {
+    strategyCagr: number; buyholdCagr: number;
+    strategyFinal: number; buyholdFinal: number;
+    strategyMdd: number; buyholdMdd: number;
+    months: number; beatRate: number;
+    downsideProtection: number | null;
+    avgMonthlyStrat: number; avgMonthlyBh: number;
+  };
+  rows: BacktestRow[];
+}
+
+// 长波数据（longwave.json）
+export interface LongwaveSeries {
+  id: string; name: string; unit: string;
+  yearly: { year: string; value: number }[];
+}
+export interface LongwaveData {
+  generatedAt: string;
+  series: Record<string, LongwaveSeries>;
+  annotations: { year: number; label: string; type: string }[];
 }
 
 // ---------- 内置指标元数据（共享 JSON，脚本 scripts/fetch-data.mjs 也读它） ----------
