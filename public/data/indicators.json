@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T01:18:57.628Z",
+  "updatedAt": "2026-09-01T01:45:22.454Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -111,7 +111,7 @@
         },
         {
           "month": "2026-08",
-          "value": 0.39
+          "value": 0.41
         }
       ],
       "signal": "down",
@@ -227,7 +227,7 @@
         },
         {
           "month": "2026-08",
-          "value": 0.83
+          "value": 0.84
         }
       ],
       "signal": "down",
@@ -343,7 +343,7 @@
         },
         {
           "month": "2026-08",
-          "value": 2.63
+          "value": 2.6
         }
       ],
       "signal": "up",
@@ -459,10 +459,10 @@
         },
         {
           "month": "2026-08",
-          "value": 0.43
+          "value": 0.41
         }
       ],
-      "signal": "down",
+      "signal": "up",
       "updatedAt": "2026-08"
     },
     {
@@ -575,7 +575,7 @@
         },
         {
           "month": "2026-08",
-          "value": 2.34
+          "value": 2.42
         }
       ],
       "signal": "up",
@@ -2239,7 +2239,7 @@
         },
         {
           "month": "2026-08",
-          "value": 14.51
+          "value": 14.43
         }
       ],
       "signal": "up",
@@ -2355,7 +2355,7 @@
         },
         {
           "month": "2026-08",
-          "value": 7711.76
+          "value": 7686.14
         }
       ],
       "signal": "up",
@@ -2494,10 +2494,6 @@
       "source": "东方财富",
       "monthly": [
         {
-          "month": "2024-08",
-          "value": 49.1
-        },
-        {
           "month": "2024-09",
           "value": 49.8
         },
@@ -2588,10 +2584,14 @@
         {
           "month": "2026-07",
           "value": 49.2
+        },
+        {
+          "month": "2026-08",
+          "value": 49.8
         }
       ],
-      "signal": "down",
-      "updatedAt": "2026-07"
+      "signal": "up",
+      "updatedAt": "2026-08"
     },
     {
       "id": "cn-pmi-orders",
@@ -2609,10 +2609,6 @@
       "auto": true,
       "source": "东方财富",
       "monthly": [
-        {
-          "month": "2024-08",
-          "value": 50.3
-        },
         {
           "month": "2024-09",
           "value": 50
@@ -2704,10 +2700,14 @@
         {
           "month": "2026-07",
           "value": 49
+        },
+        {
+          "month": "2026-08",
+          "value": 49
         }
       ],
-      "signal": "down",
-      "updatedAt": "2026-07"
+      "signal": "flat",
+      "updatedAt": "2026-08"
     },
     {
       "id": "cn-m1",
@@ -4328,7 +4328,7 @@
         },
         {
           "month": "2026-08",
-          "value": 3952.179
+          "value": 3986.298
         }
       ],
       "signal": "up",
@@ -4444,7 +4444,7 @@
         },
         {
           "month": "2026-08",
-          "value": 4609.176
+          "value": 4625.086
         }
       ],
       "signal": "up",
