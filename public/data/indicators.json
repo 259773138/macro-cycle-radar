@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T01:45:22.454Z",
+  "updatedAt": "2026-09-02T00:57:15.565Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -17,10 +17,6 @@
       "auto": true,
       "source": "FRED",
       "monthly": [
-        {
-          "month": "2024-09",
-          "value": 0.15
-        },
         {
           "month": "2024-10",
           "value": 0.12
@@ -112,10 +108,14 @@
         {
           "month": "2026-08",
           "value": 0.41
+        },
+        {
+          "month": "2026-09",
+          "value": 0.4
         }
       ],
       "signal": "down",
-      "updatedAt": "2026-08"
+      "updatedAt": "2026-09"
     },
     {
       "id": "us-3m10s",
@@ -133,10 +133,6 @@
       "auto": true,
       "source": "FRED",
       "monthly": [
-        {
-          "month": "2024-09",
-          "value": -0.92
-        },
         {
           "month": "2024-10",
           "value": -0.36
@@ -228,10 +224,14 @@
         {
           "month": "2026-08",
           "value": 0.84
+        },
+        {
+          "month": "2026-09",
+          "value": 0.87
         }
       ],
-      "signal": "down",
-      "updatedAt": "2026-08"
+      "signal": "up",
+      "updatedAt": "2026-09"
     },
     {
       "id": "us-hy-oas",
@@ -343,7 +343,7 @@
         },
         {
           "month": "2026-08",
-          "value": 2.6
+          "value": 2.63
         }
       ],
       "signal": "up",
@@ -459,10 +459,10 @@
         },
         {
           "month": "2026-08",
-          "value": 0.41
+          "value": 0.44
         }
       ],
-      "signal": "up",
+      "signal": "down",
       "updatedAt": "2026-08"
     },
     {
@@ -575,7 +575,7 @@
         },
         {
           "month": "2026-08",
-          "value": 2.42
+          "value": 2.44
         }
       ],
       "signal": "up",
@@ -2239,7 +2239,7 @@
         },
         {
           "month": "2026-08",
-          "value": 14.43
+          "value": 14.92
         }
       ],
       "signal": "up",
@@ -2261,10 +2261,6 @@
       "auto": true,
       "source": "FRED",
       "monthly": [
-        {
-          "month": "2024-09",
-          "value": 5762.48
-        },
         {
           "month": "2024-10",
           "value": 5705.45
@@ -2356,10 +2352,14 @@
         {
           "month": "2026-08",
           "value": 7686.14
+        },
+        {
+          "month": "2026-09",
+          "value": 7631.47
         }
       ],
-      "signal": "up",
-      "updatedAt": "2026-08"
+      "signal": "down",
+      "updatedAt": "2026-09"
     },
     {
       "id": "us-fedfunds",
@@ -3867,8 +3867,7 @@
         }
       ],
       "signal": "down",
-      "updatedAt": "2026-04",
-      "stale": true
+      "updatedAt": "2026-04"
     },
     {
       "id": "cn-urban-ue",
@@ -4235,10 +4234,6 @@
       "source": "新浪财经行情",
       "monthly": [
         {
-          "month": "2024-09",
-          "value": 3336.497
-        },
-        {
           "month": "2024-10",
           "value": 3279.824
         },
@@ -4329,10 +4324,14 @@
         {
           "month": "2026-08",
           "value": 3986.298
+        },
+        {
+          "month": "2026-09",
+          "value": 3979.888
         }
       ],
-      "signal": "up",
-      "updatedAt": "2026-08"
+      "signal": "down",
+      "updatedAt": "2026-09"
     },
     {
       "id": "cn-hs300",
@@ -4350,10 +4349,6 @@
       "auto": true,
       "source": "新浪财经行情",
       "monthly": [
-        {
-          "month": "2024-09",
-          "value": 4017.855
-        },
         {
           "month": "2024-10",
           "value": 3891.04
@@ -4445,10 +4440,14 @@
         {
           "month": "2026-08",
           "value": 4625.086
+        },
+        {
+          "month": "2026-09",
+          "value": 4611.439
         }
       ],
-      "signal": "up",
-      "updatedAt": "2026-08"
+      "signal": "down",
+      "updatedAt": "2026-09"
     }
   ]
 }
