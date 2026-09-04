@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-03T01:02:37.739Z",
+  "updatedAt": "2026-09-04T00:58:45.880Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -111,10 +111,10 @@
         },
         {
           "month": "2026-09",
-          "value": 0.4
+          "value": 0.43
         }
       ],
-      "signal": "down",
+      "signal": "up",
       "updatedAt": "2026-09"
     },
     {
@@ -227,7 +227,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.87
+          "value": 0.88
         }
       ],
       "signal": "up",
@@ -343,7 +343,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.65
+          "value": 2.66
         }
       ],
       "signal": "down",
@@ -575,10 +575,10 @@
         },
         {
           "month": "2026-09",
-          "value": 2.44
+          "value": 2.45
         }
       ],
-      "signal": "flat",
+      "signal": "down",
       "updatedAt": "2026-09"
     },
     {
@@ -875,7 +875,7 @@
         },
         {
           "month": "2026-08",
-          "value": 2.85
+          "value": 3.06
         }
       ],
       "signal": "up",
@@ -991,7 +991,7 @@
         },
         {
           "month": "2026-08",
-          "value": 203000
+          "value": 206000
         }
       ],
       "signal": "down",
@@ -2239,7 +2239,7 @@
         },
         {
           "month": "2026-09",
-          "value": 16.34
+          "value": 15.2
         }
       ],
       "signal": "down",
@@ -2355,10 +2355,10 @@
         },
         {
           "month": "2026-09",
-          "value": 7666.6
+          "value": 7747.71
         }
       ],
-      "signal": "down",
+      "signal": "up",
       "updatedAt": "2026-09"
     },
     {
@@ -4327,7 +4327,7 @@
         },
         {
           "month": "2026-09",
-          "value": 3941.386
+          "value": 3942.088
         }
       ],
       "signal": "down",
@@ -4443,7 +4443,7 @@
         },
         {
           "month": "2026-09",
-          "value": 4547.956
+          "value": 4552.578
         }
       ],
       "signal": "down",
