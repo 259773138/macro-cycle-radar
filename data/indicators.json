@@ -1,0 +1,4454 @@
+{
+  "updatedAt": "2026-09-05T00:48:11.689Z",
+  "indicators": [
+    {
+      "id": "us-2s10s",
+      "name": "美债收益率曲线 2s10s",
+      "region": "US",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "bp",
+      "better": "high",
+      "watch": "是否倒挂、倒挂深度与持续时间、何时重新陡峭化",
+      "meaning": "1955 年以来美国衰退前几乎都出现倒挂；领先约 6–18 个月，中位数约 12 个月",
+      "limit": "2022–2024 出现超长倒挂而未立刻衰退；浅而短的倒挂假信号更多",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": 0.12
+        },
+        {
+          "month": "2024-11",
+          "value": 0.05
+        },
+        {
+          "month": "2024-12",
+          "value": 0.33
+        },
+        {
+          "month": "2025-01",
+          "value": 0.36
+        },
+        {
+          "month": "2025-02",
+          "value": 0.25
+        },
+        {
+          "month": "2025-03",
+          "value": 0.34
+        },
+        {
+          "month": "2025-04",
+          "value": 0.57
+        },
+        {
+          "month": "2025-05",
+          "value": 0.52
+        },
+        {
+          "month": "2025-06",
+          "value": 0.52
+        },
+        {
+          "month": "2025-07",
+          "value": 0.43
+        },
+        {
+          "month": "2025-08",
+          "value": 0.64
+        },
+        {
+          "month": "2025-09",
+          "value": 0.56
+        },
+        {
+          "month": "2025-10",
+          "value": 0.51
+        },
+        {
+          "month": "2025-11",
+          "value": 0.55
+        },
+        {
+          "month": "2025-12",
+          "value": 0.71
+        },
+        {
+          "month": "2026-01",
+          "value": 0.74
+        },
+        {
+          "month": "2026-02",
+          "value": 0.59
+        },
+        {
+          "month": "2026-03",
+          "value": 0.51
+        },
+        {
+          "month": "2026-04",
+          "value": 0.52
+        },
+        {
+          "month": "2026-05",
+          "value": 0.47
+        },
+        {
+          "month": "2026-06",
+          "value": 0.3
+        },
+        {
+          "month": "2026-07",
+          "value": 0.47
+        },
+        {
+          "month": "2026-08",
+          "value": 0.41
+        },
+        {
+          "month": "2026-09",
+          "value": 0.41
+        }
+      ],
+      "signal": "flat",
+      "updatedAt": "2026-09"
+    },
+    {
+      "id": "us-3m10s",
+      "name": "美债收益率曲线 3m10s",
+      "region": "US",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "bp",
+      "better": "high",
+      "watch": "是否倒挂、深度与持续时间",
+      "meaning": "更贴政策、假信号相对少；2s10s 更早更吵，两者一起看",
+      "limit": "同样存在“超长倒挂未衰退”的失效期",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": -0.36
+        },
+        {
+          "month": "2024-11",
+          "value": -0.4
+        },
+        {
+          "month": "2024-12",
+          "value": 0.21
+        },
+        {
+          "month": "2025-01",
+          "value": 0.27
+        },
+        {
+          "month": "2025-02",
+          "value": -0.08
+        },
+        {
+          "month": "2025-03",
+          "value": -0.09
+        },
+        {
+          "month": "2025-04",
+          "value": -0.14
+        },
+        {
+          "month": "2025-05",
+          "value": 0.05
+        },
+        {
+          "month": "2025-06",
+          "value": -0.17
+        },
+        {
+          "month": "2025-07",
+          "value": -0.04
+        },
+        {
+          "month": "2025-08",
+          "value": 0
+        },
+        {
+          "month": "2025-09",
+          "value": 0.14
+        },
+        {
+          "month": "2025-10",
+          "value": 0.22
+        },
+        {
+          "month": "2025-11",
+          "value": 0.14
+        },
+        {
+          "month": "2025-12",
+          "value": 0.51
+        },
+        {
+          "month": "2026-01",
+          "value": 0.59
+        },
+        {
+          "month": "2026-02",
+          "value": 0.3
+        },
+        {
+          "month": "2026-03",
+          "value": 0.6
+        },
+        {
+          "month": "2026-04",
+          "value": 0.72
+        },
+        {
+          "month": "2026-05",
+          "value": 0.76
+        },
+        {
+          "month": "2026-06",
+          "value": 0.57
+        },
+        {
+          "month": "2026-07",
+          "value": 0.92
+        },
+        {
+          "month": "2026-08",
+          "value": 0.84
+        },
+        {
+          "month": "2026-09",
+          "value": 0.87
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-09"
+    },
+    {
+      "id": "us-hy-oas",
+      "name": "高收益债利差 HY OAS",
+      "region": "US",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "bp",
+      "better": "low",
+      "watch": "水平 + 走阔速度（100bp 快速走阔尤其重要）",
+      "meaning": "利差快速走阔往往早于股价见顶；危机级常见 >600bp",
+      "limit": "利差可以在过热期长期过窄，容易让人麻木",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": 2.88
+        },
+        {
+          "month": "2024-11",
+          "value": 2.74
+        },
+        {
+          "month": "2024-12",
+          "value": 2.92
+        },
+        {
+          "month": "2025-01",
+          "value": 2.68
+        },
+        {
+          "month": "2025-02",
+          "value": 2.87
+        },
+        {
+          "month": "2025-03",
+          "value": 3.55
+        },
+        {
+          "month": "2025-04",
+          "value": 3.94
+        },
+        {
+          "month": "2025-05",
+          "value": 3.32
+        },
+        {
+          "month": "2025-06",
+          "value": 2.96
+        },
+        {
+          "month": "2025-07",
+          "value": 2.86
+        },
+        {
+          "month": "2025-08",
+          "value": 2.84
+        },
+        {
+          "month": "2025-09",
+          "value": 2.8
+        },
+        {
+          "month": "2025-10",
+          "value": 2.94
+        },
+        {
+          "month": "2025-11",
+          "value": 2.92
+        },
+        {
+          "month": "2025-12",
+          "value": 2.81
+        },
+        {
+          "month": "2026-01",
+          "value": 2.88
+        },
+        {
+          "month": "2026-02",
+          "value": 3.12
+        },
+        {
+          "month": "2026-03",
+          "value": 3.28
+        },
+        {
+          "month": "2026-04",
+          "value": 2.83
+        },
+        {
+          "month": "2026-05",
+          "value": 2.74
+        },
+        {
+          "month": "2026-06",
+          "value": 2.75
+        },
+        {
+          "month": "2026-07",
+          "value": 2.85
+        },
+        {
+          "month": "2026-08",
+          "value": 2.63
+        },
+        {
+          "month": "2026-09",
+          "value": 2.65
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-09"
+    },
+    {
+      "id": "us-ig-baa",
+      "name": "投资级利差 BAA–AAA",
+      "region": "US",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "bp",
+      "better": "low",
+      "watch": "质量下沉是否被惩罚",
+      "meaning": "金融条件收紧的确认信号",
+      "limit": "相对 HY 更钝、更晚",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": 0.65
+        },
+        {
+          "month": "2024-11",
+          "value": 0.61
+        },
+        {
+          "month": "2024-12",
+          "value": 0.6
+        },
+        {
+          "month": "2025-01",
+          "value": 0.6
+        },
+        {
+          "month": "2025-02",
+          "value": 0.6
+        },
+        {
+          "month": "2025-03",
+          "value": 0.68
+        },
+        {
+          "month": "2025-04",
+          "value": 0.75
+        },
+        {
+          "month": "2025-05",
+          "value": 0.74
+        },
+        {
+          "month": "2025-06",
+          "value": 0.65
+        },
+        {
+          "month": "2025-07",
+          "value": 0.63
+        },
+        {
+          "month": "2025-08",
+          "value": 0.61
+        },
+        {
+          "month": "2025-09",
+          "value": 0.61
+        },
+        {
+          "month": "2025-10",
+          "value": 0.58
+        },
+        {
+          "month": "2025-11",
+          "value": 0.62
+        },
+        {
+          "month": "2025-12",
+          "value": 0.55
+        },
+        {
+          "month": "2026-01",
+          "value": 0.5
+        },
+        {
+          "month": "2026-02",
+          "value": 0.53
+        },
+        {
+          "month": "2026-03",
+          "value": 0.56
+        },
+        {
+          "month": "2026-04",
+          "value": 0.58
+        },
+        {
+          "month": "2026-05",
+          "value": 0.52
+        },
+        {
+          "month": "2026-06",
+          "value": 0.42
+        },
+        {
+          "month": "2026-07",
+          "value": 0.42
+        },
+        {
+          "month": "2026-08",
+          "value": 0.44
+        },
+        {
+          "month": "2026-09",
+          "value": 0.42
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-09"
+    },
+    {
+      "id": "us-real-rate",
+      "name": "10 年期 TIPS 实际利率",
+      "region": "US",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "%",
+      "better": "low",
+      "watch": "政策是限制性还是转向",
+      "meaning": "短债周期的舵；剔除通胀后的真实资金成本",
+      "limit": "拐点期期货隐含误差会显著变大",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": 1.95
+        },
+        {
+          "month": "2024-11",
+          "value": 1.92
+        },
+        {
+          "month": "2024-12",
+          "value": 2.24
+        },
+        {
+          "month": "2025-01",
+          "value": 2.16
+        },
+        {
+          "month": "2025-02",
+          "value": 1.86
+        },
+        {
+          "month": "2025-03",
+          "value": 1.85
+        },
+        {
+          "month": "2025-04",
+          "value": 1.94
+        },
+        {
+          "month": "2025-05",
+          "value": 2.07
+        },
+        {
+          "month": "2025-06",
+          "value": 1.95
+        },
+        {
+          "month": "2025-07",
+          "value": 1.98
+        },
+        {
+          "month": "2025-08",
+          "value": 1.82
+        },
+        {
+          "month": "2025-09",
+          "value": 1.8
+        },
+        {
+          "month": "2025-10",
+          "value": 1.81
+        },
+        {
+          "month": "2025-11",
+          "value": 1.79
+        },
+        {
+          "month": "2025-12",
+          "value": 1.93
+        },
+        {
+          "month": "2026-01",
+          "value": 1.9
+        },
+        {
+          "month": "2026-02",
+          "value": 1.72
+        },
+        {
+          "month": "2026-03",
+          "value": 2
+        },
+        {
+          "month": "2026-04",
+          "value": 1.94
+        },
+        {
+          "month": "2026-05",
+          "value": 2.07
+        },
+        {
+          "month": "2026-06",
+          "value": 2.2
+        },
+        {
+          "month": "2026-07",
+          "value": 2.47
+        },
+        {
+          "month": "2026-08",
+          "value": 2.44
+        },
+        {
+          "month": "2026-09",
+          "value": 2.42
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-09"
+    },
+    {
+      "id": "us-m2",
+      "name": "美国 M2 同比（全球流动性核心代理）",
+      "region": "US",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "%",
+      "better": "high",
+      "watch": "水平不如加速度（二阶导）",
+      "meaning": "流动性加速常领先风险资产表现",
+      "limit": "口径、时滞、财政干扰较大；非全球口径",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2025-08",
+          "value": 4.25
+        },
+        {
+          "month": "2025-09",
+          "value": 4.233
+        },
+        {
+          "month": "2025-10",
+          "value": 4.279
+        },
+        {
+          "month": "2025-11",
+          "value": 3.845
+        },
+        {
+          "month": "2025-12",
+          "value": 4.038
+        },
+        {
+          "month": "2026-01",
+          "value": 4.058
+        },
+        {
+          "month": "2026-02",
+          "value": 4.589
+        },
+        {
+          "month": "2026-03",
+          "value": 4.41
+        },
+        {
+          "month": "2026-04",
+          "value": 4.529
+        },
+        {
+          "month": "2026-05",
+          "value": 5.394
+        },
+        {
+          "month": "2026-06",
+          "value": 5.344
+        },
+        {
+          "month": "2026-07",
+          "value": 5.414
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "us-fci",
+      "name": "芝加哥金融条件指数 NFCI",
+      "region": "US",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "指数",
+      "better": "low",
+      "watch": "零轴上下、方向",
+      "meaning": "综合金融条件的市场代理（替代银行贷款标准 SLOOS 的高频版）；银行“拒绝放贷”往往比股市阴线更早更诚实",
+      "limit": "综合指数，掩盖结构性差异",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-09",
+          "value": -0.427
+        },
+        {
+          "month": "2024-10",
+          "value": -0.446
+        },
+        {
+          "month": "2024-11",
+          "value": -0.477
+        },
+        {
+          "month": "2024-12",
+          "value": -0.486
+        },
+        {
+          "month": "2025-01",
+          "value": -0.509
+        },
+        {
+          "month": "2025-02",
+          "value": -0.48
+        },
+        {
+          "month": "2025-03",
+          "value": -0.409
+        },
+        {
+          "month": "2025-04",
+          "value": -0.389
+        },
+        {
+          "month": "2025-05",
+          "value": -0.466
+        },
+        {
+          "month": "2025-06",
+          "value": -0.496
+        },
+        {
+          "month": "2025-07",
+          "value": -0.519
+        },
+        {
+          "month": "2025-08",
+          "value": -0.528
+        },
+        {
+          "month": "2025-09",
+          "value": -0.527
+        },
+        {
+          "month": "2025-10",
+          "value": -0.515
+        },
+        {
+          "month": "2025-11",
+          "value": -0.511
+        },
+        {
+          "month": "2025-12",
+          "value": -0.54
+        },
+        {
+          "month": "2026-01",
+          "value": -0.567
+        },
+        {
+          "month": "2026-02",
+          "value": -0.509
+        },
+        {
+          "month": "2026-03",
+          "value": -0.46
+        },
+        {
+          "month": "2026-04",
+          "value": -0.497
+        },
+        {
+          "month": "2026-05",
+          "value": -0.509
+        },
+        {
+          "month": "2026-06",
+          "value": -0.514
+        },
+        {
+          "month": "2026-07",
+          "value": -0.544
+        },
+        {
+          "month": "2026-08",
+          "value": -0.558
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-08"
+    },
+    {
+      "id": "us-wei",
+      "name": "美国周度经济指数 WEI（LEI 代理）",
+      "region": "US",
+      "layer": "leading",
+      "type": "leading",
+      "unit": "指数",
+      "better": "high",
+      "watch": "连续 3 个月同向变化",
+      "meaning": "Conference Board LEI 的免费替代（LEI 官方口径不开放）；综合领先指数，常先于衰退",
+      "limit": "周度噪声大，看趋势不看单周",
+      "freq": "w",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-09",
+          "value": 2.09
+        },
+        {
+          "month": "2024-10",
+          "value": 2.13
+        },
+        {
+          "month": "2024-11",
+          "value": 1.73
+        },
+        {
+          "month": "2024-12",
+          "value": 2.71
+        },
+        {
+          "month": "2025-01",
+          "value": 2.79
+        },
+        {
+          "month": "2025-02",
+          "value": 2.43
+        },
+        {
+          "month": "2025-03",
+          "value": 2.29
+        },
+        {
+          "month": "2025-04",
+          "value": 2.33
+        },
+        {
+          "month": "2025-05",
+          "value": 1.79
+        },
+        {
+          "month": "2025-06",
+          "value": 2.15
+        },
+        {
+          "month": "2025-07",
+          "value": 2.59
+        },
+        {
+          "month": "2025-08",
+          "value": 2.23
+        },
+        {
+          "month": "2025-09",
+          "value": 2.37
+        },
+        {
+          "month": "2025-10",
+          "value": 2.02
+        },
+        {
+          "month": "2025-11",
+          "value": 2.26
+        },
+        {
+          "month": "2025-12",
+          "value": 2.51
+        },
+        {
+          "month": "2026-01",
+          "value": 2.21
+        },
+        {
+          "month": "2026-02",
+          "value": 2.48
+        },
+        {
+          "month": "2026-03",
+          "value": 2.86
+        },
+        {
+          "month": "2026-04",
+          "value": 2.95
+        },
+        {
+          "month": "2026-05",
+          "value": 3.22
+        },
+        {
+          "month": "2026-06",
+          "value": 2.55
+        },
+        {
+          "month": "2026-07",
+          "value": 2.42
+        },
+        {
+          "month": "2026-08",
+          "value": 3.06
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-08"
+    },
+    {
+      "id": "us-claims",
+      "name": "初请失业金人数",
+      "region": "US",
+      "layer": "leading",
+      "type": "leading",
+      "unit": "万人",
+      "better": "low",
+      "watch": "趋势而非单周数字",
+      "meaning": "劳动市场最早的裂口；拐点信息量大于水平",
+      "limit": "节假日、飓风等会扭曲单周读数",
+      "freq": "w",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-09",
+          "value": 227000
+        },
+        {
+          "month": "2024-10",
+          "value": 219000
+        },
+        {
+          "month": "2024-11",
+          "value": 222000
+        },
+        {
+          "month": "2024-12",
+          "value": 212000
+        },
+        {
+          "month": "2025-01",
+          "value": 212000
+        },
+        {
+          "month": "2025-02",
+          "value": 241000
+        },
+        {
+          "month": "2025-03",
+          "value": 220000
+        },
+        {
+          "month": "2025-04",
+          "value": 239000
+        },
+        {
+          "month": "2025-05",
+          "value": 244000
+        },
+        {
+          "month": "2025-06",
+          "value": 231000
+        },
+        {
+          "month": "2025-07",
+          "value": 219000
+        },
+        {
+          "month": "2025-08",
+          "value": 236000
+        },
+        {
+          "month": "2025-09",
+          "value": 225000
+        },
+        {
+          "month": "2025-10",
+          "value": 221000
+        },
+        {
+          "month": "2025-11",
+          "value": 216000
+        },
+        {
+          "month": "2025-12",
+          "value": 203000
+        },
+        {
+          "month": "2026-01",
+          "value": 230000
+        },
+        {
+          "month": "2026-02",
+          "value": 214000
+        },
+        {
+          "month": "2026-03",
+          "value": 203000
+        },
+        {
+          "month": "2026-04",
+          "value": 190000
+        },
+        {
+          "month": "2026-05",
+          "value": 225000
+        },
+        {
+          "month": "2026-06",
+          "value": 217000
+        },
+        {
+          "month": "2026-07",
+          "value": 198000
+        },
+        {
+          "month": "2026-08",
+          "value": 206000
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-08"
+    },
+    {
+      "id": "us-housing",
+      "name": "美国新屋开工",
+      "region": "US",
+      "layer": "leading",
+      "type": "leading",
+      "unit": "千套",
+      "better": "high",
+      "watch": "趋势",
+      "meaning": "长周期里的短领先；地产是利率最敏感的实体部门",
+      "limit": "地区差异大，受利率以外供给约束影响",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 1394
+        },
+        {
+          "month": "2024-09",
+          "value": 1357
+        },
+        {
+          "month": "2024-10",
+          "value": 1370
+        },
+        {
+          "month": "2024-11",
+          "value": 1300
+        },
+        {
+          "month": "2024-12",
+          "value": 1494
+        },
+        {
+          "month": "2025-01",
+          "value": 1353
+        },
+        {
+          "month": "2025-02",
+          "value": 1491
+        },
+        {
+          "month": "2025-03",
+          "value": 1346
+        },
+        {
+          "month": "2025-04",
+          "value": 1400
+        },
+        {
+          "month": "2025-05",
+          "value": 1289
+        },
+        {
+          "month": "2025-06",
+          "value": 1379
+        },
+        {
+          "month": "2025-07",
+          "value": 1432
+        },
+        {
+          "month": "2025-08",
+          "value": 1291
+        },
+        {
+          "month": "2025-09",
+          "value": 1319
+        },
+        {
+          "month": "2025-10",
+          "value": 1273
+        },
+        {
+          "month": "2025-11",
+          "value": 1319
+        },
+        {
+          "month": "2025-12",
+          "value": 1378
+        },
+        {
+          "month": "2026-01",
+          "value": 1385
+        },
+        {
+          "month": "2026-02",
+          "value": 1346
+        },
+        {
+          "month": "2026-03",
+          "value": 1522
+        },
+        {
+          "month": "2026-04",
+          "value": 1414
+        },
+        {
+          "month": "2026-05",
+          "value": 1182
+        },
+        {
+          "month": "2026-06",
+          "value": 1415
+        },
+        {
+          "month": "2026-07",
+          "value": 1239
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "us-permit",
+      "name": "美国营建许可",
+      "region": "US",
+      "layer": "leading",
+      "type": "leading",
+      "unit": "千套",
+      "better": "high",
+      "watch": "许可趋势",
+      "meaning": "比开工更领先一步的地产先行指标",
+      "limit": "月度波动大",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 1492
+        },
+        {
+          "month": "2024-09",
+          "value": 1421
+        },
+        {
+          "month": "2024-10",
+          "value": 1435
+        },
+        {
+          "month": "2024-11",
+          "value": 1512
+        },
+        {
+          "month": "2024-12",
+          "value": 1467
+        },
+        {
+          "month": "2025-01",
+          "value": 1463
+        },
+        {
+          "month": "2025-02",
+          "value": 1446
+        },
+        {
+          "month": "2025-03",
+          "value": 1492
+        },
+        {
+          "month": "2025-04",
+          "value": 1445
+        },
+        {
+          "month": "2025-05",
+          "value": 1416
+        },
+        {
+          "month": "2025-06",
+          "value": 1399
+        },
+        {
+          "month": "2025-07",
+          "value": 1400
+        },
+        {
+          "month": "2025-08",
+          "value": 1347
+        },
+        {
+          "month": "2025-09",
+          "value": 1444
+        },
+        {
+          "month": "2025-10",
+          "value": 1418
+        },
+        {
+          "month": "2025-11",
+          "value": 1414
+        },
+        {
+          "month": "2025-12",
+          "value": 1482
+        },
+        {
+          "month": "2026-01",
+          "value": 1393
+        },
+        {
+          "month": "2026-02",
+          "value": 1540
+        },
+        {
+          "month": "2026-03",
+          "value": 1363
+        },
+        {
+          "month": "2026-04",
+          "value": 1423
+        },
+        {
+          "month": "2026-05",
+          "value": 1410
+        },
+        {
+          "month": "2026-06",
+          "value": 1374
+        },
+        {
+          "month": "2026-07",
+          "value": 1433
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "us-capex",
+      "name": "核心资本品订单（非国防不含飞机）",
+      "region": "US",
+      "layer": "leading",
+      "type": "leading",
+      "unit": "亿美元",
+      "better": "high",
+      "watch": "企业投资意图",
+      "meaning": "朱格拉周期的月度代理",
+      "limit": "波动大、修订多",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 83538
+        },
+        {
+          "month": "2024-09",
+          "value": 83534
+        },
+        {
+          "month": "2024-10",
+          "value": 83598
+        },
+        {
+          "month": "2024-11",
+          "value": 82164
+        },
+        {
+          "month": "2024-12",
+          "value": 83501
+        },
+        {
+          "month": "2025-01",
+          "value": 87026
+        },
+        {
+          "month": "2025-02",
+          "value": 84840
+        },
+        {
+          "month": "2025-03",
+          "value": 107940
+        },
+        {
+          "month": "2025-04",
+          "value": 87169
+        },
+        {
+          "month": "2025-05",
+          "value": 130657
+        },
+        {
+          "month": "2025-06",
+          "value": 98835
+        },
+        {
+          "month": "2025-07",
+          "value": 90299
+        },
+        {
+          "month": "2025-08",
+          "value": 94843
+        },
+        {
+          "month": "2025-09",
+          "value": 93874
+        },
+        {
+          "month": "2025-10",
+          "value": 90208
+        },
+        {
+          "month": "2025-11",
+          "value": 108609
+        },
+        {
+          "month": "2025-12",
+          "value": 101296
+        },
+        {
+          "month": "2026-01",
+          "value": 100355
+        },
+        {
+          "month": "2026-02",
+          "value": 92412
+        },
+        {
+          "month": "2026-03",
+          "value": 91289
+        },
+        {
+          "month": "2026-04",
+          "value": 114066
+        },
+        {
+          "month": "2026-05",
+          "value": 96592
+        },
+        {
+          "month": "2026-06",
+          "value": 97144
+        },
+        {
+          "month": "2026-07",
+          "value": 98869
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "gl-copper",
+      "name": "铜价同比（全球周期温度计）",
+      "region": "GL",
+      "layer": "leading",
+      "type": "leading",
+      "unit": "%",
+      "better": "high",
+      "watch": "同比方向",
+      "meaning": "铜偏周期：同比上行常与全球增长回暖同向",
+      "limit": "受供给、库存、金融属性干扰",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2025-08",
+          "value": 7.691
+        },
+        {
+          "month": "2025-09",
+          "value": 7.945
+        },
+        {
+          "month": "2025-10",
+          "value": 12.649
+        },
+        {
+          "month": "2025-11",
+          "value": 19.131
+        },
+        {
+          "month": "2025-12",
+          "value": 32.335
+        },
+        {
+          "month": "2026-01",
+          "value": 44.67
+        },
+        {
+          "month": "2026-02",
+          "value": 38.799
+        },
+        {
+          "month": "2026-03",
+          "value": 28.687
+        },
+        {
+          "month": "2026-04",
+          "value": 40.533
+        },
+        {
+          "month": "2026-05",
+          "value": 41.768
+        },
+        {
+          "month": "2026-06",
+          "value": 37.793
+        },
+        {
+          "month": "2026-07",
+          "value": 38.608
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "us-ip",
+      "name": "美国工业生产",
+      "region": "US",
+      "layer": "coincident",
+      "type": "coincident",
+      "unit": "指数",
+      "better": "high",
+      "watch": "同比方向",
+      "meaning": "回答“现在在哪”的核心同步指标",
+      "limit": "制造业占比下降，代表性减弱",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 100.4309
+        },
+        {
+          "month": "2024-09",
+          "value": 99.8084
+        },
+        {
+          "month": "2024-10",
+          "value": 99.4695
+        },
+        {
+          "month": "2024-11",
+          "value": 99.2925
+        },
+        {
+          "month": "2024-12",
+          "value": 100.3273
+        },
+        {
+          "month": "2025-01",
+          "value": 100.0647
+        },
+        {
+          "month": "2025-02",
+          "value": 101.0993
+        },
+        {
+          "month": "2025-03",
+          "value": 101.0404
+        },
+        {
+          "month": "2025-04",
+          "value": 101.1279
+        },
+        {
+          "month": "2025-05",
+          "value": 100.9655
+        },
+        {
+          "month": "2025-06",
+          "value": 101.4785
+        },
+        {
+          "month": "2025-07",
+          "value": 101.894
+        },
+        {
+          "month": "2025-08",
+          "value": 101.6247
+        },
+        {
+          "month": "2025-09",
+          "value": 101.668
+        },
+        {
+          "month": "2025-10",
+          "value": 101.2195
+        },
+        {
+          "month": "2025-11",
+          "value": 101.0344
+        },
+        {
+          "month": "2025-12",
+          "value": 101.4941
+        },
+        {
+          "month": "2026-01",
+          "value": 101.0388
+        },
+        {
+          "month": "2026-02",
+          "value": 101.9053
+        },
+        {
+          "month": "2026-03",
+          "value": 101.7543
+        },
+        {
+          "month": "2026-04",
+          "value": 102.5198
+        },
+        {
+          "month": "2026-05",
+          "value": 102.5099
+        },
+        {
+          "month": "2026-06",
+          "value": 102.7868
+        },
+        {
+          "month": "2026-07",
+          "value": 102.9939
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "us-retail",
+      "name": "美国零售销售",
+      "region": "US",
+      "layer": "coincident",
+      "type": "coincident",
+      "unit": "亿美元",
+      "better": "high",
+      "watch": "同比 / 环比方向",
+      "meaning": "消费是 GDP 的大头，同步确认增长动能",
+      "limit": "不覆盖服务消费",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 622421
+        },
+        {
+          "month": "2024-09",
+          "value": 579083
+        },
+        {
+          "month": "2024-10",
+          "value": 622738
+        },
+        {
+          "month": "2024-11",
+          "value": 630399
+        },
+        {
+          "month": "2024-12",
+          "value": 691312
+        },
+        {
+          "month": "2025-01",
+          "value": 566662
+        },
+        {
+          "month": "2025-02",
+          "value": 543970
+        },
+        {
+          "month": "2025-03",
+          "value": 624954
+        },
+        {
+          "month": "2025-04",
+          "value": 623756
+        },
+        {
+          "month": "2025-05",
+          "value": 647306
+        },
+        {
+          "month": "2025-06",
+          "value": 616031
+        },
+        {
+          "month": "2025-07",
+          "value": 644493
+        },
+        {
+          "month": "2025-08",
+          "value": 640803
+        },
+        {
+          "month": "2025-09",
+          "value": 611277
+        },
+        {
+          "month": "2025-10",
+          "value": 642315
+        },
+        {
+          "month": "2025-11",
+          "value": 640201
+        },
+        {
+          "month": "2025-12",
+          "value": 716924
+        },
+        {
+          "month": "2026-01",
+          "value": 582287
+        },
+        {
+          "month": "2026-02",
+          "value": 564663
+        },
+        {
+          "month": "2026-03",
+          "value": 657586
+        },
+        {
+          "month": "2026-04",
+          "value": 654070
+        },
+        {
+          "month": "2026-05",
+          "value": 685550
+        },
+        {
+          "month": "2026-06",
+          "value": 672357
+        },
+        {
+          "month": "2026-07",
+          "value": 677431
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "us-payrolls",
+      "name": "非农就业人数",
+      "region": "US",
+      "layer": "coincident",
+      "type": "coincident",
+      "unit": "万人",
+      "better": "high",
+      "watch": "趋势与下修",
+      "meaning": "就业是最重要的同步指标之一；Sahm 规则的原料",
+      "limit": "初始值修订大",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-09",
+          "value": 157912
+        },
+        {
+          "month": "2024-10",
+          "value": 157945
+        },
+        {
+          "month": "2024-11",
+          "value": 158079
+        },
+        {
+          "month": "2024-12",
+          "value": 158316
+        },
+        {
+          "month": "2025-01",
+          "value": 158268
+        },
+        {
+          "month": "2025-02",
+          "value": 158310
+        },
+        {
+          "month": "2025-03",
+          "value": 158377
+        },
+        {
+          "month": "2025-04",
+          "value": 158485
+        },
+        {
+          "month": "2025-05",
+          "value": 158498
+        },
+        {
+          "month": "2025-06",
+          "value": 158478
+        },
+        {
+          "month": "2025-07",
+          "value": 158542
+        },
+        {
+          "month": "2025-08",
+          "value": 158472
+        },
+        {
+          "month": "2025-09",
+          "value": 158548
+        },
+        {
+          "month": "2025-10",
+          "value": 158408
+        },
+        {
+          "month": "2025-11",
+          "value": 158449
+        },
+        {
+          "month": "2025-12",
+          "value": 158432
+        },
+        {
+          "month": "2026-01",
+          "value": 158592
+        },
+        {
+          "month": "2026-02",
+          "value": 158436
+        },
+        {
+          "month": "2026-03",
+          "value": 158650
+        },
+        {
+          "month": "2026-04",
+          "value": 158798
+        },
+        {
+          "month": "2026-05",
+          "value": 158861
+        },
+        {
+          "month": "2026-06",
+          "value": 158892
+        },
+        {
+          "month": "2026-07",
+          "value": 158913
+        },
+        {
+          "month": "2026-08",
+          "value": 159075
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-08"
+    },
+    {
+      "id": "us-ue",
+      "name": "失业率（Sahm 规则）",
+      "region": "US",
+      "layer": "lagging",
+      "type": "lagging",
+      "unit": "%",
+      "better": "low",
+      "watch": "3 个月均值较过去 12 个月低点回升 0.5pp",
+      "meaning": "美国战后衰退识别相当稳，但偏确认而非领先（平均滞后约 2–3 个月）",
+      "limit": "OECD 国家需重标定阈值；结构变化会干扰",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 4.2
+        },
+        {
+          "month": "2024-09",
+          "value": 4.1
+        },
+        {
+          "month": "2024-10",
+          "value": 4.1
+        },
+        {
+          "month": "2024-11",
+          "value": 4.2
+        },
+        {
+          "month": "2024-12",
+          "value": 4.1
+        },
+        {
+          "month": "2025-01",
+          "value": 4
+        },
+        {
+          "month": "2025-02",
+          "value": 4.2
+        },
+        {
+          "month": "2025-03",
+          "value": 4.2
+        },
+        {
+          "month": "2025-04",
+          "value": 4.2
+        },
+        {
+          "month": "2025-05",
+          "value": 4.3
+        },
+        {
+          "month": "2025-06",
+          "value": 4.1
+        },
+        {
+          "month": "2025-07",
+          "value": 4.3
+        },
+        {
+          "month": "2025-08",
+          "value": 4.3
+        },
+        {
+          "month": "2025-09",
+          "value": 4.4
+        },
+        {
+          "month": "2025-11",
+          "value": 4.5
+        },
+        {
+          "month": "2025-12",
+          "value": 4.4
+        },
+        {
+          "month": "2026-01",
+          "value": 4.3
+        },
+        {
+          "month": "2026-02",
+          "value": 4.4
+        },
+        {
+          "month": "2026-03",
+          "value": 4.3
+        },
+        {
+          "month": "2026-04",
+          "value": 4.3
+        },
+        {
+          "month": "2026-05",
+          "value": 4.3
+        },
+        {
+          "month": "2026-06",
+          "value": 4.2
+        },
+        {
+          "month": "2026-07",
+          "value": 4.1
+        },
+        {
+          "month": "2026-08",
+          "value": 4.1
+        }
+      ],
+      "signal": "flat",
+      "updatedAt": "2026-08"
+    },
+    {
+      "id": "us-core-cpi",
+      "name": "美国核心 CPI 同比",
+      "region": "US",
+      "layer": "lagging",
+      "type": "lagging",
+      "unit": "%",
+      "better": "low",
+      "watch": "趋势；但拐点预警请看 PPI/CRB/运价/工资",
+      "meaning": "通胀是典型滞后变量：适合定阶段，不适合做拐点预警",
+      "limit": "用 CPI 做拐点预警通常太晚",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2025-07",
+          "value": 3.054
+        },
+        {
+          "month": "2025-08",
+          "value": 3.112
+        },
+        {
+          "month": "2025-09",
+          "value": 3.02
+        },
+        {
+          "month": "2025-11",
+          "value": 2.894
+        },
+        {
+          "month": "2025-12",
+          "value": 2.838
+        },
+        {
+          "month": "2026-01",
+          "value": 2.949
+        },
+        {
+          "month": "2026-02",
+          "value": 2.734
+        },
+        {
+          "month": "2026-03",
+          "value": 2.673
+        },
+        {
+          "month": "2026-04",
+          "value": 2.988
+        },
+        {
+          "month": "2026-05",
+          "value": 2.957
+        },
+        {
+          "month": "2026-06",
+          "value": 2.806
+        },
+        {
+          "month": "2026-07",
+          "value": 2.787
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "us-ppi",
+      "name": "美国 PPI 同比",
+      "region": "US",
+      "layer": "lagging",
+      "type": "lagging",
+      "unit": "%",
+      "better": "low",
+      "watch": "拐点苗头",
+      "meaning": "比 CPI 更早看到通胀拐点",
+      "limit": "商品属性强，受供给冲击影响大",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2025-08",
+          "value": 2.602
+        },
+        {
+          "month": "2025-09",
+          "value": 3.709
+        },
+        {
+          "month": "2025-10",
+          "value": 2.967
+        },
+        {
+          "month": "2025-11",
+          "value": 3.437
+        },
+        {
+          "month": "2025-12",
+          "value": 3.121
+        },
+        {
+          "month": "2026-01",
+          "value": 2.428
+        },
+        {
+          "month": "2026-02",
+          "value": 3.868
+        },
+        {
+          "month": "2026-03",
+          "value": 6.802
+        },
+        {
+          "month": "2026-04",
+          "value": 9.429
+        },
+        {
+          "month": "2026-05",
+          "value": 12.308
+        },
+        {
+          "month": "2026-06",
+          "value": 9.9
+        },
+        {
+          "month": "2026-07",
+          "value": 8.271
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "us-inv-sales",
+      "name": "库存 / 销售比",
+      "region": "US",
+      "layer": "lagging",
+      "type": "lagging",
+      "unit": "比值",
+      "better": "low",
+      "watch": "被动补库还是主动去库",
+      "meaning": "库存是滞后变量：被动去库结束+新订单回升是扩张信号",
+      "limit": "行业差异巨大",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-07",
+          "value": 1.4
+        },
+        {
+          "month": "2024-08",
+          "value": 1.41
+        },
+        {
+          "month": "2024-09",
+          "value": 1.4
+        },
+        {
+          "month": "2024-10",
+          "value": 1.41
+        },
+        {
+          "month": "2024-11",
+          "value": 1.4
+        },
+        {
+          "month": "2024-12",
+          "value": 1.39
+        },
+        {
+          "month": "2025-01",
+          "value": 1.4
+        },
+        {
+          "month": "2025-02",
+          "value": 1.39
+        },
+        {
+          "month": "2025-03",
+          "value": 1.38
+        },
+        {
+          "month": "2025-04",
+          "value": 1.38
+        },
+        {
+          "month": "2025-05",
+          "value": 1.39
+        },
+        {
+          "month": "2025-06",
+          "value": 1.39
+        },
+        {
+          "month": "2025-07",
+          "value": 1.37
+        },
+        {
+          "month": "2025-08",
+          "value": 1.37
+        },
+        {
+          "month": "2025-09",
+          "value": 1.37
+        },
+        {
+          "month": "2025-10",
+          "value": 1.38
+        },
+        {
+          "month": "2025-11",
+          "value": 1.37
+        },
+        {
+          "month": "2025-12",
+          "value": 1.36
+        },
+        {
+          "month": "2026-01",
+          "value": 1.35
+        },
+        {
+          "month": "2026-02",
+          "value": 1.33
+        },
+        {
+          "month": "2026-03",
+          "value": 1.32
+        },
+        {
+          "month": "2026-04",
+          "value": 1.3
+        },
+        {
+          "month": "2026-05",
+          "value": 1.28
+        },
+        {
+          "month": "2026-06",
+          "value": 1.3
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-06"
+    },
+    {
+      "id": "us-vix",
+      "name": "VIX 恐慌指数",
+      "region": "US",
+      "layer": "sentiment",
+      "type": "leading",
+      "unit": "点",
+      "better": "low",
+      "watch": "方向与期限结构",
+      "meaning": "VIX 的水平不如方向和期限结构有信息",
+      "limit": "容易被事件脉冲扭曲",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": 23.16
+        },
+        {
+          "month": "2024-11",
+          "value": 13.51
+        },
+        {
+          "month": "2024-12",
+          "value": 17.35
+        },
+        {
+          "month": "2025-01",
+          "value": 16.43
+        },
+        {
+          "month": "2025-02",
+          "value": 19.63
+        },
+        {
+          "month": "2025-03",
+          "value": 22.28
+        },
+        {
+          "month": "2025-04",
+          "value": 24.7
+        },
+        {
+          "month": "2025-05",
+          "value": 18.57
+        },
+        {
+          "month": "2025-06",
+          "value": 16.73
+        },
+        {
+          "month": "2025-07",
+          "value": 16.72
+        },
+        {
+          "month": "2025-08",
+          "value": 15.36
+        },
+        {
+          "month": "2025-09",
+          "value": 16.28
+        },
+        {
+          "month": "2025-10",
+          "value": 17.44
+        },
+        {
+          "month": "2025-11",
+          "value": 16.35
+        },
+        {
+          "month": "2025-12",
+          "value": 14.95
+        },
+        {
+          "month": "2026-01",
+          "value": 17.44
+        },
+        {
+          "month": "2026-02",
+          "value": 19.86
+        },
+        {
+          "month": "2026-03",
+          "value": 25.25
+        },
+        {
+          "month": "2026-04",
+          "value": 16.89
+        },
+        {
+          "month": "2026-05",
+          "value": 15.32
+        },
+        {
+          "month": "2026-06",
+          "value": 16.45
+        },
+        {
+          "month": "2026-07",
+          "value": 15.99
+        },
+        {
+          "month": "2026-08",
+          "value": 14.92
+        },
+        {
+          "month": "2026-09",
+          "value": 14.32
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-09"
+    },
+    {
+      "id": "us-sp500",
+      "name": "标普 500 指数",
+      "region": "US",
+      "layer": "sentiment",
+      "type": "leading",
+      "unit": "点",
+      "better": "high",
+      "watch": "趋势与背离（新高而广度变差）",
+      "meaning": "风险偏好的直接表达；与广度/利差配合看背离",
+      "limit": "指数受少数权重股影响",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": 5705.45
+        },
+        {
+          "month": "2024-11",
+          "value": 6032.38
+        },
+        {
+          "month": "2024-12",
+          "value": 5881.63
+        },
+        {
+          "month": "2025-01",
+          "value": 6040.53
+        },
+        {
+          "month": "2025-02",
+          "value": 5954.5
+        },
+        {
+          "month": "2025-03",
+          "value": 5611.85
+        },
+        {
+          "month": "2025-04",
+          "value": 5569.06
+        },
+        {
+          "month": "2025-05",
+          "value": 5911.69
+        },
+        {
+          "month": "2025-06",
+          "value": 6204.95
+        },
+        {
+          "month": "2025-07",
+          "value": 6339.39
+        },
+        {
+          "month": "2025-08",
+          "value": 6460.26
+        },
+        {
+          "month": "2025-09",
+          "value": 6688.46
+        },
+        {
+          "month": "2025-10",
+          "value": 6840.2
+        },
+        {
+          "month": "2025-11",
+          "value": 6849.09
+        },
+        {
+          "month": "2025-12",
+          "value": 6845.5
+        },
+        {
+          "month": "2026-01",
+          "value": 6939.03
+        },
+        {
+          "month": "2026-02",
+          "value": 6878.88
+        },
+        {
+          "month": "2026-03",
+          "value": 6528.52
+        },
+        {
+          "month": "2026-04",
+          "value": 7209.01
+        },
+        {
+          "month": "2026-05",
+          "value": 7580.06
+        },
+        {
+          "month": "2026-06",
+          "value": 7499.36
+        },
+        {
+          "month": "2026-07",
+          "value": 7489.72
+        },
+        {
+          "month": "2026-08",
+          "value": 7686.14
+        },
+        {
+          "month": "2026-09",
+          "value": 7718.6
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-09"
+    },
+    {
+      "id": "us-fedfunds",
+      "name": "联邦基金利率",
+      "region": "US",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "%",
+      "better": "low",
+      "watch": "政策是限制性还是转向",
+      "meaning": "短债周期的舵；美联储政策立场的最直接度量",
+      "limit": "滞后于市场定价",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "FRED",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": 4.83
+        },
+        {
+          "month": "2024-11",
+          "value": 4.58
+        },
+        {
+          "month": "2024-12",
+          "value": 4.33
+        },
+        {
+          "month": "2025-01",
+          "value": 4.33
+        },
+        {
+          "month": "2025-02",
+          "value": 4.33
+        },
+        {
+          "month": "2025-03",
+          "value": 4.33
+        },
+        {
+          "month": "2025-04",
+          "value": 4.33
+        },
+        {
+          "month": "2025-05",
+          "value": 4.33
+        },
+        {
+          "month": "2025-06",
+          "value": 4.33
+        },
+        {
+          "month": "2025-07",
+          "value": 4.33
+        },
+        {
+          "month": "2025-08",
+          "value": 4.33
+        },
+        {
+          "month": "2025-09",
+          "value": 4.09
+        },
+        {
+          "month": "2025-10",
+          "value": 3.86
+        },
+        {
+          "month": "2025-11",
+          "value": 3.89
+        },
+        {
+          "month": "2025-12",
+          "value": 3.64
+        },
+        {
+          "month": "2026-01",
+          "value": 3.64
+        },
+        {
+          "month": "2026-02",
+          "value": 3.64
+        },
+        {
+          "month": "2026-03",
+          "value": 3.64
+        },
+        {
+          "month": "2026-04",
+          "value": 3.64
+        },
+        {
+          "month": "2026-05",
+          "value": 3.62
+        },
+        {
+          "month": "2026-06",
+          "value": 3.63
+        },
+        {
+          "month": "2026-07",
+          "value": 3.63
+        },
+        {
+          "month": "2026-08",
+          "value": 3.63
+        },
+        {
+          "month": "2026-09",
+          "value": 3.63
+        }
+      ],
+      "signal": "flat",
+      "updatedAt": "2026-09"
+    },
+    {
+      "id": "cn-pmi",
+      "name": "中国制造业 PMI",
+      "region": "CN",
+      "layer": "leading",
+      "type": "leading",
+      "unit": "指数",
+      "better": "high",
+      "watch": "荣枯线 50 上下、连续方向",
+      "meaning": "中国需求的最快月度读数；扩张初期新订单回升是关键",
+      "limit": "季节性明显（春节），需看同比或扩散",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-09",
+          "value": 49.8
+        },
+        {
+          "month": "2024-10",
+          "value": 50.1
+        },
+        {
+          "month": "2024-11",
+          "value": 50.3
+        },
+        {
+          "month": "2024-12",
+          "value": 50.1
+        },
+        {
+          "month": "2025-01",
+          "value": 49.1
+        },
+        {
+          "month": "2025-02",
+          "value": 50.2
+        },
+        {
+          "month": "2025-03",
+          "value": 50.5
+        },
+        {
+          "month": "2025-04",
+          "value": 49
+        },
+        {
+          "month": "2025-05",
+          "value": 49.5
+        },
+        {
+          "month": "2025-06",
+          "value": 49.7
+        },
+        {
+          "month": "2025-07",
+          "value": 49.3
+        },
+        {
+          "month": "2025-08",
+          "value": 49.4
+        },
+        {
+          "month": "2025-09",
+          "value": 49.8
+        },
+        {
+          "month": "2025-10",
+          "value": 49
+        },
+        {
+          "month": "2025-11",
+          "value": 49.2
+        },
+        {
+          "month": "2025-12",
+          "value": 50.1
+        },
+        {
+          "month": "2026-01",
+          "value": 49.3
+        },
+        {
+          "month": "2026-02",
+          "value": 49
+        },
+        {
+          "month": "2026-03",
+          "value": 50.4
+        },
+        {
+          "month": "2026-04",
+          "value": 50.3
+        },
+        {
+          "month": "2026-05",
+          "value": 50
+        },
+        {
+          "month": "2026-06",
+          "value": 50.3
+        },
+        {
+          "month": "2026-07",
+          "value": 49.2
+        },
+        {
+          "month": "2026-08",
+          "value": 49.8
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-08"
+    },
+    {
+      "id": "cn-pmi-orders",
+      "name": "中国 PMI 新订单",
+      "region": "CN",
+      "layer": "leading",
+      "type": "leading",
+      "unit": "指数",
+      "better": "high",
+      "watch": "新订单–库存差，比 PMI 水平更领先",
+      "meaning": "需求的月度体温；连续低于 48 更有意义",
+      "limit": "单月噪声大",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-09",
+          "value": 50
+        },
+        {
+          "month": "2024-10",
+          "value": 50.2
+        },
+        {
+          "month": "2024-11",
+          "value": 50
+        },
+        {
+          "month": "2024-12",
+          "value": 52.2
+        },
+        {
+          "month": "2025-01",
+          "value": 50.2
+        },
+        {
+          "month": "2025-02",
+          "value": 50.4
+        },
+        {
+          "month": "2025-03",
+          "value": 50.8
+        },
+        {
+          "month": "2025-04",
+          "value": 50.4
+        },
+        {
+          "month": "2025-05",
+          "value": 50.3
+        },
+        {
+          "month": "2025-06",
+          "value": 50.5
+        },
+        {
+          "month": "2025-07",
+          "value": 50.1
+        },
+        {
+          "month": "2025-08",
+          "value": 50.3
+        },
+        {
+          "month": "2025-09",
+          "value": 50
+        },
+        {
+          "month": "2025-10",
+          "value": 50.1
+        },
+        {
+          "month": "2025-11",
+          "value": 49.5
+        },
+        {
+          "month": "2025-12",
+          "value": 50.2
+        },
+        {
+          "month": "2026-01",
+          "value": 49.4
+        },
+        {
+          "month": "2026-02",
+          "value": 49.5
+        },
+        {
+          "month": "2026-03",
+          "value": 50.1
+        },
+        {
+          "month": "2026-04",
+          "value": 49.4
+        },
+        {
+          "month": "2026-05",
+          "value": 50.1
+        },
+        {
+          "month": "2026-06",
+          "value": 50.2
+        },
+        {
+          "month": "2026-07",
+          "value": 49
+        },
+        {
+          "month": "2026-08",
+          "value": 49
+        }
+      ],
+      "signal": "flat",
+      "updatedAt": "2026-08"
+    },
+    {
+      "id": "cn-m1",
+      "name": "中国 M1 同比",
+      "region": "CN",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "%",
+      "better": "high",
+      "watch": "同比方向与拐点",
+      "meaning": "企业活钱、周期敏感；历史上领先股价约 1–2 个月量级（经验规律）",
+      "limit": "非定律；受节日、口径调整干扰",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": -7.3
+        },
+        {
+          "month": "2024-09",
+          "value": -7.4
+        },
+        {
+          "month": "2024-10",
+          "value": -6.1
+        },
+        {
+          "month": "2024-11",
+          "value": -3.7
+        },
+        {
+          "month": "2024-12",
+          "value": -1.4
+        },
+        {
+          "month": "2025-01",
+          "value": 0.4
+        },
+        {
+          "month": "2025-02",
+          "value": 0.1
+        },
+        {
+          "month": "2025-03",
+          "value": 1.6
+        },
+        {
+          "month": "2025-04",
+          "value": 1.5
+        },
+        {
+          "month": "2025-05",
+          "value": 2.3
+        },
+        {
+          "month": "2025-06",
+          "value": 4.6
+        },
+        {
+          "month": "2025-07",
+          "value": 5.6
+        },
+        {
+          "month": "2025-08",
+          "value": 6
+        },
+        {
+          "month": "2025-09",
+          "value": 7.2
+        },
+        {
+          "month": "2025-10",
+          "value": 6.2
+        },
+        {
+          "month": "2025-11",
+          "value": 4.9
+        },
+        {
+          "month": "2025-12",
+          "value": 3.8
+        },
+        {
+          "month": "2026-01",
+          "value": 4.9
+        },
+        {
+          "month": "2026-02",
+          "value": 5.9
+        },
+        {
+          "month": "2026-03",
+          "value": 5.1
+        },
+        {
+          "month": "2026-04",
+          "value": 5
+        },
+        {
+          "month": "2026-05",
+          "value": 5.5
+        },
+        {
+          "month": "2026-06",
+          "value": 4
+        },
+        {
+          "month": "2026-07",
+          "value": 4
+        }
+      ],
+      "signal": "flat",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "cn-m2",
+      "name": "中国 M2 同比",
+      "region": "CN",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "%",
+      "better": "high",
+      "watch": "方向 + 与社融的背离",
+      "meaning": "广义货币：方向代表货币政策松紧的近似",
+      "limit": "存量变大后增速对边际变化变钝",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 6.3
+        },
+        {
+          "month": "2024-09",
+          "value": 6.8
+        },
+        {
+          "month": "2024-10",
+          "value": 7.5
+        },
+        {
+          "month": "2024-11",
+          "value": 7.1
+        },
+        {
+          "month": "2024-12",
+          "value": 7.3
+        },
+        {
+          "month": "2025-01",
+          "value": 7
+        },
+        {
+          "month": "2025-02",
+          "value": 7
+        },
+        {
+          "month": "2025-03",
+          "value": 7
+        },
+        {
+          "month": "2025-04",
+          "value": 8
+        },
+        {
+          "month": "2025-05",
+          "value": 7.9
+        },
+        {
+          "month": "2025-06",
+          "value": 8.3
+        },
+        {
+          "month": "2025-07",
+          "value": 8.8
+        },
+        {
+          "month": "2025-08",
+          "value": 8.8
+        },
+        {
+          "month": "2025-09",
+          "value": 8.4
+        },
+        {
+          "month": "2025-10",
+          "value": 8.2
+        },
+        {
+          "month": "2025-11",
+          "value": 8
+        },
+        {
+          "month": "2025-12",
+          "value": 8.5
+        },
+        {
+          "month": "2026-01",
+          "value": 9
+        },
+        {
+          "month": "2026-02",
+          "value": 9
+        },
+        {
+          "month": "2026-03",
+          "value": 8.5
+        },
+        {
+          "month": "2026-04",
+          "value": 8.6
+        },
+        {
+          "month": "2026-05",
+          "value": 8.6
+        },
+        {
+          "month": "2026-06",
+          "value": 8
+        },
+        {
+          "month": "2026-07",
+          "value": 7.7
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "cn-m1m2",
+      "name": "M1–M2 剪刀差",
+      "region": "CN",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "pp",
+      "better": "high",
+      "watch": "M1 快于 M2 → 资金活化；反之预防性储蓄",
+      "meaning": "反映资金活化程度，是信用环境敏感的温度计",
+      "limit": "M2/社融存量变大后增速钝化，需结合结构",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": -13.6
+        },
+        {
+          "month": "2024-09",
+          "value": -14.2
+        },
+        {
+          "month": "2024-10",
+          "value": -13.6
+        },
+        {
+          "month": "2024-11",
+          "value": -10.8
+        },
+        {
+          "month": "2024-12",
+          "value": -8.7
+        },
+        {
+          "month": "2025-01",
+          "value": -6.6
+        },
+        {
+          "month": "2025-02",
+          "value": -6.9
+        },
+        {
+          "month": "2025-03",
+          "value": -5.4
+        },
+        {
+          "month": "2025-04",
+          "value": -6.5
+        },
+        {
+          "month": "2025-05",
+          "value": -5.6
+        },
+        {
+          "month": "2025-06",
+          "value": -3.7
+        },
+        {
+          "month": "2025-07",
+          "value": -3.2
+        },
+        {
+          "month": "2025-08",
+          "value": -2.8
+        },
+        {
+          "month": "2025-09",
+          "value": -1.2
+        },
+        {
+          "month": "2025-10",
+          "value": -2
+        },
+        {
+          "month": "2025-11",
+          "value": -3.1
+        },
+        {
+          "month": "2025-12",
+          "value": -4.7
+        },
+        {
+          "month": "2026-01",
+          "value": -4.1
+        },
+        {
+          "month": "2026-02",
+          "value": -3.1
+        },
+        {
+          "month": "2026-03",
+          "value": -3.4
+        },
+        {
+          "month": "2026-04",
+          "value": -3.6
+        },
+        {
+          "month": "2026-05",
+          "value": -3.1
+        },
+        {
+          "month": "2026-06",
+          "value": -4
+        },
+        {
+          "month": "2026-07",
+          "value": -3.7
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "cn-cpi",
+      "name": "中国 CPI 同比",
+      "region": "CN",
+      "layer": "coincident",
+      "type": "coincident",
+      "unit": "%",
+      "better": "low",
+      "watch": "趋势",
+      "meaning": "通胀的滞后读数：定阶段用，做拐点预警太晚",
+      "limit": "受猪肉等单一分项扰动大",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 0.6
+        },
+        {
+          "month": "2024-09",
+          "value": 0.4
+        },
+        {
+          "month": "2024-10",
+          "value": 0.3
+        },
+        {
+          "month": "2024-11",
+          "value": 0.2
+        },
+        {
+          "month": "2024-12",
+          "value": 0.1
+        },
+        {
+          "month": "2025-01",
+          "value": 0.5
+        },
+        {
+          "month": "2025-02",
+          "value": -0.7
+        },
+        {
+          "month": "2025-03",
+          "value": -0.1
+        },
+        {
+          "month": "2025-04",
+          "value": -0.1
+        },
+        {
+          "month": "2025-05",
+          "value": -0.1
+        },
+        {
+          "month": "2025-06",
+          "value": 0.1
+        },
+        {
+          "month": "2025-07",
+          "value": 0
+        },
+        {
+          "month": "2025-08",
+          "value": -0.4
+        },
+        {
+          "month": "2025-09",
+          "value": -0.3
+        },
+        {
+          "month": "2025-10",
+          "value": 0.2
+        },
+        {
+          "month": "2025-11",
+          "value": 0.7
+        },
+        {
+          "month": "2025-12",
+          "value": 0.8
+        },
+        {
+          "month": "2026-01",
+          "value": 0.2
+        },
+        {
+          "month": "2026-02",
+          "value": 1.3
+        },
+        {
+          "month": "2026-03",
+          "value": 1
+        },
+        {
+          "month": "2026-04",
+          "value": 1.2
+        },
+        {
+          "month": "2026-05",
+          "value": 1.2
+        },
+        {
+          "month": "2026-06",
+          "value": 1
+        },
+        {
+          "month": "2026-07",
+          "value": 0.5
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "cn-ppi",
+      "name": "中国 PPI 同比",
+      "region": "CN",
+      "layer": "coincident",
+      "type": "coincident",
+      "unit": "%",
+      "better": "low",
+      "watch": "拐点苗头",
+      "meaning": "比 CPI 更早看到工业品价格与盈利拐点",
+      "limit": "受大宗商品与基数效应影响大",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": -1.8
+        },
+        {
+          "month": "2024-09",
+          "value": -2.8
+        },
+        {
+          "month": "2024-10",
+          "value": -2.9
+        },
+        {
+          "month": "2024-11",
+          "value": -2.5
+        },
+        {
+          "month": "2024-12",
+          "value": -2.3
+        },
+        {
+          "month": "2025-01",
+          "value": -2.3
+        },
+        {
+          "month": "2025-02",
+          "value": -2.2
+        },
+        {
+          "month": "2025-03",
+          "value": -2.5
+        },
+        {
+          "month": "2025-04",
+          "value": -2.7
+        },
+        {
+          "month": "2025-05",
+          "value": -3.3
+        },
+        {
+          "month": "2025-06",
+          "value": -3.6
+        },
+        {
+          "month": "2025-07",
+          "value": -3.6
+        },
+        {
+          "month": "2025-08",
+          "value": -2.9
+        },
+        {
+          "month": "2025-09",
+          "value": -2.3
+        },
+        {
+          "month": "2025-10",
+          "value": -2.1
+        },
+        {
+          "month": "2025-11",
+          "value": -2.2
+        },
+        {
+          "month": "2025-12",
+          "value": -1.9
+        },
+        {
+          "month": "2026-01",
+          "value": -1.4
+        },
+        {
+          "month": "2026-02",
+          "value": -0.9
+        },
+        {
+          "month": "2026-03",
+          "value": 0.5
+        },
+        {
+          "month": "2026-04",
+          "value": 2.8
+        },
+        {
+          "month": "2026-05",
+          "value": 3.9
+        },
+        {
+          "month": "2026-06",
+          "value": 4.1
+        },
+        {
+          "month": "2026-07",
+          "value": 3.5
+        }
+      ],
+      "signal": "up",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "cn-ip",
+      "name": "中国工业增加值同比",
+      "region": "CN",
+      "layer": "coincident",
+      "type": "coincident",
+      "unit": "%",
+      "better": "high",
+      "watch": "同比方向",
+      "meaning": "中国实体经济的最核心同步读数",
+      "limit": "受基数效应干扰大",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-04",
+          "value": 6.7
+        },
+        {
+          "month": "2024-05",
+          "value": 5.6
+        },
+        {
+          "month": "2024-06",
+          "value": 5.3
+        },
+        {
+          "month": "2024-07",
+          "value": 5.1
+        },
+        {
+          "month": "2024-08",
+          "value": 4.5
+        },
+        {
+          "month": "2024-09",
+          "value": 5.4
+        },
+        {
+          "month": "2024-10",
+          "value": 5.3
+        },
+        {
+          "month": "2024-11",
+          "value": 5.4
+        },
+        {
+          "month": "2024-12",
+          "value": 6.2
+        },
+        {
+          "month": "2025-03",
+          "value": 7.7
+        },
+        {
+          "month": "2025-04",
+          "value": 6.1
+        },
+        {
+          "month": "2025-05",
+          "value": 5.8
+        },
+        {
+          "month": "2025-06",
+          "value": 6.8
+        },
+        {
+          "month": "2025-07",
+          "value": 5.7
+        },
+        {
+          "month": "2025-08",
+          "value": 5.2
+        },
+        {
+          "month": "2025-09",
+          "value": 6.5
+        },
+        {
+          "month": "2025-10",
+          "value": 4.9
+        },
+        {
+          "month": "2025-11",
+          "value": 4.8
+        },
+        {
+          "month": "2025-12",
+          "value": 5.2
+        },
+        {
+          "month": "2026-03",
+          "value": 5.7
+        },
+        {
+          "month": "2026-04",
+          "value": 4.1
+        },
+        {
+          "month": "2026-05",
+          "value": 4.5
+        },
+        {
+          "month": "2026-06",
+          "value": 5.3
+        },
+        {
+          "month": "2026-07",
+          "value": 4.5
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "cn-gdp",
+      "name": "中国 GDP 累计同比",
+      "region": "CN",
+      "layer": "coincident",
+      "type": "coincident",
+      "unit": "%",
+      "better": "high",
+      "watch": "方向而非水平（8→6→5 是加速度变差）",
+      "meaning": "最权威的增长读数；看方向，不只盯水平",
+      "limit": "季度发布、修订多",
+      "freq": "q",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2020-09",
+          "value": 0.7
+        },
+        {
+          "month": "2020-12",
+          "value": 2.3
+        },
+        {
+          "month": "2021-03",
+          "value": 18.9
+        },
+        {
+          "month": "2021-06",
+          "value": 13
+        },
+        {
+          "month": "2021-09",
+          "value": 10.2
+        },
+        {
+          "month": "2021-12",
+          "value": 8.6
+        },
+        {
+          "month": "2022-03",
+          "value": 4.8
+        },
+        {
+          "month": "2022-06",
+          "value": 2.7
+        },
+        {
+          "month": "2022-09",
+          "value": 3.2
+        },
+        {
+          "month": "2022-12",
+          "value": 3.1
+        },
+        {
+          "month": "2023-03",
+          "value": 4.7
+        },
+        {
+          "month": "2023-06",
+          "value": 5.7
+        },
+        {
+          "month": "2023-09",
+          "value": 5.4
+        },
+        {
+          "month": "2023-12",
+          "value": 5.4
+        },
+        {
+          "month": "2024-03",
+          "value": 5.3
+        },
+        {
+          "month": "2024-06",
+          "value": 5
+        },
+        {
+          "month": "2024-09",
+          "value": 4.8
+        },
+        {
+          "month": "2024-12",
+          "value": 5
+        },
+        {
+          "month": "2025-03",
+          "value": 5.4
+        },
+        {
+          "month": "2025-06",
+          "value": 5.3
+        },
+        {
+          "month": "2025-09",
+          "value": 5.2
+        },
+        {
+          "month": "2025-12",
+          "value": 5
+        },
+        {
+          "month": "2026-03",
+          "value": 5
+        },
+        {
+          "month": "2026-06",
+          "value": 4.7
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-06"
+    },
+    {
+      "id": "cn-lpr",
+      "name": "中国 1 年期 LPR",
+      "region": "CN",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "%",
+      "better": "low",
+      "watch": "每月 20 日调整方向；降息周期是否开启",
+      "meaning": "货币×信用时钟的货币端核心定价；政策利率的方向盘",
+      "limit": "月度调整、幅度小；个别月份保持不变",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-09",
+          "value": 3.35
+        },
+        {
+          "month": "2024-10",
+          "value": 3.1
+        },
+        {
+          "month": "2024-11",
+          "value": 3.1
+        },
+        {
+          "month": "2024-12",
+          "value": 3.1
+        },
+        {
+          "month": "2025-01",
+          "value": 3.1
+        },
+        {
+          "month": "2025-02",
+          "value": 3.1
+        },
+        {
+          "month": "2025-03",
+          "value": 3.1
+        },
+        {
+          "month": "2025-04",
+          "value": 3.1
+        },
+        {
+          "month": "2025-05",
+          "value": 3
+        },
+        {
+          "month": "2025-06",
+          "value": 3
+        },
+        {
+          "month": "2025-07",
+          "value": 3
+        },
+        {
+          "month": "2025-08",
+          "value": 3
+        },
+        {
+          "month": "2025-09",
+          "value": 3
+        },
+        {
+          "month": "2025-10",
+          "value": 3
+        },
+        {
+          "month": "2025-11",
+          "value": 3
+        },
+        {
+          "month": "2025-12",
+          "value": 3
+        },
+        {
+          "month": "2026-01",
+          "value": 3
+        },
+        {
+          "month": "2026-02",
+          "value": 3
+        },
+        {
+          "month": "2026-03",
+          "value": 3
+        },
+        {
+          "month": "2026-04",
+          "value": 3
+        },
+        {
+          "month": "2026-05",
+          "value": 3
+        },
+        {
+          "month": "2026-06",
+          "value": 3
+        },
+        {
+          "month": "2026-07",
+          "value": 3
+        },
+        {
+          "month": "2026-08",
+          "value": 3
+        }
+      ],
+      "signal": "flat",
+      "updatedAt": "2026-08"
+    },
+    {
+      "id": "cn-new-loan",
+      "name": "中国新增人民币贷款（当月）",
+      "region": "CN",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "亿元",
+      "better": "high",
+      "watch": "当月增量与同比；企业与居民结构",
+      "meaning": "信用扩张的最新读数：社融的最及时平替（社融增量官方源滞后）",
+      "limit": "单月波动大（季末冲量），看同比与趋势",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 10411
+        },
+        {
+          "month": "2024-09",
+          "value": 19742
+        },
+        {
+          "month": "2024-10",
+          "value": 2965
+        },
+        {
+          "month": "2024-11",
+          "value": 5216
+        },
+        {
+          "month": "2024-12",
+          "value": 8402
+        },
+        {
+          "month": "2025-01",
+          "value": 52194
+        },
+        {
+          "month": "2025-02",
+          "value": 6528
+        },
+        {
+          "month": "2025-03",
+          "value": 38234
+        },
+        {
+          "month": "2025-04",
+          "value": 884
+        },
+        {
+          "month": "2025-05",
+          "value": 5923
+        },
+        {
+          "month": "2025-06",
+          "value": 23600
+        },
+        {
+          "month": "2025-07",
+          "value": -4296
+        },
+        {
+          "month": "2025-08",
+          "value": 6253
+        },
+        {
+          "month": "2025-09",
+          "value": 16081
+        },
+        {
+          "month": "2025-10",
+          "value": -154
+        },
+        {
+          "month": "2025-11",
+          "value": 4096
+        },
+        {
+          "month": "2025-12",
+          "value": 9804
+        },
+        {
+          "month": "2026-01",
+          "value": 49016
+        },
+        {
+          "month": "2026-02",
+          "value": 8458
+        },
+        {
+          "month": "2026-03",
+          "value": 31522
+        },
+        {
+          "month": "2026-04",
+          "value": -4006
+        },
+        {
+          "month": "2026-05",
+          "value": 4965
+        },
+        {
+          "month": "2026-06",
+          "value": 17650
+        },
+        {
+          "month": "2026-07",
+          "value": -5896
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "cn-shf",
+      "name": "中国社融规模增量（当月）",
+      "region": "CN",
+      "layer": "credit",
+      "type": "leading",
+      "unit": "亿元",
+      "better": "high",
+      "watch": "当月增量；与 M1/M2 交叉验证",
+      "meaning": "信用脉冲的官方读数（商务部源）；增量转正+扩大=宽信用",
+      "limit": "官方源更新滞后约 4 个月；用新增贷款做及时补充",
+      "freq": "m",
+      "lag": 4,
+      "auto": true,
+      "source": "商务部",
+      "monthly": [
+        {
+          "month": "2024-05",
+          "value": 20623
+        },
+        {
+          "month": "2024-06",
+          "value": 32985
+        },
+        {
+          "month": "2024-07",
+          "value": 7707
+        },
+        {
+          "month": "2024-08",
+          "value": 30323
+        },
+        {
+          "month": "2024-09",
+          "value": 37635
+        },
+        {
+          "month": "2024-10",
+          "value": 14120
+        },
+        {
+          "month": "2024-11",
+          "value": 23288
+        },
+        {
+          "month": "2024-12",
+          "value": 28507
+        },
+        {
+          "month": "2025-01",
+          "value": 70546
+        },
+        {
+          "month": "2025-02",
+          "value": 22331
+        },
+        {
+          "month": "2025-03",
+          "value": 58961
+        },
+        {
+          "month": "2025-04",
+          "value": 11599
+        },
+        {
+          "month": "2025-05",
+          "value": 22900
+        },
+        {
+          "month": "2025-06",
+          "value": 42251
+        },
+        {
+          "month": "2025-07",
+          "value": 11307
+        },
+        {
+          "month": "2025-08",
+          "value": 25660
+        },
+        {
+          "month": "2025-09",
+          "value": 35299
+        },
+        {
+          "month": "2025-10",
+          "value": 8178
+        },
+        {
+          "month": "2025-11",
+          "value": 24926
+        },
+        {
+          "month": "2025-12",
+          "value": 22075
+        },
+        {
+          "month": "2026-01",
+          "value": 72185
+        },
+        {
+          "month": "2026-02",
+          "value": 23837
+        },
+        {
+          "month": "2026-03",
+          "value": 52240
+        },
+        {
+          "month": "2026-04",
+          "value": 6245
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-04",
+      "stale": true
+    },
+    {
+      "id": "cn-urban-ue",
+      "name": "城镇调查失业率",
+      "region": "CN",
+      "layer": "coincident",
+      "type": "coincident",
+      "unit": "%",
+      "better": "low",
+      "watch": "趋势与季节调整",
+      "meaning": "中国就业的官方同步读数",
+      "limit": "对隐性失业覆盖不足",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "国家统计局",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 5.3
+        },
+        {
+          "month": "2024-09",
+          "value": 5.1
+        },
+        {
+          "month": "2024-10",
+          "value": 5
+        },
+        {
+          "month": "2024-11",
+          "value": 5
+        },
+        {
+          "month": "2024-12",
+          "value": 5.1
+        },
+        {
+          "month": "2025-01",
+          "value": 5.2
+        },
+        {
+          "month": "2025-02",
+          "value": 5.4
+        },
+        {
+          "month": "2025-03",
+          "value": 5.2
+        },
+        {
+          "month": "2025-04",
+          "value": 5.1
+        },
+        {
+          "month": "2025-05",
+          "value": 5
+        },
+        {
+          "month": "2025-06",
+          "value": 5
+        },
+        {
+          "month": "2025-07",
+          "value": 5.2
+        },
+        {
+          "month": "2025-08",
+          "value": 5.3
+        },
+        {
+          "month": "2025-09",
+          "value": 5.2
+        },
+        {
+          "month": "2025-10",
+          "value": 5.1
+        },
+        {
+          "month": "2025-11",
+          "value": 5.1
+        },
+        {
+          "month": "2025-12",
+          "value": 5.1
+        },
+        {
+          "month": "2026-01",
+          "value": 5.2
+        },
+        {
+          "month": "2026-02",
+          "value": 5.3
+        },
+        {
+          "month": "2026-03",
+          "value": 5.4
+        },
+        {
+          "month": "2026-04",
+          "value": 5.2
+        },
+        {
+          "month": "2026-05",
+          "value": 5.1
+        },
+        {
+          "month": "2026-06",
+          "value": 5
+        },
+        {
+          "month": "2026-07",
+          "value": 5.2
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "cn-house-climate",
+      "name": "国房景气指数",
+      "region": "CN",
+      "layer": "fragility",
+      "type": "lagging",
+      "unit": "指数",
+      "better": "high",
+      "watch": "100 分水岭；趋势",
+      "meaning": "房地产行业综合景气度；100 以下=行业偏冷",
+      "limit": "指数本身发布滞后约 2 个月",
+      "freq": "m",
+      "lag": 2,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2025-01",
+          "value": 93.26
+        },
+        {
+          "month": "2025-01",
+          "value": 93.26
+        },
+        {
+          "month": "2025-02",
+          "value": 93.71
+        },
+        {
+          "month": "2025-02",
+          "value": 93.71
+        },
+        {
+          "month": "2025-03",
+          "value": 93.89
+        },
+        {
+          "month": "2025-03",
+          "value": 93.89
+        },
+        {
+          "month": "2025-04",
+          "value": 93.79
+        },
+        {
+          "month": "2025-04",
+          "value": 93.79
+        },
+        {
+          "month": "2025-05",
+          "value": 93.66
+        },
+        {
+          "month": "2025-05",
+          "value": 93.66
+        },
+        {
+          "month": "2025-06",
+          "value": 93.55
+        },
+        {
+          "month": "2025-06",
+          "value": 93.55
+        },
+        {
+          "month": "2025-07",
+          "value": 93.3
+        },
+        {
+          "month": "2025-07",
+          "value": 93.3
+        },
+        {
+          "month": "2025-08",
+          "value": 93.03
+        },
+        {
+          "month": "2025-08",
+          "value": 93.03
+        },
+        {
+          "month": "2025-09",
+          "value": 92.76
+        },
+        {
+          "month": "2025-09",
+          "value": 92.76
+        },
+        {
+          "month": "2025-10",
+          "value": 92.42
+        },
+        {
+          "month": "2025-10",
+          "value": 92.42
+        },
+        {
+          "month": "2025-11",
+          "value": 91.89
+        },
+        {
+          "month": "2025-11",
+          "value": 91.89
+        },
+        {
+          "month": "2025-12",
+          "value": 91.45
+        },
+        {
+          "month": "2025-12",
+          "value": 91.45
+        }
+      ],
+      "signal": "flat",
+      "updatedAt": "2025-12"
+    },
+    {
+      "id": "cn-house-bj",
+      "name": "北京新建住宅价格指数（同比）",
+      "region": "CN",
+      "layer": "fragility",
+      "type": "lagging",
+      "unit": "指数",
+      "better": "high",
+      "watch": "100=同比持平；趋势与拐点",
+      "meaning": "一线城市房价的温度计（70 城数据的代表）；房价缺口的重要参考",
+      "limit": "一线城市不代表全国",
+      "freq": "m",
+      "lag": null,
+      "auto": true,
+      "source": "东方财富",
+      "monthly": [
+        {
+          "month": "2024-08",
+          "value": 96.4
+        },
+        {
+          "month": "2024-09",
+          "value": 95.4
+        },
+        {
+          "month": "2024-10",
+          "value": 95.1
+        },
+        {
+          "month": "2024-11",
+          "value": 94.7
+        },
+        {
+          "month": "2024-12",
+          "value": 94.6
+        },
+        {
+          "month": "2025-01",
+          "value": 94.3
+        },
+        {
+          "month": "2025-02",
+          "value": 94.5
+        },
+        {
+          "month": "2025-03",
+          "value": 94.3
+        },
+        {
+          "month": "2025-04",
+          "value": 95
+        },
+        {
+          "month": "2025-05",
+          "value": 95.7
+        },
+        {
+          "month": "2025-06",
+          "value": 95.9
+        },
+        {
+          "month": "2025-07",
+          "value": 96.4
+        },
+        {
+          "month": "2025-08",
+          "value": 96.5
+        },
+        {
+          "month": "2025-09",
+          "value": 97.4
+        },
+        {
+          "month": "2025-10",
+          "value": 98
+        },
+        {
+          "month": "2025-11",
+          "value": 97.9
+        },
+        {
+          "month": "2025-12",
+          "value": 97.6
+        },
+        {
+          "month": "2026-01",
+          "value": 97.6
+        },
+        {
+          "month": "2026-02",
+          "value": 97.7
+        },
+        {
+          "month": "2026-03",
+          "value": 97.9
+        },
+        {
+          "month": "2026-04",
+          "value": 97.7
+        },
+        {
+          "month": "2026-05",
+          "value": 97.9
+        },
+        {
+          "month": "2026-06",
+          "value": 97.9
+        },
+        {
+          "month": "2026-07",
+          "value": 97.7
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-07"
+    },
+    {
+      "id": "cn-sh-idx",
+      "name": "上证指数",
+      "region": "CN",
+      "layer": "sentiment",
+      "type": "leading",
+      "unit": "点",
+      "better": "high",
+      "watch": "趋势与背离；与广度配合",
+      "meaning": "A 股风险偏好的直接表达",
+      "limit": "指数受权重股影响",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "新浪财经行情",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": 3279.824
+        },
+        {
+          "month": "2024-11",
+          "value": 3326.456
+        },
+        {
+          "month": "2024-12",
+          "value": 3351.763
+        },
+        {
+          "month": "2025-01",
+          "value": 3250.601
+        },
+        {
+          "month": "2025-02",
+          "value": 3320.897
+        },
+        {
+          "month": "2025-03",
+          "value": 3335.746
+        },
+        {
+          "month": "2025-04",
+          "value": 3279.031
+        },
+        {
+          "month": "2025-05",
+          "value": 3347.487
+        },
+        {
+          "month": "2025-06",
+          "value": 3444.426
+        },
+        {
+          "month": "2025-07",
+          "value": 3573.208
+        },
+        {
+          "month": "2025-08",
+          "value": 3857.927
+        },
+        {
+          "month": "2025-09",
+          "value": 3882.777
+        },
+        {
+          "month": "2025-10",
+          "value": 3954.79
+        },
+        {
+          "month": "2025-11",
+          "value": 3888.596
+        },
+        {
+          "month": "2025-12",
+          "value": 3968.84
+        },
+        {
+          "month": "2026-01",
+          "value": 4117.948
+        },
+        {
+          "month": "2026-02",
+          "value": 4162.882
+        },
+        {
+          "month": "2026-03",
+          "value": 3891.861
+        },
+        {
+          "month": "2026-04",
+          "value": 4112.159
+        },
+        {
+          "month": "2026-05",
+          "value": 4068.569
+        },
+        {
+          "month": "2026-06",
+          "value": 4094.397
+        },
+        {
+          "month": "2026-07",
+          "value": 3832.262
+        },
+        {
+          "month": "2026-08",
+          "value": 3986.298
+        },
+        {
+          "month": "2026-09",
+          "value": 3930.116
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-09"
+    },
+    {
+      "id": "cn-hs300",
+      "name": "沪深 300 指数",
+      "region": "CN",
+      "layer": "sentiment",
+      "type": "leading",
+      "unit": "点",
+      "better": "high",
+      "watch": "趋势；等权 vs 市值加权背离",
+      "meaning": "A 股核心资产与机构风险偏好",
+      "limit": "与上证高度相关",
+      "freq": "d",
+      "lag": null,
+      "auto": true,
+      "source": "新浪财经行情",
+      "monthly": [
+        {
+          "month": "2024-10",
+          "value": 3891.04
+        },
+        {
+          "month": "2024-11",
+          "value": 3916.583
+        },
+        {
+          "month": "2024-12",
+          "value": 3934.911
+        },
+        {
+          "month": "2025-01",
+          "value": 3817.08
+        },
+        {
+          "month": "2025-02",
+          "value": 3890.049
+        },
+        {
+          "month": "2025-03",
+          "value": 3887.306
+        },
+        {
+          "month": "2025-04",
+          "value": 3770.571
+        },
+        {
+          "month": "2025-05",
+          "value": 3840.232
+        },
+        {
+          "month": "2025-06",
+          "value": 3936.079
+        },
+        {
+          "month": "2025-07",
+          "value": 4075.591
+        },
+        {
+          "month": "2025-08",
+          "value": 4496.759
+        },
+        {
+          "month": "2025-09",
+          "value": 4640.694
+        },
+        {
+          "month": "2025-10",
+          "value": 4640.668
+        },
+        {
+          "month": "2025-11",
+          "value": 4526.662
+        },
+        {
+          "month": "2025-12",
+          "value": 4629.94
+        },
+        {
+          "month": "2026-01",
+          "value": 4706.34
+        },
+        {
+          "month": "2026-02",
+          "value": 4710.647
+        },
+        {
+          "month": "2026-03",
+          "value": 4450.049
+        },
+        {
+          "month": "2026-04",
+          "value": 4807.307
+        },
+        {
+          "month": "2026-05",
+          "value": 4892.121
+        },
+        {
+          "month": "2026-06",
+          "value": 4979.433
+        },
+        {
+          "month": "2026-07",
+          "value": 4588.197
+        },
+        {
+          "month": "2026-08",
+          "value": 4625.086
+        },
+        {
+          "month": "2026-09",
+          "value": 4548.05
+        }
+      ],
+      "signal": "down",
+      "updatedAt": "2026-09"
+    }
+  ]
+}

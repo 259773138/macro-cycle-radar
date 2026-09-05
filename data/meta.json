@@ -1,0 +1,36 @@
+{
+  "fetchedAt": "2026-09-05T00:48:11.689Z",
+  "sources": [
+    {
+      "name": "FRED（圣路易斯联储）",
+      "status": "ok",
+      "count": 23
+    },
+    {
+      "name": "东方财富数据中心",
+      "status": "ok",
+      "count": 13
+    },
+    {
+      "name": "国家统计局",
+      "status": "ok",
+      "count": 1
+    },
+    {
+      "name": "新浪财经行情",
+      "status": "ok",
+      "count": 2
+    }
+  ],
+  "autoCount": 39,
+  "staleCount": 1,
+  "failed": [
+    {
+      "id": "cn-shf",
+      "name": "中国社融规模增量（当月）",
+      "error": "fetch failed",
+      "reused": true
+    }
+  ],
+  "note": "部分指标采集失败，已沿用最近一次成功数据。"
+}
