@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-04T00:58:45.880Z",
+  "updatedAt": "2026-09-05T00:48:11.689Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -111,10 +111,10 @@
         },
         {
           "month": "2026-09",
-          "value": 0.43
+          "value": 0.41
         }
       ],
-      "signal": "up",
+      "signal": "flat",
       "updatedAt": "2026-09"
     },
     {
@@ -227,7 +227,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.88
+          "value": 0.87
         }
       ],
       "signal": "up",
@@ -343,7 +343,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.66
+          "value": 2.65
         }
       ],
       "signal": "down",
@@ -459,7 +459,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.43
+          "value": 0.42
         }
       ],
       "signal": "up",
@@ -575,10 +575,10 @@
         },
         {
           "month": "2026-09",
-          "value": 2.45
+          "value": 2.42
         }
       ],
-      "signal": "down",
+      "signal": "up",
       "updatedAt": "2026-09"
     },
     {
@@ -1662,10 +1662,6 @@
       "source": "FRED",
       "monthly": [
         {
-          "month": "2024-08",
-          "value": 157757
-        },
-        {
           "month": "2024-09",
           "value": 157912
         },
@@ -1751,15 +1747,19 @@
         },
         {
           "month": "2026-06",
-          "value": 158881
+          "value": 158892
         },
         {
           "month": "2026-07",
-          "value": 158858
+          "value": 158913
+        },
+        {
+          "month": "2026-08",
+          "value": 159075
         }
       ],
-      "signal": "down",
-      "updatedAt": "2026-07"
+      "signal": "up",
+      "updatedAt": "2026-08"
     },
     {
       "id": "us-ue",
@@ -1777,10 +1777,6 @@
       "auto": true,
       "source": "FRED",
       "monthly": [
-        {
-          "month": "2024-07",
-          "value": 4.2
-        },
         {
           "month": "2024-08",
           "value": 4.2
@@ -1872,10 +1868,14 @@
         {
           "month": "2026-07",
           "value": 4.1
+        },
+        {
+          "month": "2026-08",
+          "value": 4.1
         }
       ],
-      "signal": "up",
-      "updatedAt": "2026-07"
+      "signal": "flat",
+      "updatedAt": "2026-08"
     },
     {
       "id": "us-core-cpi",
@@ -2239,10 +2239,10 @@
         },
         {
           "month": "2026-09",
-          "value": 15.2
+          "value": 14.32
         }
       ],
-      "signal": "down",
+      "signal": "up",
       "updatedAt": "2026-09"
     },
     {
@@ -2355,7 +2355,7 @@
         },
         {
           "month": "2026-09",
-          "value": 7747.71
+          "value": 7718.6
         }
       ],
       "signal": "up",
@@ -3867,7 +3867,8 @@
         }
       ],
       "signal": "down",
-      "updatedAt": "2026-04"
+      "updatedAt": "2026-04",
+      "stale": true
     },
     {
       "id": "cn-urban-ue",
@@ -4327,7 +4328,7 @@
         },
         {
           "month": "2026-09",
-          "value": 3942.088
+          "value": 3930.116
         }
       ],
       "signal": "down",
@@ -4443,7 +4444,7 @@
         },
         {
           "month": "2026-09",
-          "value": 4552.578
+          "value": 4548.05
         }
       ],
       "signal": "down",
