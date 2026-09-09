@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08T01:04:48.024Z",
+  "updatedAt": "2026-09-09T01:09:03.403Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -227,7 +227,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.87
+          "value": 0.86
         }
       ],
       "signal": "up",
@@ -343,7 +343,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.65
+          "value": 2.68
         }
       ],
       "signal": "down",
@@ -575,7 +575,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.42
+          "value": 2.43
         }
       ],
       "signal": "up",
@@ -2239,10 +2239,10 @@
         },
         {
           "month": "2026-09",
-          "value": 14.32
+          "value": 15.3
         }
       ],
-      "signal": "up",
+      "signal": "down",
       "updatedAt": "2026-09"
     },
     {
@@ -2355,10 +2355,10 @@
         },
         {
           "month": "2026-09",
-          "value": 7718.6
+          "value": 7673.52
         }
       ],
-      "signal": "up",
+      "signal": "down",
       "updatedAt": "2026-09"
     },
     {
@@ -3867,8 +3867,7 @@
         }
       ],
       "signal": "down",
-      "updatedAt": "2026-04",
-      "stale": true
+      "updatedAt": "2026-04"
     },
     {
       "id": "cn-urban-ue",
@@ -4328,7 +4327,7 @@
         },
         {
           "month": "2026-09",
-          "value": 3932.699
+          "value": 3940.551
         }
       ],
       "signal": "down",
@@ -4444,7 +4443,7 @@
         },
         {
           "month": "2026-09",
-          "value": 4575.025
+          "value": 4558.737
         }
       ],
       "signal": "down",
