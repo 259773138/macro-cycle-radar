@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-15T01:20:43.295Z",
+  "updatedAt": "2026-09-16T01:15:48.707Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -111,7 +111,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.32
+          "value": 0.33
         }
       ],
       "signal": "down",
@@ -227,7 +227,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.86
+          "value": 0.89
         }
       ],
       "signal": "up",
@@ -343,7 +343,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.65
+          "value": 2.71
         }
       ],
       "signal": "down",
@@ -2239,7 +2239,7 @@
         },
         {
           "month": "2026-09",
-          "value": 15.84
+          "value": 17.1
         }
       ],
       "signal": "down",
@@ -2355,7 +2355,7 @@
         },
         {
           "month": "2026-09",
-          "value": 7619.98
+          "value": 7585.73
         }
       ],
       "signal": "down",
@@ -3306,10 +3306,6 @@
       "source": "东方财富",
       "monthly": [
         {
-          "month": "2024-04",
-          "value": 6.7
-        },
-        {
           "month": "2024-05",
           "value": 5.6
         },
@@ -3400,10 +3396,14 @@
         {
           "month": "2026-07",
           "value": 4.5
+        },
+        {
+          "month": "2026-08",
+          "value": 5.2
         }
       ],
-      "signal": "down",
-      "updatedAt": "2026-07"
+      "signal": "up",
+      "updatedAt": "2026-08"
     },
     {
       "id": "cn-gdp",
@@ -3867,8 +3867,7 @@
         }
       ],
       "signal": "down",
-      "updatedAt": "2026-04",
-      "stale": true
+      "updatedAt": "2026-04"
     },
     {
       "id": "cn-urban-ue",
@@ -4119,10 +4118,6 @@
       "source": "东方财富",
       "monthly": [
         {
-          "month": "2024-08",
-          "value": 96.4
-        },
-        {
           "month": "2024-09",
           "value": 95.4
         },
@@ -4213,10 +4208,14 @@
         {
           "month": "2026-07",
           "value": 97.7
+        },
+        {
+          "month": "2026-08",
+          "value": 97.7
         }
       ],
-      "signal": "down",
-      "updatedAt": "2026-07"
+      "signal": "flat",
+      "updatedAt": "2026-08"
     },
     {
       "id": "cn-sh-idx",
@@ -4328,7 +4327,7 @@
         },
         {
           "month": "2026-09",
-          "value": 3885.333
+          "value": 3864.279
         }
       ],
       "signal": "down",
@@ -4444,7 +4443,7 @@
         },
         {
           "month": "2026-09",
-          "value": 4480.082
+          "value": 4450.04
         }
       ],
       "signal": "down",
