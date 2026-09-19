@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T01:10:58.687Z",
+  "updatedAt": "2026-09-19T01:05:22.633Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -111,7 +111,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.27
+          "value": 0.25
         }
       ],
       "signal": "down",
@@ -227,10 +227,10 @@
         },
         {
           "month": "2026-09",
-          "value": 0.82
+          "value": 0.87
         }
       ],
-      "signal": "down",
+      "signal": "up",
       "updatedAt": "2026-09"
     },
     {
@@ -575,7 +575,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.68
+          "value": 2.61
         }
       ],
       "signal": "down",
@@ -1430,10 +1430,6 @@
       "source": "FRED",
       "monthly": [
         {
-          "month": "2024-08",
-          "value": 100.4309
-        },
-        {
           "month": "2024-09",
           "value": 99.8084
         },
@@ -1507,27 +1503,31 @@
         },
         {
           "month": "2026-03",
-          "value": 101.7543
+          "value": 101.7336
         },
         {
           "month": "2026-04",
-          "value": 102.5198
+          "value": 102.5783
         },
         {
           "month": "2026-05",
-          "value": 102.5099
+          "value": 102.6396
         },
         {
           "month": "2026-06",
-          "value": 102.7868
+          "value": 102.842
         },
         {
           "month": "2026-07",
-          "value": 102.9939
+          "value": 103.0454
+        },
+        {
+          "month": "2026-08",
+          "value": 103.0682
         }
       ],
       "signal": "up",
-      "updatedAt": "2026-07"
+      "updatedAt": "2026-08"
     },
     {
       "id": "us-retail",
@@ -2239,7 +2239,7 @@
         },
         {
           "month": "2026-09",
-          "value": 17.71
+          "value": 15.44
         }
       ],
       "signal": "down",
@@ -2471,10 +2471,10 @@
         },
         {
           "month": "2026-09",
-          "value": 3.63
+          "value": 3.88
         }
       ],
-      "signal": "flat",
+      "signal": "down",
       "updatedAt": "2026-09"
     },
     {
@@ -4327,7 +4327,7 @@
         },
         {
           "month": "2026-09",
-          "value": 3875.604
+          "value": 3911.871
         }
       ],
       "signal": "down",
@@ -4443,7 +4443,7 @@
         },
         {
           "month": "2026-09",
-          "value": 4460.156
+          "value": 4507.393
         }
       ],
       "signal": "down",
