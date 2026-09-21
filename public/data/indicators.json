@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-20T00:55:59.429Z",
+  "updatedAt": "2026-09-21T00:57:54.999Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -3538,10 +3538,6 @@
       "source": "东方财富",
       "monthly": [
         {
-          "month": "2024-09",
-          "value": 3.35
-        },
-        {
           "month": "2024-10",
           "value": 3.1
         },
@@ -3632,10 +3628,14 @@
         {
           "month": "2026-08",
           "value": 3
+        },
+        {
+          "month": "2026-09",
+          "value": 3
         }
       ],
       "signal": "flat",
-      "updatedAt": "2026-08"
+      "updatedAt": "2026-09"
     },
     {
       "id": "cn-new-loan",
