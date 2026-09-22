@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T00:57:54.999Z",
+  "updatedAt": "2026-09-22T01:32:41.108Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -111,7 +111,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.25
+          "value": 0.2
         }
       ],
       "signal": "down",
@@ -227,10 +227,10 @@
         },
         {
           "month": "2026-09",
-          "value": 0.87
+          "value": 0.79
         }
       ],
-      "signal": "up",
+      "signal": "down",
       "updatedAt": "2026-09"
     },
     {
@@ -343,7 +343,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.7
+          "value": 2.68
         }
       ],
       "signal": "down",
@@ -459,10 +459,10 @@
         },
         {
           "month": "2026-09",
-          "value": 0.44
+          "value": 0.43
         }
       ],
-      "signal": "flat",
+      "signal": "up",
       "updatedAt": "2026-09"
     },
     {
@@ -575,7 +575,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.61
+          "value": 2.68
         }
       ],
       "signal": "down",
@@ -2239,10 +2239,10 @@
         },
         {
           "month": "2026-09",
-          "value": 15.44
+          "value": 14.81
         }
       ],
-      "signal": "down",
+      "signal": "up",
       "updatedAt": "2026-09"
     },
     {
@@ -2355,10 +2355,10 @@
         },
         {
           "month": "2026-09",
-          "value": 7637.76
+          "value": 7764.7
         }
       ],
-      "signal": "down",
+      "signal": "up",
       "updatedAt": "2026-09"
     },
     {
@@ -4331,7 +4331,8 @@
         }
       ],
       "signal": "down",
-      "updatedAt": "2026-09"
+      "updatedAt": "2026-09",
+      "stale": true
     },
     {
       "id": "cn-hs300",
@@ -4443,7 +4444,7 @@
         },
         {
           "month": "2026-09",
-          "value": 4507.393
+          "value": 4539.565
         }
       ],
       "signal": "down",

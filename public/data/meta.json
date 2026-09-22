@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-21T00:57:54.999Z",
+  "fetchedAt": "2026-09-22T01:32:41.108Z",
   "sources": [
     {
       "name": "FRED（圣路易斯联储）",
@@ -24,11 +24,18 @@
     {
       "name": "新浪财经行情",
       "status": "ok",
-      "count": 2
+      "count": 1
     }
   ],
-  "autoCount": 40,
-  "staleCount": 0,
-  "failed": [],
-  "note": "全部指标采集成功。"
+  "autoCount": 39,
+  "staleCount": 1,
+  "failed": [
+    {
+      "id": "cn-sh-idx",
+      "name": "上证指数",
+      "error": "fetch failed",
+      "reused": true
+    }
+  ],
+  "note": "部分指标采集失败，已沿用最近一次成功数据。"
 }
