@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T01:32:41.108Z",
+  "updatedAt": "2026-09-23T01:22:32.930Z",
   "indicators": [
     {
       "id": "us-2s10s",
@@ -111,7 +111,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.2
+          "value": 0.25
         }
       ],
       "signal": "down",
@@ -227,7 +227,7 @@
         },
         {
           "month": "2026-09",
-          "value": 0.79
+          "value": 0.8
         }
       ],
       "signal": "down",
@@ -343,7 +343,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.68
+          "value": 2.66
         }
       ],
       "signal": "down",
@@ -575,7 +575,7 @@
         },
         {
           "month": "2026-09",
-          "value": 2.68
+          "value": 2.62
         }
       ],
       "signal": "down",
@@ -598,20 +598,16 @@
       "source": "FRED",
       "monthly": [
         {
-          "month": "2025-08",
-          "value": 4.25
-        },
-        {
           "month": "2025-09",
           "value": 4.233
         },
         {
           "month": "2025-10",
-          "value": 4.279
+          "value": 4.28
         },
         {
           "month": "2025-11",
-          "value": 3.845
+          "value": 3.846
         },
         {
           "month": "2025-12",
@@ -631,23 +627,27 @@
         },
         {
           "month": "2026-04",
-          "value": 4.529
+          "value": 4.528
         },
         {
           "month": "2026-05",
-          "value": 5.394
+          "value": 5.393
         },
         {
           "month": "2026-06",
-          "value": 5.344
+          "value": 5.343
         },
         {
           "month": "2026-07",
-          "value": 5.414
+          "value": 5.413
+        },
+        {
+          "month": "2026-08",
+          "value": 5.659
         }
       ],
       "signal": "up",
-      "updatedAt": "2026-07"
+      "updatedAt": "2026-08"
     },
     {
       "id": "us-fci",
@@ -2239,7 +2239,7 @@
         },
         {
           "month": "2026-09",
-          "value": 14.81
+          "value": 14.87
         }
       ],
       "signal": "up",
@@ -2355,7 +2355,7 @@
         },
         {
           "month": "2026-09",
-          "value": 7764.7
+          "value": 7764.64
         }
       ],
       "signal": "up",
@@ -4327,12 +4327,11 @@
         },
         {
           "month": "2026-09",
-          "value": 3911.871
+          "value": 3952.128
         }
       ],
       "signal": "down",
-      "updatedAt": "2026-09",
-      "stale": true
+      "updatedAt": "2026-09"
     },
     {
       "id": "cn-hs300",
@@ -4444,7 +4443,7 @@
         },
         {
           "month": "2026-09",
-          "value": 4539.565
+          "value": 4544.588
         }
       ],
       "signal": "down",
