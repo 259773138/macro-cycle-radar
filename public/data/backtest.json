@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-23T01:23:04.732Z",
+  "generatedAt": "2026-09-24T01:17:21.503Z",
   "period": "1992-01 ~ 2026-09（34.7 年，美国样本）",
   "note": "策略=三档协议月度调仓（观察100%/预警50%/确认20%股票仓位，其余现金0收益）；信号用上月数据决定本月仓位，无未来函数。基准=纳斯达克综合指数（FRED 免费完整历史 1971 年起）。未含股息与交易成本。",
   "stats": {
-    "strategyCagr": 11.23,
-    "buyholdCagr": 11.51,
-    "strategyFinal": 39.99,
-    "buyholdFinal": 43.73,
+    "strategyCagr": 11.24,
+    "buyholdCagr": 11.53,
+    "strategyFinal": 40.17,
+    "buyholdFinal": 43.93,
     "strategyMdd": 64.55,
     "buyholdMdd": 75.03,
     "months": 416,
     "beatRate": 5.29,
     "downsideProtection": 13.58,
-    "avgMonthlyStrat": 103.54,
-    "avgMonthlyBh": 110.31
+    "avgMonthlyStrat": 103.65,
+    "avgMonthlyBh": 110.43
   },
   "rows": [
     {
@@ -3340,9 +3340,9 @@
       "month": "2026-09",
       "weight": 1,
       "tier": "watch",
-      "strategy": 39.99,
-      "buyhold": 43.73,
-      "ret": 2.85
+      "strategy": 40.17,
+      "buyhold": 43.93,
+      "ret": 3.31
     }
   ]
 }
